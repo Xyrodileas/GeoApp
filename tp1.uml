@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Formes.Rectangle</OriginalElement>
+  <nodes>
+    <node x="1087.0" y="261.0">ca.etsmtl.log.util.IDLogger</node>
+    <node x="0.0" y="260.5">Formes.Ovale</node>
+    <node x="271.2500000000001" y="549.0">LaFabrique.FabriqueForme</node>
+    <node x="845.0000000000001" y="250.5">MenuFenetre</node>
+    <node x="593.5180451127821" y="420.5">LaFabrique.FormeParser</node>
+    <node x="985.9451754385966" y="0.0">CommBase</node>
+    <node x="203.0000000000001" y="260.5">Formes.Rectangle</node>
+    <node x="60.250000000000114" y="420.5">Formes.Cercle</node>
+    <node x="405.6118421052633" y="51.0">Formes.Forme</node>
+    <node x="835.5000000000001" y="400.0">FenetrePrincipale</node>
+    <node x="269.2500000000001" y="420.5">Formes.Carre</node>
+    <node x="626.0000000000001" y="240.0">FenetreFormes</node>
+    <node x="426.0000000000001" y="260.5">Formes.Ligne</node>
+    <node x="1018.3437969924813" y="549.0">ApplicationFormes</node>
+    <node x="0.0" y="663.0">LangueConfig</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="FenetrePrincipale" target="MenuFenetre">
+      <point x="0.0" y="-44.5" />
+      <point x="0.0" y="44.5" />
+    </edge>
+    <edge source="FenetrePrincipale" target="ca.etsmtl.log.util.IDLogger">
+      <point x="80.33333333333326" y="-44.5" />
+      <point x="1036.3333333333335" y="375.0" />
+      <point x="1181.0" y="375.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="FenetreFormes" target="Formes.Forme">
+      <point x="49.75" y="-55.0" />
+      <point x="775.2500000000001" y="210.0" />
+      <point x="577.5118421052632" y="210.0" />
+      <point x="76.39999999999998" y="44.0" />
+    </edge>
+    <edge source="Formes.Rectangle" target="Formes.Forme">
+      <point x="0.0" y="-34.5" />
+      <point x="304.5000000000001" y="220.0" />
+      <point x="462.91184210526325" y="220.0" />
+      <point x="-38.200000000000045" y="44.0" />
+    </edge>
+    <edge source="MenuFenetre" target="CommBase">
+      <point x="0.0" y="-44.5" />
+      <point x="956.0000000000001" y="220.0" />
+      <point x="1050.4451754385966" y="220.0" />
+      <point x="-64.5" y="95.0" />
+    </edge>
+    <edge source="LaFabrique.FabriqueForme" target="Formes.Ovale">
+      <point x="-67.71428571428567" y="-34.5" />
+      <point x="282.53571428571445" y="529.0" />
+      <point x="49.75" y="529.0" />
+      <point x="49.75" y="375.0" />
+      <point x="45.75" y="375.0" />
+      <point x="-45.75" y="34.5" />
+    </edge>
+    <edge source="LaFabrique.FabriqueForme" target="Formes.Carre">
+      <point x="0.0" y="-34.5" />
+      <point x="0.0" y="24.0" />
+    </edge>
+    <edge source="LaFabrique.FabriqueForme" target="Formes.Cercle">
+      <point x="-45.14285714285711" y="-34.5" />
+      <point x="305.107142857143" y="519.0" />
+      <point x="133.2500000000001" y="519.0" />
+      <point x="0.0" y="24.0" />
+    </edge>
+    <edge source="LaFabrique.FabriqueForme" target="LaFabrique.FormeParser">
+      <point x="45.14285714285717" y="-34.5" />
+      <point x="395.3928571428573" y="519.0" />
+      <point x="632.7680451127821" y="519.0" />
+      <point x="-39.25" y="24.0" />
+    </edge>
+    <edge source="Formes.Ovale" target="Formes.Forme">
+      <point x="0.0" y="-34.5" />
+      <point x="91.5" y="210.0" />
+      <point x="424.7118421052633" y="210.0" />
+      <point x="-76.39999999999998" y="44.0" />
+    </edge>
+    <edge source="Formes.Ligne" target="Formes.Forme">
+      <point x="0.0" y="-34.5" />
+      <point x="516.0000000000001" y="220.0" />
+      <point x="501.1118421052633" y="220.0" />
+      <point x="0.0" y="44.0" />
+    </edge>
+    <edge source="LaFabrique.FabriqueForme" target="Formes.Ligne">
+      <point x="22.571428571428555" y="-34.5" />
+      <point x="372.82142857142867" y="509.0" />
+      <point x="516.0000000000001" y="509.0" />
+      <point x="0.0" y="34.5" />
+    </edge>
+    <edge source="ApplicationFormes" target="FenetrePrincipale">
+      <point x="-43.25" y="-34.5" />
+      <point x="1061.5937969924812" y="529.0" />
+      <point x="956.0000000000001" y="529.0" />
+      <point x="0.0" y="44.5" />
+    </edge>
+    <edge source="ApplicationFormes" target="CommBase">
+      <point x="43.25" y="-34.5" />
+      <point x="1148.0937969924812" y="529.0" />
+      <point x="1285.5" y="529.0" />
+      <point x="1285.5" y="220.0" />
+      <point x="1179.4451754385966" y="220.0" />
+      <point x="64.49999999999994" y="95.0" />
+    </edge>
+    <edge source="Formes.Carre" target="Formes.Rectangle">
+      <point x="0.0" y="-24.0" />
+      <point x="350.2500000000001" y="375.0" />
+      <point x="355.2500000000001" y="375.0" />
+      <point x="50.75" y="34.5" />
+    </edge>
+    <edge source="FenetrePrincipale" target="FenetreFormes">
+      <point x="-80.33333333333326" y="-44.5" />
+      <point x="875.6666666666669" y="375.0" />
+      <point x="725.5000000000001" y="375.0" />
+      <point x="0.0" y="55.0" />
+    </edge>
+    <edge source="LaFabrique.FabriqueForme" target="Formes.Rectangle">
+      <point x="-22.571428571428555" y="-34.5" />
+      <point x="327.67857142857156" y="509.0" />
+      <point x="258.7500000000001" y="509.0" />
+      <point x="258.7500000000001" y="375.0" />
+      <point x="253.7500000000001" y="375.0" />
+      <point x="-50.75" y="34.5" />
+    </edge>
+    <edge source="Formes.Cercle" target="Formes.Ovale">
+      <point x="0.0" y="-24.0" />
+      <point x="133.2500000000001" y="375.0" />
+      <point x="137.25" y="375.0" />
+      <point x="45.75" y="34.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7674418604651163" x="657.0" y="355.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>protected</VISIBILITY>
+</Diagram>
+

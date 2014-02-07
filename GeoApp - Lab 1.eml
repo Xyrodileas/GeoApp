@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component jdk="IDEA IU-133.331" jdk_type="IDEA JDK">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<levels>
+		<level name="IDLogger" value="project"/>
+	</levels>
+</component>
