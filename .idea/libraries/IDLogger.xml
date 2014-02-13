@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="IDLogger">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/IDLoggerr/ca.etsmtl.log.util.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

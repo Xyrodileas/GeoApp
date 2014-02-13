@@ -1,5 +1,17 @@
 /******************************************************
 Cours:  LOG121
+Projet: Laboratoire1 
+Nom du fichier: MenuFenetre.java
+Date créé: 20/01/1014
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Aissou Idriss
+30/01/2014 Version personnelle
+*******************************************************/ 
+
+/******************************************************
+Cours:  LOG121
 Projet: Squelette du laboratoire #1
 Nom du fichier: MenuFenetre.java
 Date créé: 2013-05-03
@@ -13,14 +25,19 @@ Historique des modifications
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 /**
- * Crée le menu de la fenêtre de x2'applicationé
+ * Crée le menu de la fenêtre de l'applicationé
  */
 public class MenuFenetre extends JMenuBar{
 	
@@ -39,10 +56,12 @@ public class MenuFenetre extends JMenuBar{
 			MENU_DESSIN_ARRETER = "app.frame.menus.draw.stop",
 			MENU_AIDE_TITRE = "app.frame.menus.help.title",
 			MENU_AIDE_PROPOS = "app.frame.menus.help.about";
-	private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about";  
-
+	private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about"; 
+	
+	
 	private JMenuItem arreterMenuItem, demarrerMenuItem;
 	private static final int DELAI_QUITTER_MSEC = 200;
+	FenetrePrincipale fenetrePrincipale;
  	   
 	CommBase comm; // Pour activer/désactiver la communication avec le serveur
 	
@@ -52,6 +71,7 @@ public class MenuFenetre extends JMenuBar{
 	public MenuFenetre(CommBase comm) {
 		this.comm = comm;
 		addMenuDessiner();
+		addMenuClasser();
 		addMenuFichier();
 		addMenuAide();
 	}
@@ -63,27 +83,42 @@ public class MenuFenetre extends JMenuBar{
 		JMenu menu = creerMenu(MENU_DESSIN_TITRE,new String[] { MENU_DESSIN_DEMARRER, MENU_DESSIN_ARRETER });
 
 		demarrerMenuItem = menu.getItem(0);
-        // Si le bouton de début est enclenché, on demande à l'utilisateur les informations sur le serveur
 		demarrerMenuItem.addActionListener(new ActionListener(){
 		  public void actionPerformed(ActionEvent arg0) {
-            String ipsrv = JOptionPane.showInputDialog(null, "Adresse du serveur (par défaut localhost) : ","Du fun avec les formes !", JOptionPane.QUESTION_MESSAGE);
-            if(!ipsrv.contentEquals(""))
-                  comm.setIpserveur(ipsrv);
-            else // Si l'utilisateur ne fournit aucune information, on utilise la valeur par défaut
-                comm.setIpserveur("localhost");
-
-            try{
-                int port = Integer.parseInt(JOptionPane.showInputDialog(null, "Port de communication (par défaut 10001) : ","Du fun avec les formes !", JOptionPane.QUESTION_MESSAGE));
-                if(port != 0)
-                    comm.setPortserveur(port);
-                else // Si aucun port n'est spécifié, on utilise le port par défaut
-                    comm.setPortserveur(10001);
-            }catch(NumberFormatException e){ // Si tu texte est entré, on utilise le port par défaut
-                System.err.println("Chiffre uniquement, utilisation du port par défaut");
-                comm.setPortserveur(10001);
-            }
-
-            comm.start();
+			try {
+				//FENETRE
+				JTextField adresse_ip = new JTextField();
+				JTextField num_port = new JTextField();
+				
+				//JOptionPane jConnexion = new JOptionPane();
+				
+				int validation = JOptionPane.showConfirmDialog(fenetrePrincipale, 
+					      new Object[] {"L'hote de connexion :", adresse_ip, "Num�ro de port :", num_port},
+					      "Hote de connexion distant",
+					      JOptionPane.OK_CANCEL_OPTION); 
+				
+				
+							    
+			    try{
+			    	if (validation == JOptionPane.OK_OPTION){
+			    		comm.recupereJFrame(fenetrePrincipale);
+			    		comm.start(adresse_ip.getText(),Integer.parseInt(num_port.getText()));	
+			    	}
+			    	
+			    }
+			    catch(NumberFormatException e){
+			    	JOptionPane.showMessageDialog(fenetrePrincipale, 
+							"Format incorrect", 
+							"Fin",
+							JOptionPane.INFORMATION_MESSAGE); 
+				}
+			    	
+			    }
+			    	 
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			rafraichirMenus();
 		  }
 		});
@@ -140,11 +175,117 @@ public class MenuFenetre extends JMenuBar{
 		});
 		add(menu);
 	}
+	
+	
+	private void addMenuClasser() {
+		   		//Menu Classer_Formes
+		   		JMenu menuClasser = new JMenu("Classer_Formes");
+		   		//Cr�ation du groupe de boutons
+		   		ButtonGroup groupeboutton = new ButtonGroup();
+		   		//Cr�ation de l'ecouteur des boutons
+		   		EcouteurClasser ecouteur= new EcouteurClasser(fenetrePrincipale);
+		   		
+		   	   // Creation des sous menus
+			   JRadioButtonMenuItem sequenceCroissant = new JRadioButtonMenuItem("Sequence_Croissant");//num�ro de s�quence croissant
+			   sequenceCroissant.setSelected(true);
+			   
+			   JRadioButtonMenuItem sequenceDecroissant = new JRadioButtonMenuItem("Sequence_Decroissant");//num�ro de s�quence d�croissant
+			   JRadioButtonMenuItem aireFormeCroissante = new JRadioButtonMenuItem("Aire_Forme_Croissante");//Aire croissante
+			   JRadioButtonMenuItem aireFormeDecroissante = new JRadioButtonMenuItem("Aire_Forme_Decroissante");//Aire d�croissante
+			   JRadioButtonMenuItem parTypeDeFormes = new JRadioButtonMenuItem("Par_type_De_formes");//carr�, rectangle, cercle, ovale, ligne
+			   JRadioButtonMenuItem parTypeDeFormesInverse = new JRadioButtonMenuItem("Par_type_De_formes_inverse");//ligne, ovale, cercle, rectangle, carr�**/
+			  
+			   //Ajout de l �couteur aux boutons
+			   sequenceCroissant.addActionListener(ecouteur);
+			   sequenceDecroissant.addActionListener(ecouteur);
+			   aireFormeCroissante.addActionListener(ecouteur);
+			   aireFormeDecroissante.addActionListener(ecouteur);
+			   parTypeDeFormes.addActionListener(ecouteur);
+			   parTypeDeFormesInverse.addActionListener(ecouteur);
+			   
+			   //Ajout des boutons au groupe
+			   groupeboutton.add(sequenceCroissant);
+			   groupeboutton.add(sequenceDecroissant);
+			   groupeboutton.add(aireFormeCroissante);
+			   groupeboutton.add(aireFormeDecroissante);
+			   groupeboutton.add(parTypeDeFormes);
+			   groupeboutton.add(parTypeDeFormesInverse);
+		   
+			   //Ajout des boutons au super menu
+			   menuClasser.add(sequenceCroissant);
+			   menuClasser.add(sequenceDecroissant);
+			   menuClasser.add(aireFormeCroissante);
+			   menuClasser.add(aireFormeDecroissante);
+			   menuClasser.add(parTypeDeFormes);
+			   menuClasser.add(parTypeDeFormesInverse);
+
+			   menuClasser.addSeparator();
+			   
+			   //Ajout du menuClasser Globale
+			   add(menuClasser);
+		   
+	}
+public class EcouteurClasser implements ActionListener{
+		public FenetrePrincipale fenetrePrincipale;
+		
+		public EcouteurClasser(FenetrePrincipale f){ 
+			fenetrePrincipale=f;
+		}
+
+	 public void actionPerformed(ActionEvent e) {
+		 
+		 /*
+		  * (sequenceCroissant = 0)(sequenceDecroissant = 1)
+		  * (aireFormeCroissante=2)(aireFormeDecroissante=3)
+		  * (parTypeDeFormes=4)(parTypeDeFormesInverse=5)
+		  */
+		 
+		   if(e.getActionCommand().equals("Sequence_Croissant")){
+			   System.out.println("tri sequenceCroissant  appel de fenetrePrincipale.aiguilleurDeTraitement(0)");
+			   fenetrePrincipale.aiguilleurDeTraitement(0);
+			  
+		   }
+		   		else
+		   				if(e.getActionCommand().equals( "Sequence_Decroissant")){
+		   					System.out.println("tri sequenceDecroissant appel de  fenetrePrincipale.aiguilleurDeTraitement(1)" );
+		   				 fenetrePrincipale.aiguilleurDeTraitement(1);
+		   				
+		   				}
+		   
+		   				else 
+		   					if(e.getActionCommand().equals( "Aire_Forme_Croissante")){
+		   						System.out.println("tri aireFormeCroissante appel de fenetrePrincipale.aiguilleurDeTraitement(2)");
+		   					 fenetrePrincipale.aiguilleurDeTraitement(2);
+		   					
+		   					}
+		   					else 
+			   					if(e.getActionCommand().equals("Aire_Forme_Decroissante")){
+			   					System.out.println("tri aireFormeDecroissante appel de fenetrePrincipale.aiguilleurDeTraitement(3)");
+			   					 fenetrePrincipale.aiguilleurDeTraitement(3);
+			   					
+			   					}
+		   					else 
+		   						if(e.getActionCommand().equals("Par_type_De_formes")){
+		   						System.out.println("tri TypeDeFormes appel de fenetrePrincipale.aiguilleurDeTraitement(4)");
+		   						 fenetrePrincipale.aiguilleurDeTraitement(4);
+		   						
+				   		
+		   						}
+		   						else 
+		   							if(e.getActionCommand().equals( "Par_type_De_formes_inverse")){
+		   							System.out.println("tri TypeDeFormesInverse appel de fenetrePrincipale.aiguilleurDeTraitement(5)");
+		   							 fenetrePrincipale.aiguilleurDeTraitement(5);
+		   							
+					   		
+		   							}
+		   
+		   }
+	}
 
 	/**
 	 *  Activer ou désactiver les items du menu selon la sélection. 
 	 */
-	public void rafraichirMenus() {
+	private void rafraichirMenus() {
 		demarrerMenuItem.setEnabled(!comm.isActif());
 		arreterMenuItem.setEnabled(comm.isActif());
 	}
@@ -162,4 +303,9 @@ public class MenuFenetre extends JMenuBar{
         }
         return menu;
    }
+	
+	public void setJFrame(FenetrePrincipale fenetre){
+		fenetrePrincipale=fenetre;
+		
+	}
 }

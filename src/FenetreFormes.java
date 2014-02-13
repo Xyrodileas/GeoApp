@@ -1,5 +1,18 @@
 /******************************************************
 Cours:  LOG121
+Projet: Laboratoire1 
+Nom du fichier: FenetreFormes.java
+Date créé: 20/01/1014
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Aissou Idriss
+30/01/2014 Version personnelle
+*******************************************************/ 
+
+
+/******************************************************
+Cours:  LOG121
 Projet: Squelette du laboratoire #1
 Nom du fichier: FenetreFormes.java
 Date créé: 2013-05-03
@@ -12,78 +25,98 @@ Historique des modifications
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+
 import javax.swing.JComponent;
-import LaFabrique.FabriqueForme;
-import java.awt.Composite;
-import java.awt.AlphaComposite;
 
 /**
- * Cette fenêtre gère x2'affichage des formes
+ * Cette fenêtre gère l'affichage des formes 
  * @author Patrice Boucher
  * @date 2013/05/04
  */
-import Formes.*;
-public class FenetreFormes extends JComponent{
-
+public class FenetreFormes extends JComponent {
+	
 	private static final long serialVersionUID = -2262235643903749505L;
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
-	public static final Dimension dimension = new Dimension(500,500);
-    private Forme affichage[] = new Forme[10];
-    private int counter;
+	public static final Dimension dimension = new Dimension(800,500);
+	private Formes[] tabRecu= new Formes[10];
 		
 	/**
-	 * Constructeur
+	 * Constructeur par defaut
+	 * Classe FenetreFormes
 	 */
-	public FenetreFormes(){
-		for(int x=0; x<10; x++){
-            affichage[x] = null;
-        }
-        counter=9;
-	}
+	
+	public FenetreFormes(){}
 	
 	/*
+	 * Proc�dure : qui permet de dessiner les formes dans la zone appropri�e
 	 * Affiche la liste de formes 
+	 * Consequent:
+	 * 			le composant javax.swing.JComponent#paintComponent(java.awt.Graphics) est utiliser pour dessiner
 	 */
-	@Override 
 	public void paintComponent(Graphics g){
-        for(int y=0; y<10; y++){
-            if(affichage[y] != null){ // On parcours le tableau pour afficher les composant dans l'ordre, du plus recent au plus ancien
-                affichage[y].draw(g);
-            }
-        }
+		
+			for (int i=9 ; i>=0 ; i--){
+			
+					if (tabRecu[i] != null ){
+							
+							//permet de parcourir le tableau recu de la methode setTab afin d'afficher les formes selon leur type 	
+				
+							//application de la couleur de l'objet Formes
+							g.setColor(tabRecu[i].getCouleur());
+				
+							// Si c'est un Ovale on dessine l'objet Ovale
+							if((tabRecu[i].getNom()).equals("Ovale")){
+								g.fillOval(((Formes.Ovale)(tabRecu[i])).getCentreX(), ((Formes.Ovale)(tabRecu[i])).getCentreY(), ((Formes.Ovale)(tabRecu[i])).getRayonH(), ((Formes.Ovale)(tabRecu[i])).getRayonV());
+							}
+				
+							// Si c'est un Carre on dessine l'objet carre
+							else if ((tabRecu[i].getNom()).equals("Carre")){
+									g.fillRect(((Formes.Carre)(tabRecu[i])).getX1(), ((Formes.Carre)(tabRecu[i])).getX1(), ((Formes.Carre)(tabRecu[i])).getY1(),((Formes.Carre)(tabRecu[i])).getY1());
+
+							}
+				
+							// Si c'est une Ligne on dessine l'objet Ligne
+							else if ((tabRecu[i].getNom()).equals("Ligne")){
+									g.drawLine(((Formes.Ligne)(tabRecu[i])).getX1(), ((Formes.Ligne)(tabRecu[i])).getY1(), ((Formes.Ligne)(tabRecu[i])).getX2(), ((Formes.Ligne)(tabRecu[i])).getY2());
+							}
+							// Si c'est un Cercle on dessine l'objet Cercle
+							else if ((tabRecu[i].getNom()).equals("Cercle")){
+									g.fillOval(((Formes.Cercle)(tabRecu[i])).getCentreX(), (((Formes.Cercle)(tabRecu[i])).getCentreY()), ((Formes.Cercle)(tabRecu[i])).getRayon(),((Formes.Cercle)(tabRecu[i])).getRayon());
+					
+							}
+				
+							// Si c'est une Rectangle on dessine l'objet Rectangle
+							else if ((tabRecu[i].getNom()).equals("Rectangle")){
+									g.fillRect(((Formes.Rectangle)(tabRecu[i])).getX1(), ((Formes.Rectangle)(tabRecu[i])).getY1(), ((Formes.Rectangle)(tabRecu[i])).getX2(), ((Formes.Rectangle)(tabRecu[i])).getY2());
+
+
+							}
+						
+					}
+					
+			}
+				
 	}
-
-    /**
-     * Fonction permettant d'ajouter une forme, et d'en retirer la plus ancienne si le tableau est complet
-     * @param forme
-     */
-    public void addForme(Forme forme){
-        if(counter >0){ // Si le tableau n'est pas complet, on ajoute simplement la forme au tableau
-            affichage[counter] = forme;
-            counter -= 1;
-
-        }
-        else{
-            for(int x=9; x>=0; x--){ // On permute tous les éléments pour les faires monter d'un rang.
-                Forme tmp;           // Le plus ancien est redescendu au rang 0
-                tmp = affichage[x];
-                if(x > 0){
-                    affichage[x] = affichage[x-1]; // Permutation
-                    affichage[x-1] = tmp;
-                }
-                else // Si on est au premier rang (0), on remplace l'élément
-                    affichage[x] = forme;
-            }
-        }
-
-    }
+		
+	
+	/**Proc�dure : qui permet de recevoir le tableau de Formes
+	 * Consequent :
+	 * 				On affecte ce tableau recu a l'attribut tabRecu de FenetreFormes
+	 * @param tab [] Formes
+	 */
+	public void setTab(Formes[] tab){
+		this.tabRecu = tab.clone();
+		
+	}
+	
 	
 	/*
+	 * Methode: Qui retourne la dimension pr�f�r�e
 	 * Le Layout qui utilise (contient) FenetreFormes doit réserver 
-	 * x2'espace nécessaire à son affichage
+	 * l'espace nécessaire à son affichage
 	 */
-	@Override 
+	
 	public Dimension getPreferredSize(){
 		return dimension;
 	}

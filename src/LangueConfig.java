@@ -15,7 +15,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;	
 
 /**
- * Utilitaire pour obtenir un mot dans la langue de x2'application
+ * Utilitaire pour obtenir un mot dans la langue de l'application
  */
 public class LangueConfig {
 	
@@ -42,7 +42,7 @@ public class LangueConfig {
 	   };
 	   
 	   /**
-	    * Retourne un mot (dans la langue de x2'application) lié à un champs
+	    * Retourne un mot (dans la langue de l'application) lié à un champs
 	    * @param key champs
 	    * @return
 	    */
