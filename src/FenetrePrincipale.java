@@ -86,7 +86,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 			
 			//Parcours le tableau de la fin vers le debut
 			for (int i =9 ; i>=1 ; i--){
-				//permet de permuter les elements dans le tableau afin d'éliminer automatiquement la premiere forme
+				//permet de permuter les elements dans le tableau afin d'ï¿½liminer automatiquement la premiere forme
 				tabFormes[i] = tabFormes[i-1];
 				
 			}
@@ -94,7 +94,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 			//Ajout de la nouvelle forme au tableau de forme
 			tabFormes[0] = DecodeurChaineFormes.creerForme((String) arg0.getNewValue());
 			
-			//1 signifie insérer après élement, 0 signifie avant élément
+			//1 signifie insï¿½rer aprï¿½s ï¿½lement, 0 signifie avant ï¿½lï¿½ment
 			try {
 				listeChaineFormes.ajoute(DecodeurChaineFormes.creerForme((String) arg0.getNewValue()), 1);
 				listeChaineFormes.afficheElementDeListe();
@@ -116,7 +116,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	}
 	/**
 	 * Permet d'indiquer au trieur le type de triage
-	 * @param (int) modeDeTriage
+	 * @param int modeDeTriage
 	 */
 	
 	public void aiguilleurDeTraitement(int modeDeTriage){
@@ -128,16 +128,23 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 		  * (parTypeDeFormes=4)(parTypeDeFormesInverse=5)
 		  */
 		case 0 :
+			System.out.println("Cas 0");
+
 			break;
 		case 1 :
+			System.out.println("Cas 1");
 			break;
 		case 2 :
+			System.out.println("Cas 2");
 			break;
 		case 3 :
+			System.out.println("Cas 3");
 			break;
 		case 4 :
+			System.out.println("Cas 4");
 			break;
 		case 5 :
+			System.out.println("Cas 5");
 			break;
 		
 		}
