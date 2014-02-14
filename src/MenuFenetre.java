@@ -22,19 +22,11 @@ Historique des modifications
 2013-05-03 Version initiale
 *******************************************************/  
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 
 /**
  * CrÃ©e le menu de la fenÃªtre de l'applicationÃ©
@@ -93,7 +85,7 @@ public class MenuFenetre extends JMenuBar{
 				//JOptionPane jConnexion = new JOptionPane();
 				
 				int validation = JOptionPane.showConfirmDialog(fenetrePrincipale, 
-					      new Object[] {"L'hote de connexion :", adresse_ip, "Numéro de port :", num_port},
+					      new Object[] {"L'hote de connexion :", adresse_ip, "Numï¿½ro de port :", num_port},
 					      "Hote de connexion distant",
 					      JOptionPane.OK_CANCEL_OPTION); 
 				
@@ -180,22 +172,22 @@ public class MenuFenetre extends JMenuBar{
 	private void addMenuClasser() {
 		   		//Menu Classer_Formes
 		   		JMenu menuClasser = new JMenu("Classer_Formes");
-		   		//Création du groupe de boutons
+		   		//Crï¿½ation du groupe de boutons
 		   		ButtonGroup groupeboutton = new ButtonGroup();
-		   		//Création de l'ecouteur des boutons
+		   		//Crï¿½ation de l'ecouteur des boutons
 		   		EcouteurClasser ecouteur= new EcouteurClasser();
 		   		
 		   	   // Creation des sous menus
-			   JRadioButtonMenuItem sequenceCroissant = new JRadioButtonMenuItem("Sequence_Croissant");//numéro de séquence croissant
+			   JRadioButtonMenuItem sequenceCroissant = new JRadioButtonMenuItem("Sequence_Croissant");//numï¿½ro de sï¿½quence croissant
 			   sequenceCroissant.setSelected(true);
 			   
-			   JRadioButtonMenuItem sequenceDecroissant = new JRadioButtonMenuItem("Sequence_Decroissant");//numéro de séquence décroissant
+			   JRadioButtonMenuItem sequenceDecroissant = new JRadioButtonMenuItem("Sequence_Decroissant");//numï¿½ro de sï¿½quence dï¿½croissant
 			   JRadioButtonMenuItem aireFormeCroissante = new JRadioButtonMenuItem("Aire_Forme_Croissante");//Aire croissante
-			   JRadioButtonMenuItem aireFormeDecroissante = new JRadioButtonMenuItem("Aire_Forme_Decroissante");//Aire décroissante
-			   JRadioButtonMenuItem parTypeDeFormes = new JRadioButtonMenuItem("Par_type_De_formes");//carré, rectangle, cercle, ovale, ligne
-			   JRadioButtonMenuItem parTypeDeFormesInverse = new JRadioButtonMenuItem("Par_type_De_formes_inverse");//ligne, ovale, cercle, rectangle, carré**/
+			   JRadioButtonMenuItem aireFormeDecroissante = new JRadioButtonMenuItem("Aire_Forme_Decroissante");//Aire dï¿½croissante
+			   JRadioButtonMenuItem parTypeDeFormes = new JRadioButtonMenuItem("Par_type_De_formes");//carrï¿½, rectangle, cercle, ovale, ligne
+			   JRadioButtonMenuItem parTypeDeFormesInverse = new JRadioButtonMenuItem("Par_type_De_formes_inverse");//ligne, ovale, cercle, rectangle, carrï¿½**/
 			  
-			   //Ajout de l écouteur aux boutons
+			   //Ajout de l ï¿½couteur aux boutons
 			   sequenceCroissant.addActionListener(ecouteur);
 			   sequenceDecroissant.addActionListener(ecouteur);
 			   aireFormeCroissante.addActionListener(ecouteur);
@@ -225,7 +217,7 @@ public class MenuFenetre extends JMenuBar{
 			   add(menuClasser);
 		   
 	}
-public class EcouteurClasser implements ActionListener{
+public class EcouteurClasser  implements ActionListener{
 		
 		public EcouteurClasser(){ }
 
@@ -236,7 +228,7 @@ public class EcouteurClasser implements ActionListener{
 		  * (aireFormeCroissante=2)(aireFormeDecroissante=3)
 		  * (parTypeDeFormes=4)(parTypeDeFormesInverse=5)
 		  */
-		 
+		try{
 		   if(e.getActionCommand().equals("Sequence_Croissant")){
 			   System.out.println("tri sequenceCroissant  appel de fenetrePrincipale.aiguilleurDeTraitement(0)");
 			   MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(0);
@@ -245,7 +237,8 @@ public class EcouteurClasser implements ActionListener{
 		   		else
 		   				if(e.getActionCommand().equals( "Sequence_Decroissant")){
 		   					System.out.println("tri sequenceDecroissant appel de  fenetrePrincipale.aiguilleurDeTraitement(1)" );
-		   				 MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(1);
+		   				    MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(1);
+
 		   				
 		   				}
 		   
@@ -275,7 +268,7 @@ public class EcouteurClasser implements ActionListener{
 		   							
 					   		
 		   							}
-		   
+        }catch(Exception e1){}
 		   }
 	}
 

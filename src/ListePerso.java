@@ -8,13 +8,13 @@ public class ListePerso{
 	 *            Une r�f�rence pointant toujours sur la position courante
 	 *
 	 */
-	 private static class Noeud{
-		 
+	 public static class Noeud{
+
 		 //la liste peut les utiliser directement via un objet
 		 //donc pas besoin d'accesseurs et de mutateurs
 		 private Formes element;
-		 private Noeud suivant;	 
-		 
+		 private Noeud suivant;
+
 		 //constructeur par copie d'attributs
 		 public Noeud(Formes element, Noeud lien){
 			 this.element = element;

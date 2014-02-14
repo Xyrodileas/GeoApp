@@ -119,7 +119,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	 * @param int modeDeTriage
 	 */
 	
-	public void aiguilleurDeTraitement(int modeDeTriage){
+	public void aiguilleurDeTraitement(int modeDeTriage) throws Exception{
 	
 		switch(modeDeTriage){
 		 /*
@@ -129,16 +129,19 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 		  */
 		case 0 :
 			System.out.println("Cas 0");
-
+            Triage.SelfSort(listeChaineFormes);
 			break;
 		case 1 :
 			System.out.println("Cas 1");
+            Triage.bubbleSortByIDLoggerInverted(listeChaineFormes);
 			break;
 		case 2 :
 			System.out.println("Cas 2");
+            Triage.bubbleSortByAir(listeChaineFormes);
 			break;
 		case 3 :
 			System.out.println("Cas 3");
+            Triage.bubbleSortByAirInverted(listeChaineFormes);
 			break;
 		case 4 :
 			System.out.println("Cas 4");
@@ -146,8 +149,10 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 		case 5 :
 			System.out.println("Cas 5");
 			break;
-		
+
 		}
+        Triage.reorganize(listeChaineFormes);
+        repaint();
 		
 	}
 

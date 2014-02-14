@@ -94,7 +94,7 @@ public class PanneauNbItems extends JPanel implements Observer{
 	 */
 	public void update(Observable o, Object arg) {
 		
-		setNbElements(Integer.parseInt((String)arg));
+//		setNbElements(Integer.parseInt((String)arg));
 		
 	}
 	

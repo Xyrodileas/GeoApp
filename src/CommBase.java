@@ -134,7 +134,7 @@ public class CommBase extends Observable{
 		    			}
 
 
-	    		if (ipRecu.equals(ip) && portRecu== port && connexion) {
+	    		if (connexion) {
 			
 		 			JOptionPane.showMessageDialog(fenetrePrincipale, "Vous �tes connect�"); 
 		 			creerCommunication();

@@ -38,6 +38,7 @@ public class FenetreFormes extends JComponent {
 	public static final int HEIGHT = 500;
 	public static final Dimension dimension = new Dimension(800,500);
 	private Formes[] tabRecu= new Formes[10];
+    private ListePerso liste = new ListePerso();
 		
 	/**
 	 * Constructeur par defaut
@@ -52,16 +53,22 @@ public class FenetreFormes extends JComponent {
 	 * Consequent:
 	 * 			le composant javax.swing.JComponent#paintComponent(java.awt.Graphics) est utiliser pour dessiner
 	 */
-	public void paintComponent(Graphics g){
-		
-			for (int i=9 ; i>=0 ; i--){
-			
-					if (tabRecu[i] != null )
-						tabRecu[i].draw(g);
-					
-			}
-				
-	}
+	public void paintComponent(Graphics g) throws Exception{
+
+        liste.premier();
+
+        //R�f�rence temporaire pour parourir la liste du debut a la fin
+       liste.getElement() = debut;
+
+        while(tmp != null){
+
+            //aFFICHE
+            System.out.println((tmp.element).getNom());
+
+            //On passe � l'�l�ment suivant dans la pile
+            tmp = tmp.suivant;
+
+        }
 		
 	
 	/**Proc�dure : qui permet de recevoir le tableau de Formes

@@ -148,27 +148,29 @@ public abstract class Formes {
             g.setColor(Color.BLACK);
             g.fillOval(centreX, centreY, rayonH, rayonV);
             g.setColor(Color.GREEN);
-            g.drawLine(centreX-rayonH, centreY+rayonV, centreX+rayonH, centreY+rayonV);
+            g.drawLine(centreX, centreY, centreX+rayonH, centreY+rayonV);
+            g.setColor(Color.CYAN);
+            g.drawRect(centreX, centreY, centreX+rayonH-centreX, centreY+rayonV-centreY);
         }
         public double getAir(){
 
             return Math.PI*rayonH*rayonV;
         }
         public int firstx(){
-            return centreX-rayonH;
+            return centreX;
         }
         public int lastx(){
             return centreX+rayonH;
         }
         public int firsty(){
-            return centreY-rayonV;
+            return centreY;
         }
         public int lasty(){
             return centreY+rayonV;
         }
         public void newPosition(int x2, int y2){
-            this.centreX = x2+rayonH;
-            this.centreY = y2+rayonV;
+            this.centreX = x2;
+            this.centreY = y2;
         }
 	}
 
@@ -243,27 +245,30 @@ public abstract class Formes {
             g.setColor(Color.BLACK);
             g.drawOval(centreX, centreY, rayon, rayon);
             g.setColor(Color.GREEN);
-            g.drawLine(centreX-rayon, centreY+rayon, centreX+rayon, centreY+rayon);
+            g.drawLine(centreX, centreY, centreX+rayon, centreY+rayon);
+            g.setColor(Color.CYAN);
+            g.drawRect(centreX, centreY, centreX+rayon-centreX, centreY+rayon-centreY);
+
         }
         public double getAir(){
 
             return Math.PI*rayon*rayon;
         }
         public int firstx(){
-            return centreX-rayon;
+            return centreX;
         }
         public int lastx(){
             return centreX+rayon;
         }
         public int firsty(){
-            return centreY-rayon;
+            return centreY;
         }
         public int lasty(){
             return centreY+rayon;
         }
         public void newPosition(int x2, int y2){
-            this.centreX = x2+rayon;
-            this.centreY = y2+rayon;
+            this.centreX = x2;
+            this.centreY = y2;
         }
 	}
 	
@@ -569,7 +574,7 @@ public abstract class Formes {
             g.drawLine(x1, y1, x2, y2);
             g.setColor(Color.BLACK);
             g.setColor(Color.GREEN);
-            g.drawRect(x1, y1, x2, y2);
+            g.drawRect(x1, y1, x2-x1, y2-y1);
         }
 
 

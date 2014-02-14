@@ -5,7 +5,7 @@
  */
 public abstract class Triage {
 
-    public void SelfSort(ListePerso lt) throws ListeVideException, Exception{
+    public static void SelfSort(ListePerso lt) throws ListeVideException, Exception{
         boolean trie = false;
         Formes pivot;
 
@@ -26,8 +26,8 @@ public abstract class Triage {
         }while(!trie);
 
     }
-
-    public void bubbleSortByIDLogger(ListePerso lt) throws ListeVideException, Exception{
+    // Trie à bulle en fonction de l'IDLogger, dans l'ordre croissant
+    public static void bubbleSortByIDLogger(ListePerso lt) throws ListeVideException, Exception{
         boolean trie = true;
         do{
             lt.premier();
@@ -44,7 +44,8 @@ public abstract class Triage {
 
         }while(!trie);
     }
-    public void bubbleSortByIDLoggerInverted(ListePerso lt) throws ListeVideException, Exception{
+    // Trie à bulle en fonction de l'IDLogger, dans l'ordre decroissant
+    public static void bubbleSortByIDLoggerInverted(ListePerso lt) throws ListeVideException, Exception{
         boolean trie = true;
         do{
             lt.premier();
@@ -61,7 +62,8 @@ public abstract class Triage {
 
         }while(!trie);
     }
-    public void bubbleSortByAir(ListePerso lt) throws ListeVideException, Exception{
+    // Trie à bulle en fonction de l'air, dans l'ordre croissant
+    public static void bubbleSortByAir(ListePerso lt) throws ListeVideException, Exception{
         boolean trie = true;
         do{
             lt.premier();
@@ -78,7 +80,8 @@ public abstract class Triage {
 
         }while(!trie);
     }
-    public void bubbleSortByAirInverted(ListePerso lt) throws ListeVideException, Exception{
+    // Trie à bulle en fonction de l'air, dans l'ordre decroissant
+    public static void bubbleSortByAirInverted(ListePerso lt) throws ListeVideException, Exception{
         boolean trie = true;
         do{
             lt.premier();
@@ -88,6 +91,7 @@ public abstract class Triage {
                 lt.suivant();
                 if(tmp.getAir() < ((Formes) lt.getElement()).getAir()){
                     lt.supprime();
+                    lt.precedent();
                     lt.ajoute(tmp, 0);
                     trie=false;
                 }
@@ -95,7 +99,7 @@ public abstract class Triage {
 
         }while(!trie);
     }
-    public void reorganize(ListePerso lt) throws Exception{
+    public static void reorganize(ListePerso lt) throws Exception{
         lt.premier();
         ((Formes)lt.getElement()).newPosition(1,1);
         for(int i=0;i<10;i++){
