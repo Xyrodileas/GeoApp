@@ -20,6 +20,7 @@ Historique des modifications
 *******************************************************
 *@author Patrice Boucher
 2013-05-03 Version initiale
+*testtest
 *******************************************************/  
 
 import javax.swing.*;
