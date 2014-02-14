@@ -9,21 +9,21 @@ Historique des modifications
 *@author Aissou Idriss
 30/01/2014 Version personnelle
 *******************************************************/  
-import java.awt.Color;
+import java.awt.*;
 
 
 /**
- * Classe mère : Formes
+ * Classe mï¿½re : Formes
  * 
  * @author Aissou Idriss
  * @author AISI01088901
  *
  */
-public class Formes {
+public abstract class Formes {
 	
 		//ATTRIBUTS
-		private Color couleur;
-		private String nomForme;
+		protected Color couleur;
+		protected String nomForme;
 		private int idlog;
 		
 		/**
@@ -32,7 +32,7 @@ public class Formes {
 		 * @param couleurRecu  (une couleur)
 		 * 
 		 * Consequent:
-		 * 			la couleur recu est affectée a l'attribut couleur
+		 * 			la couleur recu est affectï¿½e a l'attribut couleur
 		 */
 		public Formes(int id,Color couleurRecu,String nomRecu){
 			couleur=couleurRecu;
@@ -60,7 +60,13 @@ public class Formes {
 		public int getIDLogger(){
 			return idlog;
 		}
-
+        public abstract void draw(Graphics g);
+        public abstract double getAir();
+        public abstract int firstx();
+        public abstract int lastx();
+        public abstract int firsty();
+        public abstract int lasty();
+        public abstract void newPosition(int x2, int y2);
 
 
 //*************************************************************
@@ -137,8 +143,35 @@ public class Formes {
 		public int getIDLogger(){
 			return super.getIDLogger();
 		}
+        public void draw(Graphics g){
+            g.fillOval(centreX, centreY, rayonH, rayonV);
+            g.setColor(Color.BLACK);
+            g.fillOval(centreX, centreY, rayonH, rayonV);
+            g.setColor(Color.GREEN);
+            g.drawLine(centreX-rayonH, centreY+rayonV, centreX+rayonH, centreY+rayonV);
+        }
+        public double getAir(){
+
+            return Math.PI*rayonH*rayonV;
+        }
+        public int firstx(){
+            return centreX-rayonH;
+        }
+        public int lastx(){
+            return centreX+rayonH;
+        }
+        public int firsty(){
+            return centreY-rayonV;
+        }
+        public int lasty(){
+            return centreY+rayonV;
+        }
+        public void newPosition(int x2, int y2){
+            this.centreX = x2+rayonH;
+            this.centreY = y2+rayonV;
+        }
 	}
-	
+
 	
 	
 //*************************************************************	
@@ -203,7 +236,35 @@ public class Formes {
 		public int getIDLogger(){
 			return super.getIDLogger();
 		}
-		
+
+        public void draw(Graphics g){
+            g.setColor(this.couleur);
+            g.fillOval(centreX, centreY, rayon, rayon);
+            g.setColor(Color.BLACK);
+            g.drawOval(centreX, centreY, rayon, rayon);
+            g.setColor(Color.GREEN);
+            g.drawLine(centreX-rayon, centreY+rayon, centreX+rayon, centreY+rayon);
+        }
+        public double getAir(){
+
+            return Math.PI*rayon*rayon;
+        }
+        public int firstx(){
+            return centreX-rayon;
+        }
+        public int lastx(){
+            return centreX+rayon;
+        }
+        public int firsty(){
+            return centreY-rayon;
+        }
+        public int lasty(){
+            return centreY+rayon;
+        }
+        public void newPosition(int x2, int y2){
+            this.centreX = x2+rayon;
+            this.centreY = y2+rayon;
+        }
 	}
 	
 	
@@ -283,9 +344,37 @@ public class Formes {
 		public int getIDLogger(){
 			return super.getIDLogger();
 		}
-		
-		
-		
+
+        public void draw(Graphics g){
+            g.setColor(this.couleur);
+            g.fillRect(x1, y1, x2, y2);
+            g.setColor(Color.BLACK);
+            g.drawRect(x1, y1, x2, y2);
+            g.setColor(Color.GREEN);
+            g.drawLine(x1, y1, x2, y2);
+        }
+        public double getAir(){
+
+            return Math.PI*(x2-x1)*(x2-x1);
+        }
+        public int firstx(){
+            return x1;
+        }
+        public int lastx(){
+            return x2;
+        }
+        public int firsty(){
+            return y1;
+        }
+        public int lasty(){
+            return y2;
+        }
+        public void newPosition(int x2, int y2){
+            this.x2 = x2+(this.x2-this.x1);
+            this.y2 = y2+(this.y2-this.y1);
+            this.x1 = x2;
+            this.y1 = y2;
+        }
 	}	
 	
 	
@@ -365,7 +454,38 @@ public class Formes {
 		public int getIDLogger(){
 			return super.getIDLogger();
 		}
-		
+
+        public void draw(Graphics g){
+            g.setColor(this.couleur);
+            g.fillRect(x1, y1, x2, y2);
+            g.setColor(Color.BLACK);
+            g.drawRect(x1, y1, x2, y2);
+            g.setColor(Color.GREEN);
+            g.drawLine(x1, y1, x2, y2);
+        }
+        public double getAir(){
+
+            return Math.PI*(x2-x1)*(y2-y1);
+        }
+        public int firstx(){
+            return x1;
+        }
+        public int lastx(){
+            return x2;
+        }
+        public int firsty(){
+            return y1;
+        }
+        public int lasty(){
+            return y2;
+        }
+        public void newPosition(int x2, int y2){
+            this.x2 = x2+(this.x2-this.x1);
+            this.y2 = y2+(this.y2-this.y1);
+            this.x1 = x2;
+            this.y1 = y2;
+        }
+
 	}
 	
 	
@@ -443,9 +563,40 @@ public class Formes {
 		public int getIDLogger(){
 			return super.getIDLogger();
 		}
-		
-		
+
+        public void draw(Graphics g){
+            g.setColor(this.couleur);
+            g.drawLine(x1, y1, x2, y2);
+            g.setColor(Color.BLACK);
+            g.setColor(Color.GREEN);
+            g.drawRect(x1, y1, x2, y2);
+        }
+
+
+        public double getAir(){
+
+            return x2-x1;
+        }
+        public int firstx(){
+            return x1;
+        }
+        public int lastx(){
+            return x2;
+        }
+        public int firsty(){
+            return y1;
+        }
+        public int lasty(){
+            return y2;
+        }
+        public void newPosition(int x2, int y2){
+            this.x2 = x2+(this.x2-this.x1);
+            this.y2 = y2+(this.y2-this.y1);
+            this.x1 = x2;
+            this.y1 = y2;
+        }
 	}
+
 	
 }
 

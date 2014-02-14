@@ -61,7 +61,7 @@ public class MenuFenetre extends JMenuBar{
 	
 	private JMenuItem arreterMenuItem, demarrerMenuItem;
 	private static final int DELAI_QUITTER_MSEC = 200;
-	FenetrePrincipale fenetrePrincipale;
+	static FenetrePrincipale fenetrePrincipale;
  	   
 	CommBase comm; // Pour activer/dÃ©sactiver la communication avec le serveur
 	
@@ -183,7 +183,7 @@ public class MenuFenetre extends JMenuBar{
 		   		//Création du groupe de boutons
 		   		ButtonGroup groupeboutton = new ButtonGroup();
 		   		//Création de l'ecouteur des boutons
-		   		EcouteurClasser ecouteur= new EcouteurClasser(fenetrePrincipale);
+		   		EcouteurClasser ecouteur= new EcouteurClasser();
 		   		
 		   	   // Creation des sous menus
 			   JRadioButtonMenuItem sequenceCroissant = new JRadioButtonMenuItem("Sequence_Croissant");//numéro de séquence croissant
@@ -226,11 +226,8 @@ public class MenuFenetre extends JMenuBar{
 		   
 	}
 public class EcouteurClasser implements ActionListener{
-		public FenetrePrincipale fenetrePrincipale;
 		
-		public EcouteurClasser(FenetrePrincipale f){ 
-			fenetrePrincipale=f;
-		}
+		public EcouteurClasser(){ }
 
 	 public void actionPerformed(ActionEvent e) {
 		 
@@ -242,39 +239,39 @@ public class EcouteurClasser implements ActionListener{
 		 
 		   if(e.getActionCommand().equals("Sequence_Croissant")){
 			   System.out.println("tri sequenceCroissant  appel de fenetrePrincipale.aiguilleurDeTraitement(0)");
-			   fenetrePrincipale.aiguilleurDeTraitement(0);
+			   MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(0);
 			  
 		   }
 		   		else
 		   				if(e.getActionCommand().equals( "Sequence_Decroissant")){
 		   					System.out.println("tri sequenceDecroissant appel de  fenetrePrincipale.aiguilleurDeTraitement(1)" );
-		   				 fenetrePrincipale.aiguilleurDeTraitement(1);
+		   				 MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(1);
 		   				
 		   				}
 		   
 		   				else 
 		   					if(e.getActionCommand().equals( "Aire_Forme_Croissante")){
 		   						System.out.println("tri aireFormeCroissante appel de fenetrePrincipale.aiguilleurDeTraitement(2)");
-		   					 fenetrePrincipale.aiguilleurDeTraitement(2);
+		   						MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(2);
 		   					
 		   					}
 		   					else 
 			   					if(e.getActionCommand().equals("Aire_Forme_Decroissante")){
 			   					System.out.println("tri aireFormeDecroissante appel de fenetrePrincipale.aiguilleurDeTraitement(3)");
-			   					 fenetrePrincipale.aiguilleurDeTraitement(3);
+			   					MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(3);
 			   					
 			   					}
 		   					else 
 		   						if(e.getActionCommand().equals("Par_type_De_formes")){
 		   						System.out.println("tri TypeDeFormes appel de fenetrePrincipale.aiguilleurDeTraitement(4)");
-		   						 fenetrePrincipale.aiguilleurDeTraitement(4);
+		   						MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(4);
 		   						
 				   		
 		   						}
 		   						else 
 		   							if(e.getActionCommand().equals( "Par_type_De_formes_inverse")){
 		   							System.out.println("tri TypeDeFormesInverse appel de fenetrePrincipale.aiguilleurDeTraitement(5)");
-		   							 fenetrePrincipale.aiguilleurDeTraitement(5);
+		   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(5);
 		   							
 					   		
 		   							}

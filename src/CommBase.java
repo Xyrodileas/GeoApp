@@ -22,29 +22,26 @@ Historique des modifications
 2013-05-03 Version initiale
 *******************************************************/  
 
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-
-import java.net.Socket;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.*;
 import java.util.Observable;
-import java.lang.IllegalArgumentException;
 
 /**
  * STRATEGIE :
- * 				Permet d'Ètablir la connexion avec le serveur gr‚ce  
- * 				‡ la rÈception des identifiants de la part de l'onglet Demarrer du menu
+ * 				Permet d'ÔøΩtablir la connexion avec le serveur grÔøΩce  
+ * 				ÔøΩ la rÔøΩception des identifiants de la part de l'onglet Demarrer du menu
  * 
  * Base d'une communication via un fil d'ex√©cution parall√®le.
  */
 
 /**
  * Classe CommBase qui permet
- * d'Ètablir la connection avec le serveur
+ * d'ÔøΩtablir la connection avec le serveur
  * mais aussi d'envoyer les lignes de commande recu
  * au DecodeurDeChaine
  * @author Aissou Idriss
@@ -73,13 +70,13 @@ public class CommBase extends Observable{
     private JFrame fenetrePrincipale;
 	
 	/**
-	 * Constructeur par dÈfaut vide
+	 * Constructeur par dÔøΩfaut vide
 	 */
 	public CommBase(){
 	}
 	
 	/**
-	 * DÈfinir le rÈcepteur de l'information reÁue dans la communication avec le serveur
+	 * DÔøΩfinir le rÔøΩcepteur de l'information reÔøΩue dans la communication avec le serveur
 	 * @param listener sera alert√© lors de l'appel de "firePropertyChanger" par le SwingWorker
 	 */
 	public void setPropertyChangeListener(PropertyChangeListener listener){
@@ -96,50 +93,50 @@ public class CommBase extends Observable{
 	 * @throws ConnectException			Erreur De Connection
 	 * @throws IOException				Autres Erreurs
 	 * 
-	 * ConsÈquent :
-	 * 			La connexion est Ètablie avec mise en place de gestion d'exceptions
+	 * ConsÔøΩquent :
+	 * 			La connexion est ÔøΩtablie avec mise en place de gestion d'exceptions
 	 */
 	public void start(String ipRecu, int portRecu) throws IOException{
 		
 	    //DEBUT DU TEST DE VALIDATION IP
     	Boolean connexion= true;
-	    	
-	    		try { 
-	    			
+
+	    		try {
+
 	    			//TENTATIVE D'OUVERTURE DE LA CONNECTION...
-	    			
+
 	    			//Creation de la socket selon les parametres recus
-	    			socketDeConnection = new Socket(ipRecu, portRecu);	
+	    			socketDeConnection = new Socket(ipRecu, portRecu);
 	    			//creation du flux sortant
 	    			fluxEnvoyeVersServeur= new PrintStream(socketDeConnection.getOutputStream());
 	    			//creation du flux entrant
 	    			fluxRecuSurClient= new BufferedReader(new InputStreamReader(socketDeConnection.getInputStream()));
-	    			
-				 	} 
-	    		
-	    		/*gestion des exceptions 
+
+				 	}
+
+	    		/*gestion des exceptions
     			 * Erreur de connexion
     			 * Temps de connexion a la socket depasser
     			 * Erreur d'arguments
     			 * probleme de port
     			 * port injoignable
-    			 * 
+    			 *
     			 */
 	    			//LES EXEPTIONS DE CONNECTION
 	    			//Hote inconnu
 		    		catch (UnknownHostException | ConnectException |
-		    				SocketTimeoutException | BindException | NoRouteToHostException | 
+		    				SocketTimeoutException | BindException | NoRouteToHostException |
 		    				PortUnreachableException |IllegalArgumentException  e)
 		    			{
 		    			// Envoie les parametre de texte a la methode warningMessage qui affiche le message d'erreur
 		    			warningMessage("Il y a une erreur :" + "\n"+ e.toString() + "\n"+e.getLocalizedMessage(), " Information d'erreur");
 		    			connexion= false;
 		    			}
-	 
-	    	
-	    		if (ipRecu.equals(ip) && portRecu== port && connexion==true) {
+
+
+	    		if (ipRecu.equals(ip) && portRecu== port && connexion) {
 			
-		 			JOptionPane.showMessageDialog(fenetrePrincipale, "Vous Ítes connectÈ"); 
+		 			JOptionPane.showMessageDialog(fenetrePrincipale, "Vous ÔøΩtes connectÔøΩ"); 
 		 			creerCommunication();
 		 			}
 	    			
@@ -151,11 +148,11 @@ public class CommBase extends Observable{
 
 	
 	/**
-	 * ProcÈdure qui permet de stopper la connexion avec le serveur
+	 * ProcÔøΩdure qui permet de stopper la connexion avec le serveur
 	 * 
-	 * ConsÈquent :
+	 * ConsÔøΩquent :
 	 * 				La connexion se voit stopper
-	 * 				le (int) nbElement se voit revenir a zÈro
+	 * 				le (int) nbElement se voit revenir a zÔøΩro
 	 * 				Affiche un message de signalement de fin de connexion
 	 */
 	public void stop(){
@@ -180,9 +177,9 @@ public class CommBase extends Observable{
 	}
 	
 	/**
-	 * ProcÈdure qui permet de communiquer avec le serveur de formes
+	 * ProcÔøΩdure qui permet de communiquer avec le serveur de formes
 	 * 
-	 * ConsÈquent :
+	 * ConsÔøΩquent :
 	 * 				Creation du fil d'execution parallele
 	 * 				Communication avec le serveur : commande Get
 	 * 				Reception des requetes entrantes
@@ -198,7 +195,6 @@ public class CommBase extends Observable{
 				
 				while(true){
 					Thread.sleep(DELAI);
-					
 					// C'EST DANS CETTE BOUCLE QU'ON COMMUNIQUE AVEC LE SERVEUR
 					fluxEnvoyeVersServeur.println("GET");
 					
@@ -206,16 +202,16 @@ public class CommBase extends Observable{
 					if(listener!=null)
 						if(fluxRecuSurClient.readLine().length() !=9){
 							
-							nbElement++; //IncrÈmentation du nombre de formes ‡ chaque nouvelle forme recu
+							nbElement++; //IncrÔøΩmentation du nombre de formes ÔøΩ chaque nouvelle forme recu
 							//Permet de notifier le nombre de formes totale au JPanel PanneauNbItems
 							setChanged();
 							notifyObservers(nbElement);
 							
-							//Envoie a ligne de commande recu (Formes) ‡ la fenetre principale (fenetrePrincipale)
+							//Envoie a ligne de commande recu (Formes) ÔøΩ la fenetre principale (fenetrePrincipale)
 							firePropertyChange("ENVOIE-FORME-RECU", null, fluxRecuSurClient.readLine());
 							
 							//Condition d'arret
-							if(nbElement==10){
+							if(nbElement>=10){
 								stop();
 								
 							}
@@ -227,7 +223,7 @@ public class CommBase extends Observable{
 		
 		if(listener!=null)
 			   threadComm.addPropertyChangeListener(listener); // La m√©thode "propertyChange" de ApplicationFormes sera donc appel√©e lorsque le SwinkWorker invoquera la m√©thode "firePropertyChanger" 
-				nbElement=0;  //Remise a zero du nombre d'ÈlÈments
+				nbElement=0;  //Remise a zero du nombre d'ÔøΩlÔøΩments
 				setChanged();	//on applique les changements
 				notifyObservers(nbElement);//On avise l'observeur
 			threadComm.execute(); // Lance le fil d'ex√©cution parall√®le.

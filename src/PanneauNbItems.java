@@ -10,52 +10,50 @@ Historique des modifications
 30/01/2014 Version personnelle
 *******************************************************/ 
 
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 
 
 public class PanneauNbItems extends JPanel implements Observer{
 	
     /**
-     * STRATÉGIE :  On utilise  le principe Observer/Observable
-     * 				On est aviser de l'incrémentation du nombre de Formes par CommBase
+     * STRATï¿½GIE :  On utilise  le principe Observer/Observable
+     * 				On est aviser de l'incrï¿½mentation du nombre de Formes par CommBase
      * 
      * 				Dans ce cas:
      *				CommBase est Observable
      *				PanneauNbItems est l'Observer
      *
-     *			    Cela va permettre de modifier le nombre d'élements selon le nombre de formes recu
+     *			    Cela va permettre de modifier le nombre d'ï¿½lements selon le nombre de formes recu
      *				 
      *              On recoit par notification le nombre de Formes total
      *                
      */
-    //Sert pour la persistence (enlève un warning)
+    //Sert pour la persistence (enlï¿½ve un warning)
 	private static final long serialVersionUID = 1L;
 	
 	//ATTRIBUTS
-	//L'étiquette et le nombre
+	//L'ï¿½tiquette et le nombre
 	private JLabel etiqNbElements;
 	private  JLabel nbElements;
 	
 
 	/**
-	 * Constructeur par défaut
+	 * Constructeur par dï¿½faut
 	 */
 	public PanneauNbItems(){
 		
-		//Utilisation d'une procédure locale
+		//Utilisation d'une procï¿½dure locale
 		initComposants();			
 	}
 	
 	/**
-	 * Crée les deux étiquettes et définit la taille du panneau
+	 * Crï¿½e les deux ï¿½tiquettes et dï¿½finit la taille du panneau
 	 * avant d'y ajouter les composants
-	 * Conséquent :
+	 * Consï¿½quent :
 	 * 			On instancie un objet etiqNbElements Jlabel (Titre)
 	 * 			On instancie un objet nbElements JLabel 	(NombreDeFormes)
 	 */
@@ -71,10 +69,10 @@ public class PanneauNbItems extends JPanel implements Observer{
 	}
 	
 	/**
-	 * Modifie l'étiquette représentant le nombre de Formes.
-	 * @param nb Le nombre à afficher
+	 * Modifie l'ï¿½tiquette reprï¿½sentant le nombre de Formes.
+	 * @param nb Le nombre ï¿½ afficher
 	 * 
-	 *  Conséquent :
+	 *  Consï¿½quent :
 	 * 			nbElement se voit attribuer la valeur recue
 	 */
 	 
@@ -83,20 +81,20 @@ public class PanneauNbItems extends JPanel implements Observer{
 	}
 
 	/**
-	 * Procédure Update
+	 * Procï¿½dure Update
 	 * va permettre de recevoir la notification du 
 	 * CommBase avisant d'une modification
-	 * puis  Modifie l'étiquette représentant le nombre d'élément présent.
+	 * puis  Modifie l'ï¿½tiquette reprï¿½sentant le nombre d'ï¿½lï¿½ment prï¿½sent.
 	 * 
-	 * @param Observable (Par qui la notification a été envoyé)
+	 * @param "Observable" (Par qui la notification a ï¿½tï¿½ envoyï¿½)
 	 * @param arg (le nombre de formes)
 	 * 
-	 * Conséquent :
+	 * Consï¿½quent :
 	 * 			Modication du label nombre de formes
 	 */
 	public void update(Observable o, Object arg) {
 		
-		setNbElements((int) arg);
+		setNbElements(Integer.parseInt((String)arg));
 		
 	}
 	

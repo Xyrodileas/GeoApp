@@ -20,17 +20,17 @@ public class DecodeurChaineFormes<Regex> {
 		private static Formes formeAenvoyer ;
 		private static IDLogger logger = IDLogger.getInstance();	//Methode Statique
     /**
-     * Crée une nouvelle forme. Cette méthode reçoit la chaîne de
-     * caractères provenant du serveur de formes, elle détermine de quelle
-     * forme il s'agit et applique l'opérateur new sur le constructeur de
-     * la forme désirée.
+     * Crï¿½e une nouvelle forme. Cette mï¿½thode reï¿½oit la chaï¿½ne de
+     * caractï¿½res provenant du serveur de formes, elle dï¿½termine de quelle
+     * forme il s'agit et applique l'opï¿½rateur new sur le constructeur de
+     * la forme dï¿½sirï¿½e.
      *
-     * @param chaineForme un objet String contenant la chaîne de caractères
-     *                    qui décrit une forme et provenant du serveur de
+     * @param chaineForme un objet String contenant la chaï¿½ne de caractï¿½res
+     *                    qui dï¿½crit une forme et provenant du serveur de
      *                    formes.
      *
      * @return une instance d'une des sous-classes de la classe abstraite
-     *         Forme avec les paramètres passés par la chaîne d'entrée.
+     *         Forme avec les paramï¿½tres passï¿½s par la chaï¿½ne d'entrï¿½e.
      *         
      * Consequent: 
      * 			creation de la forme approprier
@@ -39,11 +39,11 @@ public class DecodeurChaineFormes<Regex> {
     		
     		format = Pattern.compile(" ");
     		
-    		// séparation en sous-chaînes par " " dans un tableau
+    		// sï¿½paration en sous-chaï¿½nes par " " dans un tableau
     		String[] tab_items = format.split(chaineFormeDuServeur);
     		
     		
-    		//COMPARAISON SELON LA TAille de l'élément tab[1] du split
+    		//COMPARAISON SELON LA TAille de l'ï¿½lï¿½ment tab[1] du split
     		switch(tab_items[1].length())
     		
     		{
@@ -83,8 +83,8 @@ public class DecodeurChaineFormes<Regex> {
     			break;
 
     		}
-    	logger.logID(Integer.parseInt(tab_items[0])); //le id étant un int représentant le numéro de séquence reçu
-		return formeAenvoyer; //retourne la forme spécifique
+    	logger.logID(Integer.parseInt(tab_items[0])); //le id ï¿½tant un int reprï¿½sentant le numï¿½ro de sï¿½quence reï¿½u
+		return formeAenvoyer; //retourne la forme spï¿½cifique
         
 
     }

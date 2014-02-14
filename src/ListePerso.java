@@ -1,11 +1,11 @@
 
 public class ListePerso{
 	/**
-	 * STRATÉGIE : implémentation dynamique par chaînage simple
+	 * STRATï¿½GIE : implï¿½mentation dynamique par chaï¿½nage simple
 	 * 
-	 *            Une Liste est un ou pls noeuds liés ensemble 
+	 *            Une Liste est un ou pls noeuds liï¿½s ensemble 
 	 *
-	 *            Une référence pointant toujours sur la position courante
+	 *            Une rï¿½fï¿½rence pointant toujours sur la position courante
 	 *
 	 */
 	 private static class Noeud{
@@ -26,7 +26,7 @@ public class ListePerso{
 	  * ATTRIBUTS
 	  */
 	 
-	 //début et fin de liste constamment actualisés
+	 //dï¿½but et fin de liste constamment actualisï¿½s
 	 private Noeud debut;
 	 private  Noeud fin;
 	 
@@ -37,7 +37,7 @@ public class ListePerso{
 	
 	 	 
 	 /**
-	  * Crée une liste vide 
+	  * Crï¿½e une liste vide 
 	  * debut = fin = position = null;
 	  */
 	 public ListePerso(){
@@ -47,45 +47,45 @@ public class ListePerso{
 	 }
 	
 	 /**
-	  * Insère l'élément reçu en début de liste
-	  * antédécent : aucun
-	  * conséquence : nbElement = nbElement + 1 
+	  * Insï¿½re l'ï¿½lï¿½ment reï¿½u en dï¿½but de liste
+	  * antï¿½dï¿½cent : aucun
+	  * consï¿½quence : nbElement = nbElement + 1 
 	  *                  position == debut 
 	  *                  this.getElement() == element
-      * @param element à insérer dans la liste                  
+      * @param element ï¿½ insï¿½rer dans la liste                  
 	  */
-	 private void insererDebut(Formes element){
+	 public void insererDebut(Formes element){
 		 
-		 //on crée un noeud en faisant le lien sur l'ancien début
+		 //on crï¿½e un noeud en faisant le lien sur l'ancien dï¿½but
   	     debut = new Noeud(element,debut);
   	     
-  	     //la première fois il faut placer le pointeur de fin
+  	     //la premiï¿½re fois il faut placer le pointeur de fin
   	     if (nbElement == 0)
 		     fin = debut;
   	     
-  	     //place la position courante au début 
+  	     //place la position courante au dï¿½but 
 		 position = debut;
 		 
-		 //incrémentation du nombre délément
+		 //incrï¿½mentation du nombre dï¿½lï¿½ment
 		 nbElement++;
 	 }
 	 
 	 
 	 /**
-	  * Insère l'élément reçu après la position courante
-      * antédécent : aucun
-	  * conséquence : nbElement = nbElement + 1 &       
+	  * Insï¿½re l'ï¿½lï¿½ment reï¿½u aprï¿½s la position courante
+      * antï¿½dï¿½cent : aucun
+	  * consï¿½quence : nbElement = nbElement + 1 &       
 	  *              liste.getElement() == element
-	  * @param element à insérer dans la liste
+	  * @param element ï¿½ insï¿½rer dans la liste
 	  *  
 	  */
 	 public void insererApres(Formes element){
 		 
-		 //si la liste est vide, on insère au début
+		 //si la liste est vide, on insï¿½re au dï¿½but
 		 if(debut == null)
 			 insererDebut(element);
 		 
-		 //Sinon on insère après la position courante et la position se déplace
+		 //Sinon on insï¿½re aprï¿½s la position courante et la position se dï¿½place
 		 else {
 
 			 //coupe le lien du suivant et le pointe sur le nouveau noeud
@@ -95,7 +95,7 @@ public class ListePerso{
 		      //cas du dernier noeud
 		      if(position == fin)
 		    	  
-		    	  //on déplace la fin
+		    	  //on dï¿½place la fin
 		    	  fin = position.suivant;
 
 		      
@@ -103,39 +103,39 @@ public class ListePerso{
 		      position = position.suivant;
 		      
 			  
-		      //on incrémente le nombre d'élément
+		      //on incrï¿½mente le nombre d'ï¿½lï¿½ment
 		      nbElement++;		      
 			 
 		 }
 	 }
 	 
 	 /**
-	  * Insère l'élément reçu avant la position courante
-      * antédécent : aucun
-	  * conséquence : nbElement = nbElement + 1 &       
+	  * Insï¿½re l'ï¿½lï¿½ment reï¿½u avant la position courante
+      * antï¿½dï¿½cent : aucun
+	  * consï¿½quence : nbElement = nbElement + 1 &       
 	  *                  liste.getElement() == element
-	  * @param element à insérer dans la liste
+	  * @param element ï¿½ insï¿½rer dans la liste
 	  */
 	 public void insererAvant(Formes element){
 	 
-		 //si la liste est vide, on insère au début
+		 //si la liste est vide, on insï¿½re au dï¿½but
 		 if(debut == null)
 			 insererDebut(element);
 		 
-		 //on insère après et on inverse les données
+		 //on insï¿½re aprï¿½s et on inverse les donnï¿½es
 		 else{
 			 
 			 //noeud temporaire pour conserver la position actuelle			
-			 //pour éviter de parcourir la liste et trouver le précédent
+			 //pour ï¿½viter de parcourir la liste et trouver le prï¿½cï¿½dent
 			 Noeud tmp = position;
 			 			 		  
-			 //on insere après en copiant la valeur de la position actuelle
+			 //on insere aprï¿½s en copiant la valeur de la position actuelle
 			 insererApres(position.element);
 			 
-			 //on met le nouvel element à l'ancienne position
+			 //on met le nouvel element ï¿½ l'ancienne position
 			 tmp.element = element;		
 
-              //replace la position courante sur le précédent      
+              //replace la position courante sur le prï¿½cï¿½dent      
              position = tmp;
              
 		 }
@@ -144,30 +144,30 @@ public class ListePerso{
 	 
 	  
 	 /**
-	  * Retourne l'élément à la position courante et l'enlève
+	  * Retourne l'ï¿½lï¿½ment ï¿½ la position courante et l'enlï¿½ve
 	  * de la structure
 	  * 
-	  * antécédent : la liste ne doit pas être vide
+	  * antï¿½cï¿½dent : la liste ne doit pas ï¿½tre vide
 	  * @throws ListeVideException 
-	  * @return L'élément à la position courante
+	  * @return L'ï¿½lï¿½ment ï¿½ la position courante
 	  * @Override
 	  */
 	 public Object getElement() throws ListeVideException {
 
 		 //si la liste est vide, on avise
 		 if(debut == null)
-			 throw new ListeVideException("Vous ne pouvez récupérer un élément " +
+			 throw new ListeVideException("Vous ne pouvez rï¿½cupï¿½rer un ï¿½lï¿½ment " +
                                           "dans une liste vide");
 		 
-		 //sinon on retourne l'élément
+		 //sinon on retourne l'ï¿½lï¿½ment
 		 
 		 return position.element;
 	 }
 	  
 	 /**
 	  * Passe la position courante au suivant dans la liste
-	  * antécédent : aucun
-	  * conséquence : position est déplacée sur l'élément suivant s'il existe
+	  * antï¿½cï¿½dent : aucun
+	  * consï¿½quence : position est dï¿½placï¿½e sur l'ï¿½lï¿½ment suivant s'il existe
 	  *                  sinon position courante == fin 
  	  * @throws ListeVideException 
 	  */
@@ -178,7 +178,7 @@ public class ListePerso{
 		     throw new ListeVideException("Vous ne pouvez aller au suivant " +
 		     		                      "dans une liste vide");
 		 
-		 //si c'est la fin, on ne déplace pas, sinon ...
+		 //si c'est la fin, on ne dï¿½place pas, sinon ...
 		 if(position.suivant != null){
 			 
 			 //on passe au suivant
@@ -190,9 +190,9 @@ public class ListePerso{
 	 }
 	 
 	 /**
-	  * Met la position courante au début de la  liste
-	  * antécédent : la liste ne doit pas être vide
-	  * conséquence : position == debut  
+	  * Met la position courante au dï¿½but de la  liste
+	  * antï¿½cï¿½dent : la liste ne doit pas ï¿½tre vide
+	  * consï¿½quence : position == debut  
  	  * @throws ListeVideException 
 	  */
 	 
@@ -200,10 +200,10 @@ public class ListePerso{
 
 		 //si la liste est vide, on avise
          if(debut == null)
-			 throw new ListeVideException("Vous ne pouvez aller au début " +
+			 throw new ListeVideException("Vous ne pouvez aller au dï¿½but " +
 			 		                      "dans une liste vide");
 		 
-         //on déplace la position courante au début
+         //on dï¿½place la position courante au dï¿½but
 		 position = debut;
 			//Applique les changements On avise l'observeur
 		
@@ -211,27 +211,27 @@ public class ListePerso{
 	 }
 
 	 /**
-	  * Met la position courante à la fin de la liste
-	  * antécédent : la liste ne doit pas être vide
-	  * conséquence : position == fin
+	  * Met la position courante ï¿½ la fin de la liste
+	  * antï¿½cï¿½dent : la liste ne doit pas ï¿½tre vide
+	  * consï¿½quence : position == fin
  	  * @throws ListeVideException 
 	  */  
 	 public void dernier() throws ListeVideException{
 		 
 		 //si la liste est vide, on avise
 		 if(debut == null)
-			 throw new ListeVideException("Vous ne pouvez aller à la fin " +
+			 throw new ListeVideException("Vous ne pouvez aller ï¿½ la fin " +
 			 		                      "dans une liste vide");
 		 
-         //on déplace la position courante à la fin
+         //on dï¿½place la position courante ï¿½ la fin
 		 position = fin;
 
 	 }
 	 
 	 /**
-	  * Passe la position courante au précédent dans la liste
-	  * antécédent : la liste ne doit pas être vide
-	  * conséquence : la position courante est sur l'élément précédent s'il existe
+	  * Passe la position courante au prï¿½cï¿½dent dans la liste
+	  * antï¿½cï¿½dent : la liste ne doit pas ï¿½tre vide
+	  * consï¿½quence : la position courante est sur l'ï¿½lï¿½ment prï¿½cï¿½dent s'il existe
 	  *                  sinon position courante == debut
  	  * @throws ListeVideException 
 	  */
@@ -239,28 +239,28 @@ public class ListePerso{
 	
 		 //si la liste est vide, on avise
 		 if(debut == null )
-			 throw new ListeVideException("Vous ne pouvez aller au précédent " +
+			 throw new ListeVideException("Vous ne pouvez aller au prï¿½cï¿½dent " +
 		                      	 		  "dans une liste vide");
 		 if(position != debut){
-			 //on se place au début
+			 //on se place au dï¿½but
 			 Noeud posTmp = debut;
-			 //tant qu'on n'est pas sur l'élément voulu 
+			 //tant qu'on n'est pas sur l'ï¿½lï¿½ment voulu 
 			 while(posTmp.suivant != position)
 
 				 //on passe au suivant
 				 posTmp = posTmp.suivant;
 			 
-			 //on place la position courante sur le précédent
+			 //on place la position courante sur le prï¿½cï¿½dent
 			 position = posTmp;
 		 }
 	 }	
 	 
 	 /**
-	  * Supprime l'élément à la position courante
-	  * antécédent : la liste ne doit pas être vide
-	  * conséquence : nbElement = nbElement - 1 &
+	  * Supprime l'ï¿½lï¿½ment ï¿½ la position courante
+	  * antï¿½cï¿½dent : la liste ne doit pas ï¿½tre vide
+	  * consï¿½quence : nbElement = nbElement - 1 &
 	  *                  position == position.suivant |
-	  *                  position == fin == debut si dernier élément
+	  *                  position == fin == debut si dernier ï¿½lï¿½ment
  	  * @throws ListeVideException 
 	  */
 	 public void supprime() throws ListeVideException{
@@ -270,12 +270,12 @@ public class ListePerso{
 			 throw new ListeVideException("Vous ne pouvez supprimer " +
 			 		                      "dans une liste vide");
 		 
-		 //cas spécial; un seul élément
+		 //cas spï¿½cial; un seul ï¿½lï¿½ment
 		 if(debut == fin){
 		    debut = fin = position = null;
 		 }
 		 
-		 //cas spécial; le premier élément
+		 //cas spï¿½cial; le premier ï¿½lï¿½ment
 		 else if(position == debut){
 			  debut = debut.suivant;
 		       position = debut;
@@ -284,19 +284,19 @@ public class ListePerso{
 			    //on retient si c'est le dernier de la liste
 			    boolean dernier = position.suivant == null;			     
 			 
-    		     //cas spécial; le dernier élément
+    		     //cas spï¿½cial; le dernier ï¿½lï¿½ment
 	   	         if(dernier){
 	   	        	 
-	 				//on ne peut pas utiliser la procédure précédent()
+	 				//on ne peut pas utiliser la procï¿½dure prï¿½cï¿½dent()
 	   	           //parqu'elle avertit les observateurs 
-	   	           //On utilise une autre boucle locale qui itère simplement.
-	   	        	 //et déplace le  pointeur de fin sur la position précédent
+	   	           //On utilise une autre boucle locale qui itï¿½re simplement.
+	   	        	 //et dï¿½place le  pointeur de fin sur la position prï¿½cï¿½dent
 	   	          fin = debut;
 	   	         
 	   	          while(fin.suivant !=position)
 	   	        	  fin = fin.suivant;
 	 		     
- 		            //on libère le noeud suivant
+ 		            //on libï¿½re le noeud suivant
 		            fin.suivant = null;
 		            
 		            //On replace la position sur la fin
@@ -304,37 +304,37 @@ public class ListePerso{
 		        }		            
 	   	         
 				 //on copie le suivant dans l'actuel cela supprime le suivant
-	   	         //pour détruire en O(1).  À noter que la position ne change pas
+	   	         //pour dï¿½truire en O(1).  ï¿½ noter que la position ne change pas
 				 else{
 					 position.element  = position.suivant.element;		 
 					 position.suivant  = position.suivant.suivant;
 					 
-					 //encore un dernier cas spécial;  Si on a détruit l'avant dernier
+					 //encore un dernier cas spï¿½cial;  Si on a dï¿½truit l'avant dernier
 					 //il faut ajuster le pointeur de fin
 					 if(position.suivant == null)
 						 fin = position;
 				 }
 	   	 }
 		 
-		 //On décrémente le nombre d'éléments
+		 //On dï¿½crï¿½mente le nombre d'ï¿½lï¿½ments
 		 nbElement--;
 	
 	 }
 
 		/**
 		 * Retourne un tableau dont les objets sont 
-		 * disposés dans le même sens que la ListePerso.
+		 * disposï¿½s dans le mï¿½me sens que la ListePerso.
 		 *
-		 * Cela signifie que l'élément du debut de la ListePerso
-		 * est dans la première case du tableau.
+		 * Cela signifie que l'ï¿½lï¿½ment du debut de la ListePerso
+		 * est dans la premiï¿½re case du tableau.
 		 * 
 		 * @return [] d'objets de la ListePerso
 		 */
 	public Formes[] retournerUnTableauDobjet() {
-		//Le tableau à retourner
+		//Le tableau ï¿½ retourner
 		Formes[] tab = new Formes[nbElement];
 
-		//Référence temporaire pour parourir la liste du debut a la fin
+		//Rï¿½fï¿½rence temporaire pour parourir la liste du debut a la fin
 		Noeud tmp = debut;
 
 			//Indice du tableau
@@ -346,10 +346,10 @@ public class ListePerso{
 				
 				//On retient l element dans le tableau
 				tab[i] = tmp.element;				
-				//On passe à l'élément suivant dans la pile
+				//On passe ï¿½ l'ï¿½lï¿½ment suivant dans la pile
 				tmp = tmp.suivant;	
 
-				//On place l'itérateur pour le prochain ajout
+				//On place l'itï¿½rateur pour le prochain ajout
 				i++;
 			}
 			return tab.clone();
@@ -397,11 +397,11 @@ public class ListePerso{
 		return i;
 	}
 	
-	//Unité de test
+	//Unitï¿½ de test
 	public void afficheElementDeListe() throws ListeVideException{
 			premier();
 
-			//Référence temporaire pour parourir la liste du debut a la fin
+			//Rï¿½fï¿½rence temporaire pour parourir la liste du debut a la fin
 			Noeud tmp = debut;
 			
 				while(tmp != null){
@@ -409,7 +409,7 @@ public class ListePerso{
 					//aFFICHE
 				System.out.println((tmp.element).getNom());
 							
-				//On passe à l'élément suivant dans la pile
+				//On passe ï¿½ l'ï¿½lï¿½ment suivant dans la pile
 				tmp = tmp.suivant;	
 
 			}
