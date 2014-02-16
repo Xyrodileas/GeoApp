@@ -22,14 +22,12 @@ Historique des modifications
 2013-05-03 Version initiale
 *******************************************************/  
 
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
  
 /**
@@ -43,12 +41,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 	//ATTRIBUTS DE FENETREPRINCIPALE
 	static FenetreFormes fenetreFormes;
-	private Formes[] tabFormes= new Formes[10];
-	/**
-	 * Constructeur
-	 */
-	
-	 private ListePerso listeChaineFormes=new ListePerso();
+	private ListePerso listeChaineFormes=new ListePerso();
 	
 	
 	
@@ -83,31 +76,30 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	public void propertyChange(PropertyChangeEvent arg0) {
 		
 		if(arg0.getPropertyName().equals("ENVOIE-FORME-RECU")){
-			
-			//Parcours le tableau de la fin vers le debut
-			for (int i =9 ; i>=1 ; i--){
-				//permet de permuter les elements dans le tableau afin d'�liminer automatiquement la premiere forme
-				tabFormes[i] = tabFormes[i-1];
-				
-			}
-			
-			//Ajout de la nouvelle forme au tableau de forme
-			tabFormes[0] = DecodeurChaineFormes.creerForme((String) arg0.getNewValue());
-			
-			//1 signifie ins�rer apr�s �lement, 0 signifie avant �l�ment
+
+			//CHAQUE NOUVELLE FORMES EST STOCKER DANS LA LISTE APRES CREATION DE LA FORMES
 			try {
 				listeChaineFormes.ajoute(DecodeurChaineFormes.creerForme((String) arg0.getNewValue()), 1);
-				listeChaineFormes.afficheElementDeListe();
+				
+				//listeChaineFormes.afficheElementDeListe();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 			
-			//envoie du tableau de forme au panneau dessinateur (FenetreFormes)
-			fenetreFormes.setTab(tabFormes);
-			
-			//Rafraichit le panneau dessin
+			// ON ENVOIE LA LISTE AU PANNEAU DESSINATEUR
+			try {
+				fenetreFormes.setListe(listeChaineFormes);
+				
+			} catch (ListeVideException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//ON RAFRAICHIT LE PANNEAU
 			fenetreFormes.repaint();
 			
 		}
@@ -128,20 +120,32 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 		  * (parTypeDeFormes=4)(parTypeDeFormesInverse=5)
 		  */
 		case 0 :
-			System.out.println("Cas 0");
-            Triage.SelfSort(listeChaineFormes);
+			System.out.println("Cas 0 Sequence Croissant");
+			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT SEQUENCE CROISSANT d'origine");
+			listeChaineFormes.afficheIdDeLaLIste();
+            Triage.bubbleSortByIDLogger(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE  APRES TRAITEMENT SEQUENCE CROISSANT d'origine");
+            listeChaineFormes.afficheIdDeLaLIste();
 			break;
 		case 1 :
-			System.out.println("Cas 1");
+			System.out.println("Cas 1 sequence Deroissant");
+			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT SEQUENCE DECROISSANT d'origine");
+			listeChaineFormes.afficheIdDeLaLIste();
             Triage.bubbleSortByIDLoggerInverted(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE  APRES TRAITEMENT SEQUENCE DECROISSANT d'origine");
+            listeChaineFormes.afficheIdDeLaLIste();
 			break;
 		case 2 :
-			System.out.println("Cas 2");
-            Triage.bubbleSortByAir(listeChaineFormes);
+			System.out.println("Cas 2 Aire Croissant");
+			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT  AIRE CROISSANT d'origine");
+			listeChaineFormes.afficheAireDeLaLIste();
+            Triage.AireFormeCroissante(listeChaineFormes);
 			break;
 		case 3 :
-			System.out.println("Cas 3");
-            Triage.bubbleSortByAirInverted(listeChaineFormes);
+			System.out.println("Cas 3 AIRE Decroissant");
+			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT  AIRE DECROISSANT d'origine");
+			listeChaineFormes.afficheAireDeLaLIste();
+            Triage.AireFormeDecroissante(listeChaineFormes);;
 			break;
 		case 4 :
 			System.out.println("Cas 4");
@@ -151,16 +155,21 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 			break;
 
 		}
+		
+		//ON ORGANISE LA LISTE
         Triage.reorganize(listeChaineFormes);
-        repaint();
+        //ON REENVOIE LA NOUVeLLE LISTE TRIER
+        fenetreFormes.setListe(listeChaineFormes);
+        //ON RAFFRAICHT LE PANNEAU
+        fenetreFormes.repaint();
 		
 	}
 
 	 private class OuvertureFermetureFenetreEcouteur implements WindowListener{
-  	   private JFrame frame;
+  	   private FenetrePrincipale frame;
   	   private CommBase comm;
   	   
-  	   private OuvertureFermetureFenetreEcouteur(CommBase commR, JFrame frameR){
+  	   private OuvertureFermetureFenetreEcouteur(CommBase commR, FenetrePrincipale frameR){
   		   comm=commR;
   		   frame=frameR;
   		   

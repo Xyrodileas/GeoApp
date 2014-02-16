@@ -21,7 +21,7 @@ public class PanneauNbItems extends JPanel implements Observer{
 	
     /**
      * STRAT�GIE :  On utilise  le principe Observer/Observable
-     * 				On est aviser de l'incr�mentation du nombre de Formes par CommBase
+     * 				On est aviser de l'incr�mentation du nombre de Formes.Formes par CommBase
      * 
      * 				Dans ce cas:
      *				CommBase est Observable
@@ -29,7 +29,7 @@ public class PanneauNbItems extends JPanel implements Observer{
      *
      *			    Cela va permettre de modifier le nombre d'�lements selon le nombre de formes recu
      *				 
-     *              On recoit par notification le nombre de Formes total
+     *              On recoit par notification le nombre de Formes.Formes total
      *                
      */
     //Sert pour la persistence (enl�ve un warning)
@@ -59,7 +59,7 @@ public class PanneauNbItems extends JPanel implements Observer{
 	 */
 	private void initComposants(){
 
-		etiqNbElements = new JLabel("Nombre de Formes");
+		etiqNbElements = new JLabel("Nombre de Formes.Formes");
 		nbElements = new JLabel("0");
 		
 		setPreferredSize(new Dimension(120,30));
@@ -68,17 +68,6 @@ public class PanneauNbItems extends JPanel implements Observer{
 		add(nbElements);
 	}
 	
-	/**
-	 * Modifie l'�tiquette repr�sentant le nombre de Formes.
-	 * @param nb Le nombre � afficher
-	 * 
-	 *  Cons�quent :
-	 * 			nbElement se voit attribuer la valeur recue
-	 */
-	 
-	public void setNbElements(int nb){
-		nbElements.setText(String.valueOf(nb));			
-	}
 
 	/**
 	 * Proc�dure Update
@@ -94,7 +83,7 @@ public class PanneauNbItems extends JPanel implements Observer{
 	 */
 	public void update(Observable o, Object arg) {
 		
-//		setNbElements(Integer.parseInt((String)arg));
+		nbElements.setText(arg.toString());	
 		
 	}
 	

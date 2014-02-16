@@ -1,3 +1,4 @@
+import Formes.Formes;
 
 public class ListePerso{
 	/**
@@ -8,7 +9,7 @@ public class ListePerso{
 	 *            Une r�f�rence pointant toujours sur la position courante
 	 *
 	 */
-	 public static class Noeud{
+	 public  class Noeud{
 
 		 //la liste peut les utiliser directement via un objet
 		 //donc pas besoin d'accesseurs et de mutateurs
@@ -20,15 +21,25 @@ public class ListePerso{
 			 this.element = element;
 			 suivant = lien;
 		 }
+		 
+		 
+		 public Formes getElement(){
+			 
+			 return this.element;
+			 
+		 }
+		 
+		 
 	 }
+	
 	 
 	 /**
 	  * ATTRIBUTS
 	  */
 	 
 	 //d�but et fin de liste constamment actualis�s
-	 private Noeud debut;
-	 private  Noeud fin;
+	  Noeud debut;
+	  Noeud fin;
 	 
 	 private int nbElement;
 	 
@@ -46,6 +57,29 @@ public class ListePerso{
 		 nbElement = 0;
 	 }
 	
+		
+	public ListePerso(ListePerso listeRecu) throws Exception{
+		
+		 debut = fin = position = null;
+		 nbElement = 0;
+		 
+			Noeud tmplisteRecu = listeRecu.debut;
+			
+				while(tmplisteRecu != null){
+				
+				
+				//System.out.println((tmplisteRecu.element).getNom());
+				this.ajoute(tmplisteRecu.element, 1);
+				
+				
+				tmplisteRecu = tmplisteRecu.suivant;	
+
+			}
+	}
+	 
+	 
+	 
+	 
 	 /**
 	  * Ins�re l'�l�ment re�u en d�but de liste
 	  * ant�d�cent : aucun
@@ -67,7 +101,7 @@ public class ListePerso{
 		 position = debut;
 		 
 		 //incr�mentation du nombre d�l�ment
-		 nbElement++;
+		 
 	 }
 	 
 	 
@@ -101,10 +135,7 @@ public class ListePerso{
 		      
 		      //On place la position courante sur le suivant
 		      position = position.suivant;
-		      
-			  
-		      //on incr�mente le nombre d'�l�ment
-		      nbElement++;		      
+		      		      
 			 
 		 }
 	 }
@@ -152,7 +183,7 @@ public class ListePerso{
 	  * @return L'�l�ment � la position courante
 	  * @Override
 	  */
-	 public Object getElement() throws ListeVideException {
+	 public Formes getElement() throws ListeVideException {
 
 		 //si la liste est vide, on avise
 		 if(debut == null)
@@ -186,6 +217,23 @@ public class ListePerso{
 		 
     	  }
 			//Applique les changements On avise l'observeur
+	
+	 }
+	 public Noeud retourneSuivant()  throws ListeVideException{
+			
+		 //si la liste est vide, on avise
+		 if(debut == null)
+		     throw new ListeVideException("Vous ne pouvez aller au suivant " +
+		     		                      "dans une liste vide");
+		 
+		 //si c'est la fin, on ne d�place pas, sinon ...
+		 if(position.suivant != null){
+			 
+			 //on passe au suivant
+    	     position = position.suivant;
+		 
+    	  }
+		return position;
 	
 	 }
 	 
@@ -360,7 +408,7 @@ public class ListePerso{
 	/**
 	 * Ajoute element dans la liste
 	 * antecedent : le mode d'insertion AVANT OU APRES
-	 * @param (Object) element a ajoute par rapport a la positon courante
+	 * @param element element a ajoute par rapport a la positon courante
 	 */
 	public void ajoute(Formes element,int modeInsertion) throws Exception {
 		//cas ou le choix d'insertion est AVANT
@@ -372,6 +420,7 @@ public class ListePerso{
 			insererApres(element);
 			
 		}
+		nbElement++;
 	}
 
 	/**
@@ -397,6 +446,116 @@ public class ListePerso{
 		return i;
 	}
 	
+	public boolean estVide(){
+		System.out.println(" Voici le nombre d'elements : "+nbElement);
+		if(nbElement==0)
+			return true;
+		return false;
+	}
+
+	public int getNbElementListe(){
+		return nbElement;
+	}
+	
+	
+	/**
+	 * Parcours la liste pour faire des ajout par ordre croissant selon NumSequence ou Aire
+	 * @param chiffreAcomparer (La forme a comparer)
+	 * @param type (0=Sequence , 1=Aire)
+	 * @return boolean
+	 */
+	 public boolean ParcourirTriCroissant(int chiffreAcomparer,int type){
+			
+			boolean insereAvant =false;
+			
+			//R�f�rence temporaire pour parourir la liste du debut a la fin
+			Noeud tmp = debut;
+			position=debut;
+			int nbsuperieur=0;
+			
+				while(tmp != null ){
+					
+					if (type==0){
+						if((tmp.element).getIDLogger()< chiffreAcomparer){
+							insereAvant=true;
+							position=tmp;
+						}
+						else if((tmp.element).getIDLogger()> chiffreAcomparer && nbsuperieur<1) {
+							nbsuperieur++;
+							insereAvant=false;
+							position=tmp;
+						}
+					}
+					if(type==1){
+						
+						if((tmp.element).getAir()< (double)chiffreAcomparer){
+							insereAvant=true;
+							position=tmp;
+						}
+						else if((tmp.element).getAir()> (double)chiffreAcomparer && nbsuperieur<1) {
+							nbsuperieur++;
+							insereAvant=false;
+							position=tmp;
+						}
+						
+					}
+					tmp = tmp.suivant;
+					
+				}
+			return	insereAvant;
+		 
+	 }
+	 
+	 
+	 public boolean ParcourirTriDecroissant(int chiffreAcomparer, int type){
+			
+			boolean insereAvant =true;
+			
+			//R�f�rence temporaire pour parourir la liste du debut a la fin
+			Noeud tmp = debut;
+			position=debut;
+			int nbsuperieur=0;
+			
+				while(tmp != null ){
+					//System.out.println("Les �lements a comparer sont  Noeud existant" +(tmp.element).getIDLogger()+  "Forme a ajouter "+chiffreAcomparer);
+					
+					if (type==0){
+						if((tmp.element).getIDLogger()> chiffreAcomparer) {
+							insereAvant=true;
+							position=tmp;
+						}
+						if((tmp.element).getIDLogger()< chiffreAcomparer && nbsuperieur<1){
+							nbsuperieur++;
+							insereAvant=false;
+							position=tmp;
+					}
+					if(type==1){
+							if((tmp.element).getAir()>(double) chiffreAcomparer) {
+								insereAvant=true;
+								position=tmp;
+							}
+							if((tmp.element).getAir()<(double) chiffreAcomparer && nbsuperieur<1){
+								nbsuperieur++;
+								insereAvant=false;
+								position=tmp;
+							}
+						}
+						
+					}
+				
+					
+					tmp = tmp.suivant;
+				}	
+			return	insereAvant;
+		 
+	 }
+	 
+	 
+		
+	 
+	 
+	
+	
 	//Unit� de test
 	public void afficheElementDeListe() throws ListeVideException{
 			premier();
@@ -414,6 +573,45 @@ public class ListePerso{
 
 			}
 	}
+	//Unit� de test2
+		public void afficheIdDeLaLIste() throws ListeVideException{
+				premier();
+				int i=0;
+				//R�f�rence temporaire pour parourir la liste du debut a la fin
+				Noeud tmp = debut;
+				
+					while(tmp != null){
+					
+						//aFFICHE
+					System.out.println((tmp.element).getIDLogger() + "indice : "+i);
+								
+					//On passe � l'�l�ment suivant dans la pile
+					tmp = tmp.suivant;	
+					i++;
+
+				}
+		}
+		
+		
+		//Unit� de test3
+		public void afficheAireDeLaLIste() throws ListeVideException{
+				premier();
+				int i=0;
+				//R�f�rence temporaire pour parourir la liste du debut a la fin
+				Noeud tmp = debut;
+				
+					while(tmp != null){
+					
+						//aFFICHE
+					System.out.println((tmp.element).getAir() + "indice : "+i);
+								
+					//On passe � l'�l�ment suivant dans la pile
+					tmp = tmp.suivant;	
+					i++;
+
+				}
+		}
+
 	
 	
 }

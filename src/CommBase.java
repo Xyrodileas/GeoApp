@@ -20,7 +20,6 @@ Historique des modifications
 *******************************************************
 *@author Patrice Boucher
 2013-05-03 Version initiale
-*testtest
 *******************************************************/  
 
 import javax.swing.*;
@@ -53,15 +52,17 @@ public class CommBase extends Observable{
 	
 	//CONSTANTES
 	private final int DELAI = 1500;
-	static final String ip ="127.0.0.1";
-	static final int port  = 10000;
+	//static final String ip ="127.0.0.1";
+	//static final int port  = 10000;
 	
 	//ATTRIBUTS DE LA  CLASSE COMMBASE
 	@SuppressWarnings("rawtypes")
 	private SwingWorker threadComm =null;
 	private PropertyChangeListener listener = null;
 	private boolean isActif = false;
-	private int nbElement=0;
+	
+	private int nbElement;
+	private int test=0;
 	
 	//SOCKET ELEMENTS
 	private Socket          socketDeConnection;	
@@ -137,7 +138,7 @@ public class CommBase extends Observable{
 
 	    		if (connexion) {
 			
-		 			JOptionPane.showMessageDialog(fenetrePrincipale, "Vous �tes connect�"); 
+		 			JOptionPane.showMessageDialog(fenetrePrincipale, "Vous etes connecte"); 
 		 			creerCommunication();
 		 			}
 	    			
@@ -167,6 +168,7 @@ public class CommBase extends Observable{
 					"Fin de la connexion", 
 					"Fin",
 					JOptionPane.INFORMATION_MESSAGE); 
+		
 		}
 		//si le thread est different de null (est actif)
 		if(threadComm!=null)
@@ -208,12 +210,13 @@ public class CommBase extends Observable{
 							setChanged();
 							notifyObservers(nbElement);
 							
-							//Envoie a ligne de commande recu (Formes) � la fenetre principale (fenetrePrincipale)
+							//Envoie a ligne de commande recu (Formes.Formes) � la fenetre principale (fenetrePrincipale)
 							firePropertyChange("ENVOIE-FORME-RECU", null, fluxRecuSurClient.readLine());
 							
 							//Condition d'arret
-							if(nbElement>=10){
+							if(nbElement==10){
 								stop();
+							
 								
 							}
 						}
@@ -235,7 +238,7 @@ public class CommBase extends Observable{
 	 * Procedure qui recupere la JFrame principale
 	 * @param frame JFrame
 	 */
-	public void recupereJFrame(JFrame frame){
+	public void recupereJFrame(FenetrePrincipale frame){
 		fenetrePrincipale=frame;
 		
 	}

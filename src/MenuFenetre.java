@@ -85,7 +85,7 @@ public class MenuFenetre extends JMenuBar{
 				//JOptionPane jConnexion = new JOptionPane();
 				
 				int validation = JOptionPane.showConfirmDialog(fenetrePrincipale, 
-					      new Object[] {"L'hote de connexion :", adresse_ip, "Num�ro de port :", num_port},
+					      new Object[] {"L'hote de connexion :", adresse_ip, "Numero de port :", num_port},
 					      "Hote de connexion distant",
 					      JOptionPane.OK_CANCEL_OPTION); 
 				
@@ -99,10 +99,16 @@ public class MenuFenetre extends JMenuBar{
 			    	
 			    }
 			    catch(NumberFormatException e){
+			    	int i=0;
+			    	if(i==0){
+			    		comm.start("127.0.0.1",10000);
+			    	}
+			    	else{
 			    	JOptionPane.showMessageDialog(fenetrePrincipale, 
 							"Format incorrect", 
 							"Fin",
-							JOptionPane.INFORMATION_MESSAGE); 
+							JOptionPane.INFORMATION_MESSAGE);
+			    	}
 				}
 			    	
 			    }
@@ -275,7 +281,7 @@ public class EcouteurClasser  implements ActionListener{
 	/**
 	 *  Activer ou désactiver les items du menu selon la sélection. 
 	 */
-	private void rafraichirMenus() {
+	private  void rafraichirMenus() {
 		demarrerMenuItem.setEnabled(!comm.isActif());
 		arreterMenuItem.setEnabled(comm.isActif());
 	}
@@ -298,4 +304,6 @@ public class EcouteurClasser  implements ActionListener{
 		fenetrePrincipale=fenetre;
 		
 	}
+	
+	
 }

@@ -12,8 +12,10 @@ Historique des modifications
 
 
 //import ca.etsmtl.log.util.IDLogger;
-import java.util.regex.*;
+import Formes.*;
 import ca.etsmtl.log.util.IDLogger;
+
+import java.util.regex.Pattern;
 
 public class DecodeurChaineFormes<Regex> {
 		private static Pattern format;
@@ -25,7 +27,7 @@ public class DecodeurChaineFormes<Regex> {
      * forme il s'agit et applique l'op�rateur new sur le constructeur de
      * la forme d�sir�e.
      *
-     * @param chaineForme un objet String contenant la cha�ne de caract�res
+     * @param chaineFormeDuServeur un objet String contenant la cha�ne de caract�res
      *                    qui d�crit une forme et provenant du serveur de
      *                    formes.
      *
@@ -53,12 +55,12 @@ public class DecodeurChaineFormes<Regex> {
     			 
     			//CAS LIGNE creer une forme LIGNE si la requete recus contient la chaine <LIGNE>
     			if(tab_items[1].equals("<LIGNE>")){
-    				formeAenvoyer= new Formes.Ligne(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+    				formeAenvoyer= new Ligne(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
     			}
     			
     			
     			else if(tab_items[1].equals("<CARRE>")){
-        			formeAenvoyer= new Formes.Carre(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+        			formeAenvoyer= new Carre(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
 
     				
     			}
@@ -66,7 +68,7 @@ public class DecodeurChaineFormes<Regex> {
     			//CAS OVALE creer une forme OVALE si la requete recus contient la chaine <OVALE>
     			else if(tab_items[1].equals("<OVALE>")){
     				//System.out.println("C'est un <OVALE>" + "\n");
-    				formeAenvoyer= new Formes.Ovale(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+    				formeAenvoyer= new Ovale(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
     			}
     			
     			break;
@@ -74,12 +76,12 @@ public class DecodeurChaineFormes<Regex> {
     		//CAS CERCLE creer une forme CERCLE si la requete recus contient la chaine <CERCLE>
     		case 8:
     			// <CERCLE>
-    			formeAenvoyer= new Formes.Cercle(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]));
+    			formeAenvoyer= new Cercle(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]));
     			break;
     			
     		//CAS RECTANGLE creer une forme rectangle si la requete recus contient la chaine <RECTANGLE>
     		case 11:
-    			formeAenvoyer= new Formes.Rectangle(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+    			formeAenvoyer= new Rectangle(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
     			break;
 
     		}
