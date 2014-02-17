@@ -163,7 +163,7 @@ public abstract class Triage {
                      lt.supprime();
                      lt.ajoute(tmp, 1);
                      lt.suivant();
-                     trie=false;
+                     trie=false; f
                  }**/
              }
 
