@@ -31,7 +31,7 @@ public class Ovale extends Formes  {
     public Ovale(int id,int xRecu, int yRecu, int rayonhRecu,int rayonVRecu){
 
 
-        super(id, Color.red,"Ovale"); //fait appel a la classe mere
+        super(id,Math.abs(Math.PI*(rayonhRecu)*(rayonVRecu)), Color.red,"Ovale",3); //fait appel a la classe mere
         centreX = xRecu;
         centreY = yRecu;
         rayonH = rayonhRecu;
@@ -102,7 +102,16 @@ public class Ovale extends Formes  {
         return centreY+rayonV;
     }
     public void newPosition(int x2, int y2){
-        this.centreX = x2+40;
-        this.centreY = y2+40;
+        // On attribut les coordonnées du centre
+        this.centreX = x2 + this.rayonH;
+        this.centreY = y2 + this.rayonV;
+        //this.centreX =(int) Math.round(x2+Math.sqrt(rayonH*rayonH+rayonH*rayonH));
+        //this.centreY = (int) Math.round(y2+Math.sqrt(rayonV*rayonV+rayonV*rayonV));
+    }
+    public double getDistanceMax(){
+        if(rayonH > rayonV)
+            return rayonH;
+        else
+            return rayonV;
     }
 }

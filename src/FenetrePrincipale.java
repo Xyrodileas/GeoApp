@@ -123,7 +123,8 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 			System.out.println("Cas 0 Sequence Croissant");
 			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT SEQUENCE CROISSANT d'origine");
 			listeChaineFormes.afficheIdDeLaLIste();
-            Triage.bubbleSortByIDLogger(listeChaineFormes);
+			
+            Triage.triBulleIDLoggerCroissant(listeChaineFormes);
             System.out.println("VoiCI LA LISTE  APRES TRAITEMENT SEQUENCE CROISSANT d'origine");
             listeChaineFormes.afficheIdDeLaLIste();
 			break;
@@ -131,7 +132,8 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 			System.out.println("Cas 1 sequence Deroissant");
 			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT SEQUENCE DECROISSANT d'origine");
 			listeChaineFormes.afficheIdDeLaLIste();
-            Triage.bubbleSortByIDLoggerInverted(listeChaineFormes);
+			
+            Triage.triBulleIDLoggerDecroissant(listeChaineFormes);
             System.out.println("VoiCI LA LISTE  APRES TRAITEMENT SEQUENCE DECROISSANT d'origine");
             listeChaineFormes.afficheIdDeLaLIste();
 			break;
@@ -139,20 +141,70 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 			System.out.println("Cas 2 Aire Croissant");
 			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT  AIRE CROISSANT d'origine");
 			listeChaineFormes.afficheAireDeLaLIste();
-            Triage.AireFormeCroissante(listeChaineFormes);
+            Triage.triBulleAireCroissant(listeChaineFormes);
+            
+            System.out.println("VoiCI LA LISTE  APRES TRAITEMENT AIRE CROISSANT  d'origine");
+            listeChaineFormes.afficheAireDeLaLIste();;
 			break;
 		case 3 :
 			System.out.println("Cas 3 AIRE Decroissant");
 			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT  AIRE DECROISSANT d'origine");
 			listeChaineFormes.afficheAireDeLaLIste();
-            Triage.AireFormeDecroissante(listeChaineFormes);;
+            Triage.triBulleAireDecroissant(listeChaineFormes);
+            
+            System.out.println("VoiCI LA LISTE  APRES TRAITEMENT AIRE  DECROISSANT  d'origine");
+            listeChaineFormes.afficheAireDeLaLIste();
 			break;
 		case 4 :
-			System.out.println("Cas 4");
+			System.out.println("Cas 4 carré, rectangle, cercle, ovale, ligne");
+			Triage.triParFormes(listeChaineFormes);
+			 System.out.println("VoiCI LA LISTE APRES TRAITEMENT FORME UN");
+			listeChaineFormes.afficheElementDeListe();
 			break;
 		case 5 :
 			System.out.println("Cas 5");
+			
+			Triage.triParFormesInverse(listeChaineFormes);
+			System.out.println("VoiCI LA LISTE APRES TRAITEMENT FORME DEUX");
+			listeChaineFormes.afficheElementDeListe();
+			
 			break;
+		case 6 :
+			//A fINIr **************
+			Triage.triParDistanceMax2points(listeChaineFormes);
+			System.out.println("VoiCI LA LISTE APRES TRAITEMENT FORME DEUX");
+			listeChaineFormes.afficheElementDeListe();
+			
+			break;
+		case 7 :
+			//A fINIr **************
+			Triage.triLargeurCroissante(listeChaineFormes);
+			
+			break;
+		case 8 :
+			//A fINIr **************
+			Triage.triLargeurDcroissante(listeChaineFormes);
+			
+			break;
+		case 9 :
+			//A fINIr **************
+			Triage.triParhauteurCroissante(listeChaineFormes);
+			
+			break;
+		case 10 :
+			//A fINIr **************
+			Triage.triParHauteurDecroissante(listeChaineFormes);
+			
+			break;
+		case 11 :
+			//A fINIr **************
+		Triage.triParOrdreOriginal(listeChaineFormes);
+			
+			break;
+
+
+
+
 
 		}
 		

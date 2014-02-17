@@ -33,7 +33,7 @@ public class Carre extends Formes {
      * 				affecte les elements recu aux attributs de Carre
      */
     public Carre(int id,int x1Recu,int y1Recu,int x2Recu, int y2Recu){
-        super(id, Color.green,"Carre");
+        super(id,Math.abs(((x2Recu)-(x1Recu))*((y2Recu)-(y1Recu))), Color.green,"Carre",0);
         x1 = x1Recu;
         y1 = y1Recu;
         x2 = x2Recu;
@@ -106,10 +106,16 @@ public class Carre extends Formes {
         return y2;
     }
     public void newPosition(int x2, int y2){
-        int tmp = x2-x1+40;
-        this.x1 = x2+40;
-        this.y1 = y2+40;
-        this.x2 = x1+tmp;
-        this.y2 = y2+tmp;
+        // On calcul la longueur du carré
+        int tmp = this.x2-this.x1;
+        // On attribut les nouvelles coordonnées de départ
+        this.x1 = x2;
+        this.y1 = y2;
+        // On attribut les coordonnée de départ + la longueur du carré
+        this.x2 = this.x1+tmp;
+        this.y2 = this.y1+tmp;
+    }
+    public double getDistanceMax(){
+        return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
     }
 }

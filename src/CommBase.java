@@ -51,7 +51,7 @@ import java.util.Observable;
 public class CommBase extends Observable{
 	
 	//CONSTANTES
-	private final int DELAI = 1500;
+	private final int DELAI = 150;
 	//static final String ip ="127.0.0.1";
 	//static final int port  = 10000;
 	

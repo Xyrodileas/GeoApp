@@ -31,7 +31,7 @@ public class Cercle extends Formes {
      * 				affecte les elements recu aux attributs
      */
     public Cercle(int id,int centreXRecu,int centreYRecu,int rayonREcu){
-        super(id, Color.blue,"Cercle");
+        super(id, Math.abs(Math.PI*(rayonREcu)*(rayonREcu)), Color.blue,"Cercle",2);
         centreX=centreXRecu;
         centreY=centreYRecu;
         rayon=rayonREcu;
@@ -78,7 +78,7 @@ public class Cercle extends Formes {
         g.setColor(Color.GREEN);
         g.drawLine(centreX, centreY, centreX+rayon, centreY+rayon);
         g.setColor(Color.CYAN);
-        g.drawRect(centreX, centreY, centreX+rayon-centreX, centreY+rayon-centreY);
+        g.drawRect(centreX, centreY, rayon, rayon);
 
     }
     public double getAir(){
@@ -98,7 +98,13 @@ public class Cercle extends Formes {
         return centreY+rayon;
     }
     public void newPosition(int x2, int y2){
-        this.centreX = x2+40;
-        this.centreY = y2+40;
+        // On attribut les coordonnées du centre
+        this.centreX = x2 + this.rayon;
+        this.centreY = y2 + this.rayon;
+        //this.centreX =(int) Math.round(x2+Math.sqrt(2*rayon*rayon));
+        //this.centreY = (int) Math.round(y2+Math.sqrt(2*rayon*rayon));
+    }
+    public double getDistanceMax(){
+        return rayon;
     }
 }

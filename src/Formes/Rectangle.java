@@ -33,7 +33,7 @@ public class Rectangle extends Formes{
      */
 
     public Rectangle (int id,int x1Recu,int y1Recu,int x2Recu, int y2Recu){
-        super(id, Color.ORANGE,"Rectangle");
+        super(id, Math.abs(((x2Recu)-(x1Recu))*((y2Recu)-(y1Recu))), Color.ORANGE,"Rectangle",1);
         x1 = x1Recu;
         y1 = y1Recu;
         x2 = x2Recu;
@@ -107,12 +107,19 @@ public class Rectangle extends Formes{
         return y2;
     }
     public void newPosition(int x2, int y2){
-        int tmp1 = x2-x1+40;
-        int tmp2 = y2-y1+40;
-        this.x1 = x2+40;
-        this.y1 = y2+40;
-        this.x2 = x1+tmp1;
-        this.y2 = y1+tmp2;
+        // On calcul les longueurs du rectangle
+        int tmp1 = this.x2-this.x1;
+        int tmp2 = this.y2-this.y1;
+        // On attribut les coordonnées de départ
+        this.x1 = x2;
+        this.y1 = y2;
+        // On ajoute les longueur du rectangle aux points de départ
+        this.x2 = this.x1+tmp1;
+        this.y2 = this.y1+tmp2;
+    }
+
+    public double getDistanceMax(){
+        return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
     }
 
 }

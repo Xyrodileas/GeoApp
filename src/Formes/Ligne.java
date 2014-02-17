@@ -32,7 +32,7 @@ public class Ligne extends Formes {
      * 				affecte les elements recu aux attributs de Ligne
      */
     public  Ligne(int id,int x1Recu,int y1Recu,int x2Recu, int y2Recu){
-        super(id, Color.BLACK,"Ligne");
+        super(id,Math.abs((x2Recu)-(x1Recu)) ,Color.BLACK,"Ligne",4);
         if(x1Recu < x2Recu){
             x1 = x1Recu;
             x2 = x2Recu;
@@ -103,7 +103,10 @@ public class Ligne extends Formes {
         return Math.abs(x2-x1);
     }
     public int firstx(){
-        return x1;
+        if(y2-y1 < 0)
+            return x2;
+        else
+            return x1;
     }
     public int lastx(){
         if(y2-y1 < 0)
@@ -112,7 +115,10 @@ public class Ligne extends Formes {
             return x2;
     }
     public int firsty(){
-        return y1;
+        if(y2-y1 < 0)
+            return y2;
+        else
+            return y1;
     }
     public int lasty(){
         if(y2-y1 < 0)
@@ -121,19 +127,23 @@ public class Ligne extends Formes {
             return y2;
     }
     public void newPosition(int x2, int y2){
-        if(y2-y1 < 0)
+        // On vérifie le sens de la ligne
+        if(y2-y1 < 0)//Si c'est de bas en haut
         {
-            this.x1 = x2+(this.x2-this.x1)+40;
-            this.y1 = y2+(this.y2-this.y1)+40;
-            this.x2 = x2+40;
-            this.y2 = y2+40;
+            this.x1 = x2+(this.x2-this.x1);
+            this.y1 = y2+(this.y2-this.y1);
+            this.x2 = x2;
+            this.y2 = y2;
         }
-        else{
-            this.x2 = x2+(this.x2-this.x1)+40;
-            this.y2 = y2+(this.y2-this.y1)+40;
-            this.x1 = x2+40;
-            this.y1 = y2+40;
+        else{ // Si c'est de haut en bas
+            this.x2 = x2+(this.x2-this.x1);
+            this.y2 = y2+(this.y2-this.y1);
+            this.x1 = x2;
+            this.y1 = y2;
         }
+    }
+    public double getDistanceMax(){
+        return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
     }
 }
 

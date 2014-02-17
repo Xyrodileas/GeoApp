@@ -25,7 +25,8 @@ public abstract class Formes {
 		protected Color couleur;
 		protected String nomForme;
 		private int idlog;
-		
+		private double aire;
+		private int classement1;
 		/**
 		 * Constructeur de Formes.Formes
 		 * Constructeur par copie d'attributs
@@ -34,10 +35,13 @@ public abstract class Formes {
          * Consequent:
          * 			la couleur recu est affect�e a l'attribut couleur
          */
-		public Formes(int id, Color couleurRecu, String nomRecu){
+		public Formes(int id,double aireRecu, Color couleurRecu, String nomRecu,int classRecu){
 			couleur=couleurRecu;
 			nomForme=nomRecu;
 			idlog=id;
+			aire=aireRecu;
+			classement1=classRecu;
+			
 			
 		}
 		
@@ -68,6 +72,12 @@ public abstract class Formes {
 		 * Retourne l'aire de la Forme
 		 * @return double
 		 */
+		public double getAire(){
+			return aire;
+		}
+		public int getNumeroClassement1(){
+			return classement1;
+		}
 		
 		
 		
@@ -78,6 +88,7 @@ public abstract class Formes {
         public abstract int firsty();
         public abstract int lasty();
         public abstract void newPosition(int x2, int y2);
+        public abstract double getDistanceMax();
 
 
 
