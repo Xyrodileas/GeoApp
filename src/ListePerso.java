@@ -549,14 +549,21 @@ public class ListePerso{
 			return	insereAvant;
 		 
 	 }
-	 
-	 
-		
-	 
-	 
-	
-	
-	//Unit� de test
+
+    public void supprimeListe() throws ListeVideException {
+
+        for(int i =0;i<10;i++)
+        supprime();
+
+
+
+    }
+
+
+
+
+
+    //Unit� de test
 	public void afficheElementDeListe() throws ListeVideException{
 			premier();
 

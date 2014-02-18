@@ -105,7 +105,7 @@ public class Rectangle extends Formes{
     }
     public int lasty(){
         return y2;
-    }
+}
     public void newPosition(int x2, int y2){
         // On calcul les longueurs du rectangle
         int tmp1 = this.x2-this.x1;

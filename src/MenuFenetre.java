@@ -128,6 +128,7 @@ public class MenuFenetre extends JMenuBar{
 		arreterMenuItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 			comm.stop();
+
 			rafraichirMenus();
 		    }
 	    });
