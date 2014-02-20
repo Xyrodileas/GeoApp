@@ -8,9 +8,10 @@ package Formes;
 
 import java.awt.*;
 
+
 /**
- * Sous classe de Formes.Formes : classe Ligne
- * @author Aissou Idriss
+ * Classe : Ligne
+ * Heritage : Formes
  *
  */
 public class Ligne extends Formes {
@@ -24,11 +25,8 @@ public class Ligne extends Formes {
     /**
      * Constructeur de la classe Carre
      * Constructeur par copie d'attributs
-<<<<<<< HEAD
      * @param ordre
      * @param id
-=======
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
      * @param x1Recu
      * @param y1Recu
      * @param x2Recu

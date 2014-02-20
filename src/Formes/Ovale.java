@@ -4,9 +4,10 @@ package Formes;
 
 import java.awt.*;
 
+
 /**
- * Sous classe de Formes.Formes : classe Ovale
- * @author Aissou Idriss
+ * Classe : Ovale
+ * Heritage : Formes
  *
  */
 public class Ovale extends Formes  {
