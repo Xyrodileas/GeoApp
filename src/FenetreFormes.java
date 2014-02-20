@@ -46,6 +46,7 @@ public class FenetreFormes extends JComponent {
     boolean actif=false; //Boolean qui permet de r�afficher des que l'on recoit une nouvelle formes sinon boucle tout le temps
 		
 	/**
+	 * Constructeur : FenetreFormes
 	 * Constructeur par defaut
 	 * Classe FenetreFormes
 	 */
@@ -53,6 +54,7 @@ public class FenetreFormes extends JComponent {
 	public FenetreFormes(){}
 	
 	/*
+	 * Methode : paintComponent()
 	 * Proc�dure : qui permet de dessiner les formes dans la zone appropri�e
 	 * Affiche la liste de formes 
 	 * Consequent:
@@ -70,6 +72,12 @@ public class FenetreFormes extends JComponent {
 			}
 	}
 		
+	/**
+	 * Methode : setListe()
+	 * Permet de recupere la liste a dessiner
+	 * @param listeRecu
+	 * @throws Exception
+	 */
 	public void setListe(ListePerso listeRecu) throws Exception{
 		
 		liste = new ListePerso(listeRecu);
@@ -79,7 +87,8 @@ public class FenetreFormes extends JComponent {
 	
 	
 	/*
-	 * Methode: Qui retourne la dimension pr�f�r�e
+	 * Methode : getPreferredSize()
+	 * Methode: Qui retourne la dimension preferee
 	 * Le Layout qui utilise (contient) FenetreFormes doit réserver 
 	 * l'espace nécessaire à son affichage
 	 */

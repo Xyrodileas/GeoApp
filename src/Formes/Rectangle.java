@@ -8,9 +8,10 @@ package Formes;
 
 import java.awt.*;
 
+
 /**
- * Sous classe de Formes.Formes : classe Rectangle
- * @author Aissou Idriss
+ * Classe : Rectangle
+ * Heritage : Formes
  *
  */
 public class Rectangle extends Formes{
