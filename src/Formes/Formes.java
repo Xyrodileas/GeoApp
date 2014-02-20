@@ -112,11 +112,7 @@ public abstract class Formes {
 		
 		/**
 		 * Methode : getOrdreArriveForme()
-<<<<<<< HEAD
-		 * Retourne le numéro d'arrive de la forme 
-=======
-		 * Retourne le numï¿½ro d'arrive de la forme 
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+		 * Retourne le numï¿½ro d'arrive de la forme
 		 * @return (int) ordre
 		 */
 		public int getOrdreArriveForme(){
@@ -137,44 +133,28 @@ public abstract class Formes {
         
         /*
          *(abstract) Methode : firstx()
-         * Permet de retourner la 
-<<<<<<< HEAD
-         * premier coordonée x 
-=======
-         * premier coordonï¿½e x 
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+         * Permet de retourner la
+         * premier coordonï¿½e x
          */
         public abstract int firstx();
         
         /*
          * (abstract)Methode : lastx()
-         * Permet de retourner la 
-<<<<<<< HEAD
-         * dernière coordonée x
-=======
+         * Permet de retourner la
          * derniï¿½re coordonï¿½e x
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
          */
         public abstract int lastx();
         
         /*
          * (abstract)Methode : firsty()
-         * Permet de retourner la 
-<<<<<<< HEAD
-         * premiere coordonée y
-=======
-         * premiere coordonï¿½e y
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+         * Permet de retourner la
+         * premiere coordonï¿½e
          */
         public abstract int firsty();
         /*
          * (abstract)Methode : lasty()
-         * Permet de retourner la 
-<<<<<<< HEAD
-         * derniere coordonée y
-=======
+         * Permet de retourner la
          * derniere coordonï¿½e y
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
          */
         public abstract int lasty();
         

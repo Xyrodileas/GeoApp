@@ -83,7 +83,6 @@ public class Carre extends Formes {
     }
 
     /**
-<<<<<<< HEAD
      * Methode : getIDLogger()
      * permet de Retourner
      * le int idlogger
@@ -94,8 +93,6 @@ public class Carre extends Formes {
     }
 
 	/**
-=======
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 * Methode : draw()
 	 * (abstract) draw
 	 * Elle va permettre de dessiner la forme
@@ -122,12 +119,8 @@ public class Carre extends Formes {
     
     /**
      * Methode : firstx()
-     * Permet de retourner la 
-<<<<<<< HEAD
-     * premier coordonée x 
-=======
-     * premier coordonï¿½e x 
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+     * Permet de retourner la
+     * premier coordonï¿½e x
      * @return (int) x1
       */
     public int firstx(){
@@ -136,12 +129,8 @@ public class Carre extends Formes {
     
     /**
      * Methode : lastx()
-     * Permet de retourner la 
-<<<<<<< HEAD
-     * dernière coordonée x
-=======
+     * Permet de retourner la
      * derniï¿½re coordonï¿½e x
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
      * @return (int) x2
      */
     public int lastx(){
@@ -150,12 +139,8 @@ public class Carre extends Formes {
     
     /**
      * Methode : lasty()
-     * Permet de retourner la 
-<<<<<<< HEAD
-     * premiere coordonée y
-=======
+     * Permet de retourner la
      * premiere coordonï¿½e y
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
      * @return: (int) y1
      */
     public int firsty(){
@@ -164,12 +149,8 @@ public class Carre extends Formes {
     
     /**
      * Methode : lasty()
-     * Permet de retourner la 
-<<<<<<< HEAD
-     * derniere coordonée y
-=======
+     * Permet de retourner la
      * derniere coordonï¿½e y
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
      * @return: (int) y1
      */
     public int lasty(){
@@ -198,13 +179,8 @@ public class Carre extends Formes {
      * Methode : newPosition
      * Permet de corriger l'affichage des formes sur le panneau
      * modification des coordonne de la formes selon celle d'avant
-<<<<<<< HEAD
      * @param x2 formes precedente
      * @param y2 formes precedente
-=======
-     * @param x2Recu formes precedente
-     * @param y2Recu formes precedente
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
      */
     public void newPosition(int x2Recu, int y2Recu){
         // On calcul la longueur du carrÃ©
