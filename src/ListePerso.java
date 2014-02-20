@@ -27,11 +27,14 @@ public class ListePerso{
 		 }
 		 
 		 
+<<<<<<< HEAD
 		 /**
 		  * Methode : getElement()
 		  * Permet de retourner la forme
 		  * @return (Formes)
 		  */
+=======
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 		 public Formes getElement(){
 			 
 			 return this.element;
@@ -45,8 +48,15 @@ public class ListePerso{
 	 /**
 	  * ATTRIBUTS De la classe ListePerso
 	  */
+<<<<<<< HEAD
 	  Noeud debut;
 	  Noeud fin;
+=======
+	 
+	 //dï¿½but et fin de liste constamment actualisï¿½s
+     private Noeud debut;
+	 private Noeud fin;
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 
 	 private int nbElement;
 	 
@@ -66,6 +76,7 @@ public class ListePerso{
 	
 		
 	 
+<<<<<<< HEAD
 	 /**
 	  * Constructeur : ListePerso
 	  * Constructeur : ListePerso(ListePerso listeRecu)
@@ -96,6 +107,36 @@ public class ListePerso{
 	 
 	 /**
 	  * Methode : insererDebut()
+=======
+	 /**
+	  * Constructeur : ListePerso(ListePerso listeRecu)
+	  * Permet de construire une liste chaine depuis une autre
+	  * en la copiant
+	  * @param listeRecu ListePerso
+	  * @throws Exception
+	  */
+	public ListePerso(ListePerso listeRecu) throws Exception{
+		
+		 debut = fin = position = null;
+		 nbElement = 0;
+		 
+			Noeud tmplisteRecu = listeRecu.debut;
+			
+				while(tmplisteRecu != null){
+				
+				
+				//System.out.println((tmplisteRecu.element).getNom());
+				this.ajoute(tmplisteRecu.element, 1);
+				
+				
+				tmplisteRecu = tmplisteRecu.suivant;	
+
+			}
+	}
+	 
+	 
+	 /**
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Insere la Forme recu en debut de liste
 	  * antecedent : aucun
 	  * consequence : nbElement = nbElement + 1 
@@ -118,7 +159,10 @@ public class ListePerso{
 	 
 	 
 	 /**
+<<<<<<< HEAD
 	  * MEthode : insererApres()
+=======
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Insere la Forme recu apres la position courante
       * antecedent : aucun
 	  * consequence : nbElement = nbElement + 1 &       
@@ -154,7 +198,10 @@ public class ListePerso{
 	 }
 	 
 	 /**
+<<<<<<< HEAD
 	  * Methode : InsererAvant()
+=======
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Insere la forme recu avant la position courante
       * antecedent : aucun
 	  * consequence : nbElement = nbElement + 1 &       
@@ -167,11 +214,19 @@ public class ListePerso{
 		 if(debut == null)
 			 insererDebut(element);
 		 
+<<<<<<< HEAD
 		 //on insere apres et on inverse les donnïees
 		 else{
 			 
 			 //noeud temporaire pour conserver la position actuelle			
 			 //pour eviter de parcourir la liste et trouver le precïedent
+=======
+		 //on insere apres et on inverse les donnï¿½ees
+		 else{
+			 
+			 //noeud temporaire pour conserver la position actuelle			
+			 //pour eviter de parcourir la liste et trouver le precï¿½edent
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 			 Noeud tmp = position;
 			 			 		  
 			 //on insere apres en copiant la valeur de la position actuelle
@@ -189,7 +244,10 @@ public class ListePerso{
 	 
 	  
 	 /**
+<<<<<<< HEAD
 	  * Methode : 
+=======
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Retourne la forme de la position courante
 	  * 
 	  * antecedent : la liste ne doit pas etre vide
@@ -238,7 +296,10 @@ public class ListePerso{
 	 
 	 
 	 /**
+<<<<<<< HEAD
 	  * Methode : retourneSuivant()
+=======
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Methode : retourneSuivant() 
 	  * Permet de retourner l'element suivant de la 
 	  * position courante
@@ -264,7 +325,10 @@ public class ListePerso{
 	 }
 	 
 	 /**
+<<<<<<< HEAD
 	  * Methode : premier()
+=======
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Met la position courante au debut de la  liste
 	  * antecedent : la liste ne doit pas etre vide
 	  * consequence : position == debut  
@@ -287,7 +351,10 @@ public class ListePerso{
 	 
 	 
 	 /**
+<<<<<<< HEAD
 	  * MEthode : dernier()
+=======
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Met la position courante a la fin de la liste
 	  * antecedent : la liste ne doit pas etre vide
 	  * consequence : position == fin
@@ -308,7 +375,10 @@ public class ListePerso{
 	 
 	 
 	 /**
+<<<<<<< HEAD
 	  * Methode : precedent()
+=======
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Passe la position courante au preceent dans la liste
 	  * antecedent : la liste ne doit pas etre vide
 	  * consequence : la position courante est sur l'element precedent s'il existe
@@ -338,14 +408,21 @@ public class ListePerso{
 	 
 	 
 	 /**
+<<<<<<< HEAD
 	  * Methode : 
+=======
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Supprime les Formes de la liste chainee
 	  * selon les position courante
 	  * Il y different cas possible a gerer selon la position
 	  * antecedent : la liste ne doit pas etre vide
 	  * consequence : 	nbElement = nbElement - 1 &
 	  *                  position == position.suivant |
+<<<<<<< HEAD
 	  *                  position == fin == debut si dernier el½ment
+=======
+	  *                  position == fin == debut si dernier elï¿½ment
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
  	  * @throws ListeVideException 
 	  */
 	 public void supprime() throws ListeVideException{
@@ -441,7 +518,7 @@ public class ListePerso{
 	 * antecedent : le mode d'insertion AVANT OU APRES
 	 * @param element element a ajoute par rapport a la positon courante
 	 */
-	public void ajoute(Formes element,int modeInsertion) throws Exception {
+	public void ajoute(Formes element,int modeInsertion) {
 		//cas ou le choix d'insertion est AVANT
 		if(modeInsertion==0){
 			insererAvant(element);

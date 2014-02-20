@@ -45,11 +45,18 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 	
 	/**
+<<<<<<< HEAD
 	 * Constructeur : FenetrePrincipale
 	 * Constructeur par copie d'attributs 
 	 * de la classe FenetrePrincipale
 	 * il recoit en paramËtre le Commbase (comnunication avec le serveur)
 	 * pour pouvoir l'envoyÈ en paramËtre au panneau de menu
+=======
+	 * Constructeur par copie d'attributs 
+	 * de la classe FenetrePrincipale
+	 * il recoit en paramÔøΩtre le Commbase (comnunication avec le serveur)
+	 * pour pouvoir l'envoyÔøΩ en paramÔøΩtre au panneau de menu
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 * @param comm (CommBase)
 	 */
 	public FenetrePrincipale(CommBase comm){
@@ -78,8 +85,13 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 	// Appel√© lorsque le sujet lance "firePropertyChanger" 
 	/*
+<<<<<<< HEAD
 	 * Permet d'ajouter ‡ la liste de Formes chainÈe les formes
 	 * qui seront crÈes au fur et ‡ mesure de la rÈception des
+=======
+	 * Permet d'ajouter ÔøΩ la liste de Formes chainÔøΩe les formes
+	 * qui seront crÔøΩes au fur et ÔøΩ mesure de la rÔøΩception des
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 * lignes de commandes de la part du serveur
 	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
 	 */
@@ -115,7 +127,11 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Methode : videListeEtRedemarre()
+=======
+	 * Methode videListeEtRedemarre()
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 * permet de Vider la liste 
 	 * pour ajouter dix nouvele formes
 	 * @throws ListeVideException 
@@ -124,20 +140,29 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 
 		listeChaineFormes.videLaListeAuComplet();
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * Methode : nouvelleListe()
 	 * Permet de creer une nouvelle liste 
 	 * en cas de bug
 	 */
+=======
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	public void nouvelleListe(){
 		this.listeChaineFormes= new ListePerso();
 	}
 	
+<<<<<<< HEAD
 	
 	/**
 	 * Permet d'indiquer au trieur le type de triage
 	 * selon le boutons du menu activÈ
+=======
+	/**
+	 * Permet d'indiquer au trieur le type de triage
+	 * selon le boutons du menu activÔøΩ
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 * @param int modeDeTriage
 	 */
 	
@@ -153,6 +178,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 		  * (triParhauteurCroissante = 10)	(triParOrdreOriginal = 11)
 		  */
 		case 0 :
+<<<<<<< HEAD
             Triage.triBulleIDLoggerCroissant(listeChaineFormes);
 			break;
 		case 1 :
@@ -187,7 +213,99 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 			break;
 		case 11 :
 			Triage.triParOrdreOriginal(listeChaineFormes);
+=======
+			System.out.println("Cas 0 Sequence Croissant");
+			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT SEQUENCE CROISSANT d'origine");
+			listeChaineFormes.afficheIdDeLaLIste();
+			
+            Triage.triBulleIDLoggerCroissant(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE  APRES TRAITEMENT SEQUENCE CROISSANT d'origine");
+            listeChaineFormes.afficheIdDeLaLIste();
 			break;
+		case 1 :
+			System.out.println("Cas 1 sequence Deroissant");
+			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT SEQUENCE DECROISSANT d'origine");
+			listeChaineFormes.afficheIdDeLaLIste();
+			
+            Triage.triBulleIDLoggerDecroissant(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE  APRES TRAITEMENT SEQUENCE DECROISSANT d'origine");
+            listeChaineFormes.afficheIdDeLaLIste();
+			break;
+		case 2 :
+			System.out.println("Cas 2 Aire Croissant");
+			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT  AIRE CROISSANT d'origine");
+			listeChaineFormes.afficheAireDeLaLIste();
+            Triage.triBulleAireCroissant(listeChaineFormes);
+            
+            System.out.println("VoiCI LA LISTE  APRES TRAITEMENT AIRE CROISSANT  d'origine");
+            listeChaineFormes.afficheAireDeLaLIste();
+            break;
+		case 3 :
+			System.out.println("Cas 3 AIRE Decroissant");
+			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT  AIRE DECROISSANT d'origine");
+			listeChaineFormes.afficheAireDeLaLIste();
+            Triage.triBulleAireDecroissant(listeChaineFormes);
+            
+            System.out.println("VoiCI LA LISTE  APRES TRAITEMENT AIRE  DECROISSANT  d'origine");
+            listeChaineFormes.afficheAireDeLaLIste();
+			break;
+		case 4 :
+			System.out.println("Cas 4 carrÔøΩ, rectangle, cercle, ovale, ligne");
+			Triage.triParFormes(listeChaineFormes);
+			 System.out.println("VoiCI LA LISTE APRES TRAITEMENT FORME UN");
+			listeChaineFormes.afficheElementDeListe();
+			break;
+		case 5 :
+			System.out.println("Cas 5");
+			
+			Triage.triParFormesInverse(listeChaineFormes);
+			System.out.println("VoiCI LA LISTE APRES TRAITEMENT FORME DEUX");
+			listeChaineFormes.afficheElementDeListe();
+			
+			break;
+		case 6 :
+			//A fINIr **************
+			Triage.triParDistanceMax2points(listeChaineFormes);
+			System.out.println("VoiCI LA LISTE APRES TRAITEMENT FORME DEUX");
+			listeChaineFormes.afficheElementDeListe();
+			
+			break;
+		case 7 :
+			//A fINIr **************
+			Triage.triLargeurCroissante(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE APRES TRAITEMENT LARGEUR CROISSANT");
+            listeChaineFormes.affichegetLargeur();
+			
+			break;
+		case 8 :
+			//A fINIr **************
+			Triage.triLargeurDecroissante(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE APRES TRAITEMENT LARGEUR DECROISSANT");
+            listeChaineFormes.affichegetLargeur();
+			
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+			break;
+		case 9 :
+			Triage.triParhauteurCroissante(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE APRES TRAITEMENT HAUTEUR CROISSANT");
+            listeChaineFormes.affichegetHauteur();
+			
+			break;
+		case 10 :
+			Triage.triParHauteurDecroissante(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE APRES TRAITEMENT HAUTEUR DECROISSANT");
+            listeChaineFormes.affichegetHauteur();
+			break;
+		case 11 :
+			
+			System.out.println("VoiCI LA liste AVANT la remise a l'ordre initiale");
+			listeChaineFormes.afficheOrdreDarriveDeLaListe();
+			Triage.triParOrdreOriginal(listeChaineFormes);
+			System.out.println("VoiCI LA liste APRES TRAITEMENT de  la remise a l'ordre initiale");
+			listeChaineFormes.afficheOrdreDarriveDeLaListe();
+			break;
+
+
 
 		}
 		
@@ -202,12 +320,16 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 
 	
 	
+<<<<<<< HEAD
 	/**
 	 * Classe : OuvertureFermetureFenetreEcouteur()
 	 * Permet d'ajouter des actions a l'ouverture 
 	 * et a la fermeture du programme
 	 *
 	 */
+=======
+	
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 private class OuvertureFermetureFenetreEcouteur implements WindowListener{
   	   private FenetrePrincipale frame;
   	   private CommBase comm;

@@ -34,11 +34,8 @@ public class PanneauNbItems extends JPanel implements Observer{
      */
     //Sert pour la persistence (enl�ve un warning)
 	private static final long serialVersionUID = 1L;
-	
-	//ATTRIBUTS
-	//L'�tiquette et le nombre
-	private JLabel etiqNbElements;
-	private  JLabel nbElements;
+
+    private  JLabel nbElements;
 	
 
 	/**
@@ -59,7 +56,7 @@ public class PanneauNbItems extends JPanel implements Observer{
 	 */
 	private void initComposants(){
 
-		etiqNbElements = new JLabel("Nombre de Formes");
+        JLabel etiqNbElements = new JLabel("Nombre de Formes");
 		nbElements = new JLabel("0");
 		
 		setPreferredSize(new Dimension(140,50));

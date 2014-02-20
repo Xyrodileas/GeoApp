@@ -86,7 +86,11 @@ public abstract class Formes {
 		 * @return (int)
 		 */
 		public int getIDLogger(){
+<<<<<<< HEAD
 			return (int)idlog; 
+=======
+			return idlog;
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 		}
 		
 		/**
@@ -110,7 +114,11 @@ public abstract class Formes {
 		
 		/**
 		 * Methode : getOrdreArriveForme()
+<<<<<<< HEAD
 		 * Retourne le numéro d'arrive de la forme 
+=======
+		 * Retourne le numï¿½ro d'arrive de la forme 
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 		 * @return (int) ordre
 		 */
 		public int getOrdreArriveForme(){
@@ -132,27 +140,43 @@ public abstract class Formes {
         /*
          *(abstract) Methode : firstx()
          * Permet de retourner la 
+<<<<<<< HEAD
          * premier coordonée x 
+=======
+         * premier coordonï¿½e x 
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
          */
         public abstract int firstx();
         
         /*
          * (abstract)Methode : lastx()
          * Permet de retourner la 
+<<<<<<< HEAD
          * dernière coordonée x
+=======
+         * derniï¿½re coordonï¿½e x
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
          */
         public abstract int lastx();
         
         /*
          * (abstract)Methode : firsty()
          * Permet de retourner la 
+<<<<<<< HEAD
          * premiere coordonée y
+=======
+         * premiere coordonï¿½e y
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
          */
         public abstract int firsty();
         /*
          * (abstract)Methode : lasty()
          * Permet de retourner la 
+<<<<<<< HEAD
          * derniere coordonée y
+=======
+         * derniere coordonï¿½e y
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
          */
         public abstract int lasty();
         

@@ -18,10 +18,13 @@ import ca.etsmtl.log.util.IDLogger;
 import java.util.regex.Pattern;
 
 public class DecodeurChaineFormes<Regex> {
-		private static Pattern format;
-		private static Formes formeAenvoyer ;
+    private static Formes formeAenvoyer ;
 		private static IDLogger logger = IDLogger.getInstance();	//Methode Statique
+<<<<<<< HEAD
 		static int i=0;
+=======
+		private static int i=0;
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
     /**
      * Cr�e une nouvelle forme. Cette m�thode re�oit la cha�ne de
      * caract�res provenant du serveur de formes, elle d�termine de quelle
@@ -39,8 +42,8 @@ public class DecodeurChaineFormes<Regex> {
      * 			creation de la forme approprier
      */
     public static Formes creerForme(String chaineFormeDuServeur) {
-    		
-    		format = Pattern.compile(" ");
+
+        Pattern format = Pattern.compile(" ");
     		
     		// s�paration en sous-cha�nes par " " dans un tableau
     		String[] tab_items = format.split(chaineFormeDuServeur);
@@ -55,6 +58,7 @@ public class DecodeurChaineFormes<Regex> {
     		case 7 :
     			 
     			//CAS LIGNE creer une forme LIGNE si la requete recus contient la chaine <LIGNE>
+<<<<<<< HEAD
     			if(tab_items[1].equals("<LIGNE>")){
     				formeAenvoyer= new Ligne(i,Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
     			}
@@ -71,6 +75,24 @@ public class DecodeurChaineFormes<Regex> {
     				//System.out.println("C'est un <OVALE>" + "\n");
     				formeAenvoyer= new Ovale(i,Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
     			}
+=======
+                switch (tab_items[1]) {
+                    case "<LIGNE>":
+                        formeAenvoyer = new Ligne(i, Integer.parseInt(tab_items[0]), Integer.parseInt(tab_items[2]), Integer.parseInt(tab_items[3]), Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+                        break;
+                    case "<CARRE>":
+                        formeAenvoyer = new Carre(i, Integer.parseInt(tab_items[0]), Integer.parseInt(tab_items[2]), Integer.parseInt(tab_items[3]), Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+
+
+                        break;
+
+                    //CAS OVALE creer une forme OVALE si la requete recus contient la chaine <OVALE>
+                    case "<OVALE>":
+                        //System.out.println("C'est un <OVALE>" + "\n");
+                        formeAenvoyer = new Ovale(i, Integer.parseInt(tab_items[0]), Integer.parseInt(tab_items[2]), Integer.parseInt(tab_items[3]), Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+                        break;
+                }
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
     			
     			break;
     		

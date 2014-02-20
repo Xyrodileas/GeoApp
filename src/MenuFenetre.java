@@ -54,7 +54,7 @@ public class MenuFenetre extends JMenuBar{
 	
 	private JMenuItem arreterMenuItem, demarrerMenuItem;
 	private static final int DELAI_QUITTER_MSEC = 200;
-	static FenetrePrincipale fenetrePrincipale;
+	private static FenetrePrincipale fenetrePrincipale;
  	   
 	CommBase comm; // Pour activer/d√©sactiver la communication avec le serveur
 	
@@ -187,16 +187,22 @@ public class MenuFenetre extends JMenuBar{
 	}
 	
 	
+<<<<<<< HEAD
 	//  *******************************************************************************************
 		
 		/**
 		 * Methode : addMenuRechercheFormes()
 		 * Permet de creer le menu Recuperer 10 formes
 		 */
+=======
+	//*******************************************************************************************
+		
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 		private void addMenuRechercheFormes(){
 			
 			JMenu demandeFormeMenuItems = new JMenu("Relancer 10 Formes ");
 			JMenuItem item = new JMenuItem("10 nouvelles formes");
+<<<<<<< HEAD
 			
 			//Ecouteur du menu 10 nouvelles formes
 			item .addActionListener(new ActionListener(){
@@ -205,6 +211,9 @@ public class MenuFenetre extends JMenuBar{
 				 * 					-Va vider la liste
 				 * 					-Relancer la communication avec le serveur
 				 */
+=======
+			item .addActionListener(new ActionListener(){
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 				public void actionPerformed(ActionEvent arg0) {
 					
 					comm.setNbElementZero();
@@ -212,7 +221,11 @@ public class MenuFenetre extends JMenuBar{
 						fenetrePrincipale.videListeEtRedemarre();
 						
 					} catch (ListeVideException e) {
+<<<<<<< HEAD
 					
+=======
+						// TODO Auto-generated catch block
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 						fenetrePrincipale.nouvelleListe();
 					}
 					repaint();
@@ -231,11 +244,15 @@ public class MenuFenetre extends JMenuBar{
 	
 	
 	
+<<<<<<< HEAD
 //  ***************************************************************************************************************
 	/**
 	* Methode : addMenuClasser()
 	* Permet d'initaliser le menu classer ( triage )
 	 */
+=======
+	//***************************************************************************************************************
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	private void addMenuClasser() {
 		   		
 		//Menu Classer_Formes
@@ -318,9 +335,14 @@ public class MenuFenetre extends JMenuBar{
 	
 /**
  * Classe : Ecouteur de tri	
+<<<<<<< HEAD
  *Permet d'implÈmenter l'interface
  * ActionListener selon les boutons activÈs
  * du menu de tri
+=======
+ *Permet d'implÔøΩmenter l'interface ActionListener selon
+ *les boutons activÔøΩs
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
  */
 public class EcouteurClasser  implements ActionListener{
 		
@@ -329,9 +351,13 @@ public class EcouteurClasser  implements ActionListener{
 
 		
 	/**
+<<<<<<< HEAD
 	 * ActionListener :
 	 * Evenement qui se produira selon le bouton prÈssÈ
 	 * 			-Permet de Trier selon le bouton
+=======
+	 * Evenement qui se produira selon le bouton prÔøΩssÔøΩ
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 */
 	 public void actionPerformed(ActionEvent e) {
 		 
@@ -379,36 +405,60 @@ public class EcouteurClasser  implements ActionListener{
 		   							}
 		   							else 
 			   							if(e.getActionCommand().equals( "parDistanceMax2points")){
+<<<<<<< HEAD
+=======
+			   							System.out.println("tri TypeDeFormesInverse appel de fenetrePrincipale.aiguilleurDeTraitement(6)");
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 			   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(6);
 			   							
 						   		
 			   							}
 			   							else 
 				   							if(e.getActionCommand().equals( "triLargeurCroissante")){
+<<<<<<< HEAD
+=======
+				   							System.out.println("tri TypeDeFormesInverse appel de fenetrePrincipale.aiguilleurDeTraitement(7)");
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 				   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(7);
 				   							
 							   		
 				   							}
 				   							else 
 					   							if(e.getActionCommand().equals( "triLargeurDecroissante")){
+<<<<<<< HEAD
+=======
+					   							System.out.println("tri TypeDeFormesInverse appel de fenetrePrincipale.aiguilleurDeTraitement(8)");
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 					   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(8);
 					   							
 								   		
 					   							}
 					   							else 
 						   							if(e.getActionCommand().equals( "triParhauteurCroissante")){
+<<<<<<< HEAD
+=======
+						   							System.out.println("tri TypeDeFormesInverse appel de fenetrePrincipale.aiguilleurDeTraitement(9)");
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 						   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(9);
 						   							
 									   		
 						   							}
 						   							else 
 							   							if(e.getActionCommand().equals( "triParHauteurDecroissante")){
+<<<<<<< HEAD
+=======
+							   							System.out.println("tri TypeDeFormesInverse appel de fenetrePrincipale.aiguilleurDeTraitement(10)");
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 							   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(10);
 							   							
 										   		
 							   							}
 							   							else 
 								   							if(e.getActionCommand().equals( "triParOrdreOriginal")){
+<<<<<<< HEAD
+=======
+								   							System.out.println("tri TypeDeFormesInverse appel de fenetrePrincipale.aiguilleurDeTraitement(11)");
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 								   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(11);
 								   							
 											   		
@@ -424,7 +474,11 @@ public class EcouteurClasser  implements ActionListener{
 		   }
 	}
 
+<<<<<<< HEAD
 //  ********************************************************************************************************************
+=======
+//********************************************************************************************************************
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 
 	/**
 	 *  Activer ou d√©sactiver les items du menu selon la s√©lection. 
@@ -434,7 +488,11 @@ public class EcouteurClasser  implements ActionListener{
 		arreterMenuItem.setEnabled(comm.isActif());
 	}
 	
+<<<<<<< HEAD
 //  ********************************************************************************************************************
+=======
+	//********************************************************************************************************************
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	
 	/**
 	 * Cr√©er un √©l√©ment de menu √† partir d'un champs principal et ses √©l√©ments
@@ -451,8 +509,12 @@ public class EcouteurClasser  implements ActionListener{
    }
 	
 	/**
+<<<<<<< HEAD
 	 * Methode : setJFrame
 	 * Permet de rÈcupÈrer la rÈfÈrence de la fenetre principale
+=======
+	 * Permet de rÔøΩcupÔøΩrer la rÔøΩfÔøΩrence de la fenetre principale
+>>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 * @param fenetre
 	 */
 	public void setJFrame(FenetrePrincipale fenetre){
