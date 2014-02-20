@@ -58,11 +58,8 @@ public class CommBase extends Observable{
 	private SwingWorker threadComm =null;
 	private PropertyChangeListener listener = null;
 	private boolean isActif = false;
-<<<<<<< HEAD
-	
-	private int nbElement;
-=======
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+
+
 	
 	private int nbElement;
 
@@ -89,7 +86,7 @@ public class CommBase extends Observable{
 	/**
 	 * Methode : setNbElement()
 <<<<<<< HEAD
-	 * Permet de mettre a zéro le nombre d lement
+	 * Permet de mettre a zï¿½ro le nombre d lement
 =======
 	 * Permet de mettre a zï¿½ro le nombre d lement
 >>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
@@ -147,7 +144,7 @@ public class CommBase extends Observable{
 		    				PortUnreachableException |IllegalArgumentException  e)
 		    			{
 		    			// Envoie les parametre de texte a la methode warningMessage qui affiche le message d'erreur
-		    			warningMessage("Il y a une erreur :" + "\n"+ e.toString() + "\n"+e.getLocalizedMessage());
+		    			warningMessage("Il y a une erreur :","\n"+ e.toString() + "\n"+e.getLocalizedMessage());
 		    			connexion= false;
 		    			}
 
@@ -232,27 +229,17 @@ public class CommBase extends Observable{
 						
 					
 						if(fluxRecuSurClient.readLine().length() !=9 && nbElement <10){
-<<<<<<< HEAD
-							
 							//Envoie a ligne de commande recu (Formes.Formes) a la fenetre principale (fenetrePrincipale)
 							firePropertyChange("ENVOIE-FORME-RECU", null, fluxRecuSurClient.readLine());
 							
-=======
-							
-							//Envoie a ligne de commande recu (Formes.Formes) a la fenetre principale (fenetrePrincipale)
-							firePropertyChange("ENVOIE-FORME-RECU", null, fluxRecuSurClient.readLine());
-							
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+
 							nbElement++; //Incrementation du nombre de formes a chaque nouvelle forme recu
 							//Permet de notifier le nombre de formes totale au JPanel PanneauNbItems
 							setChanged();
 							notifyObservers(nbElement);
 							
 						}
-<<<<<<< HEAD
 						//Nous avons attend 10 formes on arrete le threadComm
-=======
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 						if(nbElement==10){
 							threadComm.cancel(true);
 						}
@@ -294,7 +281,6 @@ public class CommBase extends Observable{
 	}
 	
 	/**
-<<<<<<< HEAD
 	 * Methode : warningMessage()
 	 * Permet d'afficher le message
 	 *  d'erreur concernant la connexion
@@ -303,14 +289,7 @@ public class CommBase extends Observable{
 	 */
 	public void warningMessage(String information, String entete){
 		JOptionPane.showMessageDialog(fenetrePrincipale,information,entete,JOptionPane.WARNING_MESSAGE);
-=======
-	 * Permet d'afficher le message d'erreur concernant la connexion
-     * @param information    String
-     *
-     */
-	public void warningMessage(String information){
-		JOptionPane.showMessageDialog(fenetrePrincipale,information, " Information d'erreur",JOptionPane.WARNING_MESSAGE);
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+
 
 	}
 	
