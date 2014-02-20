@@ -45,18 +45,11 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 	
 	/**
-<<<<<<< HEAD
 	 * Constructeur : FenetrePrincipale
-	 * Constructeur par copie d'attributs 
-	 * de la classe FenetrePrincipale
-	 * il recoit en paramËtre le Commbase (comnunication avec le serveur)
-	 * pour pouvoir l'envoyÈ en paramËtre au panneau de menu
-=======
 	 * Constructeur par copie d'attributs 
 	 * de la classe FenetrePrincipale
 	 * il recoit en paramÔøΩtre le Commbase (comnunication avec le serveur)
 	 * pour pouvoir l'envoyÔøΩ en paramÔøΩtre au panneau de menu
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 * @param comm (CommBase)
 	 */
 	public FenetrePrincipale(CommBase comm){
@@ -86,8 +79,8 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	// Appel√© lorsque le sujet lance "firePropertyChanger" 
 	/*
 <<<<<<< HEAD
-	 * Permet d'ajouter ‡ la liste de Formes chainÈe les formes
-	 * qui seront crÈes au fur et ‡ mesure de la rÈception des
+	 * Permet d'ajouter ÔøΩ la liste de Formes chainÔøΩe les formes
+	 * qui seront crÔøΩes au fur et ÔøΩ mesure de la rÔøΩception des
 =======
 	 * Permet d'ajouter ÔøΩ la liste de Formes chainÔøΩe les formes
 	 * qui seront crÔøΩes au fur et ÔøΩ mesure de la rÔøΩception des
@@ -157,7 +150,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 	/**
 	 * Permet d'indiquer au trieur le type de triage
-	 * selon le boutons du menu activÈ
+	 * selon le boutons du menu activÔøΩ
 =======
 	/**
 	 * Permet d'indiquer au trieur le type de triage

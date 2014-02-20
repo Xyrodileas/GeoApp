@@ -26,15 +26,13 @@ public class ListePerso{
 			 suivant = lien;
 		 }
 		 
-		 
-<<<<<<< HEAD
+
 		 /**
 		  * Methode : getElement()
 		  * Permet de retourner la forme
 		  * @return (Formes)
 		  */
-=======
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+
 		 public Formes getElement(){
 			 
 			 return this.element;
@@ -48,15 +46,8 @@ public class ListePerso{
 	 /**
 	  * ATTRIBUTS De la classe ListePerso
 	  */
-<<<<<<< HEAD
 	  Noeud debut;
 	  Noeud fin;
-=======
-	 
-	 //dï¿½but et fin de liste constamment actualisï¿½s
-     private Noeud debut;
-	 private Noeud fin;
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	 
 	 private int nbElement;
 	 
@@ -75,8 +66,7 @@ public class ListePerso{
 	 }
 	
 		
-	 
-<<<<<<< HEAD
+
 	 /**
 	  * Constructeur : ListePerso
 	  * Constructeur : ListePerso(ListePerso listeRecu)
@@ -107,42 +97,12 @@ public class ListePerso{
 	 
 	 /**
 	  * Methode : insererDebut()
-=======
-	 /**
-	  * Constructeur : ListePerso(ListePerso listeRecu)
-	  * Permet de construire une liste chaine depuis une autre
-	  * en la copiant
-	  * @param listeRecu ListePerso
-	  * @throws Exception
-	  */
-	public ListePerso(ListePerso listeRecu) throws Exception{
-		
-		 debut = fin = position = null;
-		 nbElement = 0;
-		 
-			Noeud tmplisteRecu = listeRecu.debut;
-			
-				while(tmplisteRecu != null){
-				
-				
-				//System.out.println((tmplisteRecu.element).getNom());
-				this.ajoute(tmplisteRecu.element, 1);
-				
-				
-				tmplisteRecu = tmplisteRecu.suivant;	
-
-			}
-	}
-	 
-	 
-	 /**
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Insere la Forme recu en debut de liste
 	  * antecedent : aucun
 	  * consequence : nbElement = nbElement + 1 
 	  *                  position == debut 
 	  *                  this.getElement() == element
-      * @param Forme a inserer dans la liste                  
+      * @param element a inserer dans la liste
 	  */
 	 public void insererDebut(Formes element){
 		 
@@ -159,15 +119,12 @@ public class ListePerso{
 	 
 	 
 	 /**
-<<<<<<< HEAD
 	  * MEthode : insererApres()
-=======
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Insere la Forme recu apres la position courante
       * antecedent : aucun
 	  * consequence : nbElement = nbElement + 1 &       
 	  *              liste.getElement() == element
-	  * @param Forme a inserer dans la liste
+	  * @param element a inserer dans la liste
 	  *  
 	  */
 	 public void insererApres(Formes element){
@@ -198,35 +155,25 @@ public class ListePerso{
 	 }
 	 
 	 /**
-<<<<<<< HEAD
 	  * Methode : InsererAvant()
-=======
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
 	  * Insere la forme recu avant la position courante
       * antecedent : aucun
 	  * consequence : nbElement = nbElement + 1 &       
 	  *                  liste.getElement() == element
-	  * @param Forme a inserer dans la liste
+	  * @param element a inserer dans la liste
 	  */
 	 public void insererAvant(Formes element){
 	 
 		 //si la liste est vide, on insere au debut
 		 if(debut == null)
 			 insererDebut(element);
-		 
-<<<<<<< HEAD
-		 //on insere apres et on inverse les donnïees
-		 else{
-			 
-			 //noeud temporaire pour conserver la position actuelle			
-			 //pour eviter de parcourir la liste et trouver le precïedent
-=======
+
 		 //on insere apres et on inverse les donnï¿½ees
 		 else{
 			 
 			 //noeud temporaire pour conserver la position actuelle			
 			 //pour eviter de parcourir la liste et trouver le precï¿½edent
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+
 			 Noeud tmp = position;
 			 			 		  
 			 //on insere apres en copiant la valeur de la position actuelle
@@ -419,7 +366,7 @@ public class ListePerso{
 	  * consequence : 	nbElement = nbElement - 1 &
 	  *                  position == position.suivant |
 <<<<<<< HEAD
-	  *                  position == fin == debut si dernier el½ment
+	  *                  position == fin == debut si dernier elï¿½ment
 =======
 	  *                  position == fin == debut si dernier elï¿½ment
 >>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
