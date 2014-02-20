@@ -86,11 +86,9 @@ public abstract class Formes {
 		 * @return (int)
 		 */
 		public int getIDLogger(){
-<<<<<<< HEAD
-			return (int)idlog; 
-=======
+
 			return idlog;
->>>>>>> ebc8c444d9c32e8db20551f54955191644af5d8e
+
 		}
 		
 		/**
