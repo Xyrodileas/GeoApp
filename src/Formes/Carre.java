@@ -9,8 +9,8 @@ package Formes;
 import java.awt.*;
 
 /**
- * Sous classe de Formes.Formes : classe Carre
- * @author Aissou Idriss
+ * Classe : Carre
+ * Heritage : Formes
  *
  */
 public class Carre extends Formes {
@@ -32,8 +32,8 @@ public class Carre extends Formes {
      *  Consequent :
      * 				affecte les elements recu aux attributs de Carre
      */
-    public Carre(int id,int x1Recu,int y1Recu,int x2Recu, int y2Recu){
-        super(id,Math.abs(((x2Recu)-(x1Recu))*((y2Recu)-(y1Recu))), Color.green,"Carre",0);
+    public Carre(int ordre,int id,int x1Recu,int y1Recu,int x2Recu, int y2Recu){
+        super(ordre,id,Math.abs(((x2Recu)-(x1Recu))*((y2Recu)-(y1Recu))), Color.green,"Carre",0);
         x1 = x1Recu;
         y1 = y1Recu;
         x2 = x2Recu;
@@ -43,7 +43,9 @@ public class Carre extends Formes {
 
     // ACCESSEURS
     /**
-     * Methode qui permet de retourner le x1 de Carre
+     * Methode :  getX1()
+     * Methode qui permet 
+     * de retourner le x1 de Carre
      * @return (int) x1
      */
     public int getX1() {
@@ -51,7 +53,9 @@ public class Carre extends Formes {
     }
 
     /**
-     * Methode qui permet de retourner le y1 de Carre
+     * Methode :  gety1()
+     * Methode qui permet de 
+     * retourner le y1 de Carre
      * @return (int) y1
      */
     public int getY1() {
@@ -59,7 +63,9 @@ public class Carre extends Formes {
     }
 
     /**
-     * Methode qui permet de retourner le x2 de Carre
+     * Methode :  getX2()
+     * Methode qui permet 
+     * de retourner le x2 de Carre
      * @return (int) x2
      */
     public int getX2() {
@@ -67,7 +73,9 @@ public class Carre extends Formes {
     }
 
     /**
-     * Methode qui permet de retourner le y2 de Carre
+     * Methode :  getY2
+     * Methode qui permet de 
+     * retourner le y2 de Carre
      * @return (int) y2
      */
     public int getY2() {
@@ -75,13 +83,11 @@ public class Carre extends Formes {
     }
 
     /**
-     * Retourne int idlogger
-     * @return : int id
-     */
-    public int getIDLogger(){
-        return super.getIDLogger();
-    }
-
+	 * Methode : draw()
+	 * (abstract) draw
+	 * Elle va permettre de dessiner la forme
+	 * @param (g) graphics
+	 */
     public void draw(Graphics g){
         g.setColor(this.couleur);
         g.fillRect(x1, y1, x2-x1, y2-y1);
@@ -90,31 +96,99 @@ public class Carre extends Formes {
         g.setColor(Color.GREEN);
         g.drawLine(x1, y1, x2, y2);
     }
+    
+    /**
+     * Methode :  getAir()
+     * Permet de retourner l'aire
+     * de la forme
+     * @return (int) aire
+      */
     public double getAir(){
         return Math.abs((x2-x1)*(y2-y1));
     }
+    
+    /**
+     * Methode : firstx()
+     * Permet de retourner la 
+     * premier coordon�e x 
+     * @return (int) x1
+      */
     public int firstx(){
         return x1;
     }
+    
+    /**
+     * Methode : lastx()
+     * Permet de retourner la 
+     * derni�re coordon�e x
+     * @return (int) x2
+     */
     public int lastx(){
         return x2;
     }
+    
+    /**
+     * Methode : lasty()
+     * Permet de retourner la 
+     * premiere coordon�e y
+     * @return: (int) y1
+     */
     public int firsty(){
         return y1;
     }
+    
+    /**
+     * Methode : lasty()
+     * Permet de retourner la 
+     * derniere coordon�e y
+     * @return: (int) y1
+     */
     public int lasty(){
         return y2;
     }
-    public void newPosition(int x2, int y2){
+
+    /**
+     *  Methode : getHauteur()
+     *  Permet de retourner la hauteur
+     *  @return (int) hauteur
+     */
+    public int getHauteur() {
+        return x2-x1;
+    }
+    
+    /**
+     *  Methode :getLargeur()
+     *  Permet de retourner la largeur
+     *  @return (int) largeur
+     */
+    public int getLargeur(){
+        return y2-y1;
+    }
+
+    /**
+     * Methode : newPosition
+     * Permet de corriger l'affichage des formes sur le panneau
+     * modification des coordonne de la formes selon celle d'avant
+     * @param x2Recu formes precedente
+     * @param y2Recu formes precedente
+     */
+    public void newPosition(int x2Recu, int y2Recu){
         // On calcul la longueur du carré
         int tmp = this.x2-this.x1;
         // On attribut les nouvelles coordonnées de départ
-        this.x1 = x2;
-        this.y1 = y2;
+        this.x1 = x2Recu;
+        this.y1 = y2Recu;
         // On attribut les coordonnée de départ + la longueur du carré
         this.x2 = this.x1+tmp;
         this.y2 = this.y1+tmp;
     }
+    
+    
+    /**
+     *  Methode : getDistanceMax()
+     *  Permet de retourner distance Max entre 2 points
+     *  @return (int) distanceMax
+     */
     public double getDistanceMax(){
         return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
     }

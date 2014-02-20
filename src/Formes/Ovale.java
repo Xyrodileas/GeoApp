@@ -28,10 +28,10 @@ public class Ovale extends Formes  {
      * Consequent:
      * 				Les elements recus seront affecter aux attributs de l'objet
      */
-    public Ovale(int id,int xRecu, int yRecu, int rayonhRecu,int rayonVRecu){
+    public Ovale(int ordre,int id,int xRecu, int yRecu, int rayonhRecu,int rayonVRecu){
 
 
-        super(id,Math.abs(Math.PI*(rayonhRecu)*(rayonVRecu)), Color.red,"Ovale",3); //fait appel a la classe mere
+        super(ordre,id,Math.abs(Math.PI*(rayonhRecu)*(rayonVRecu)), Color.red,"Ovale",3); //fait appel a la classe mere
         centreX = xRecu;
         centreY = yRecu;
         rayonH = rayonhRecu;
@@ -69,21 +69,13 @@ public class Ovale extends Formes  {
         return rayonV;
     }
 
-    /**
-     * Retourne int idlogger
-     * @return : int id
-     */
-    public int getIDLogger(){
-        return super.getIDLogger();
-    }
     public void draw(Graphics g){
-        g.fillOval(centreX, centreY, rayonH, rayonV);
-        g.setColor(Color.BLACK);
-        g.fillOval(centreX, centreY, rayonH, rayonV);
+        g.setColor(Color.DARK_GRAY);
+        g.fillOval(centreX-rayonH, centreY-rayonV, rayonH*2, rayonV*2);
         g.setColor(Color.GREEN);
-        g.drawLine(centreX, centreY, centreX+rayonH, centreY+rayonV);
+        g.drawLine(centreX-rayonH, centreY-rayonV, centreX+rayonH, centreY+rayonV);
         g.setColor(Color.CYAN);
-        g.drawRect(centreX, centreY, centreX+rayonH-centreX, centreY+rayonV-centreY);
+        g.drawRect(centreX-rayonH, centreY-rayonV, rayonH*2, rayonV*2);
     }
     public double getAir(){
 
@@ -96,11 +88,20 @@ public class Ovale extends Formes  {
         return centreX+rayonH;
     }
     public int firsty(){
-        return centreY-rayonH;
+        return centreY-rayonV;
     }
     public int lasty(){
         return centreY+rayonV;
     }
+
+    public int getHauteur() {
+        return rayonV*2;
+    }
+
+    public int getLargeur(){
+        return rayonH*2;
+    }
+
     public void newPosition(int x2, int y2){
         // On attribut les coordonnées du centre
         this.centreX = x2 + this.rayonH;

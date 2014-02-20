@@ -33,27 +33,25 @@ import java.util.Observable;
 
 /**
  * STRATEGIE :
- * 				Permet d'�tablir la connexion avec le serveur gr�ce  
- * 				� la r�ception des identifiants de la part de l'onglet Demarrer du menu
+ * 				Permet d'etablir la connexion avec le serveur grace  
+ * 				a la reception des identifiants de la part de l'onglet Demarrer du menu
  * 
- * Base d'une communication via un fil d'exécution parallèle.
+ * Base d'une communication via un fil d'execution parallele.
  */
 
 /**
  * Classe CommBase qui permet
- * d'�tablir la connection avec le serveur
+ * d'etablir la connection avec le serveur
  * mais aussi d'envoyer les lignes de commande recu
  * au DecodeurDeChaine
- * @author Aissou Idriss
  * 
  *
  */
 public class CommBase extends Observable{
 	
 	//CONSTANTES
-	private final int DELAI = 150;
-	//static final String ip ="127.0.0.1";
-	//static final int port  = 10000;
+	private final int DELAI = 200;
+
 	
 	//ATTRIBUTS DE LA  CLASSE COMMBASE
 	@SuppressWarnings("rawtypes")
@@ -62,10 +60,7 @@ public class CommBase extends Observable{
 	private boolean isActif = false;
 	
 	private int nbElement;
-	private int test=0;
-	
-	//SOCKET ELEMENTS
-	private Socket          socketDeConnection;	
+
     private PrintStream    fluxEnvoyeVersServeur ;
     private BufferedReader  fluxRecuSurClient;
 	
@@ -84,6 +79,17 @@ public class CommBase extends Observable{
 	public void setPropertyChangeListener(PropertyChangeListener listener){
 		this.listener = listener;
 	}
+	
+	
+	/**
+	 * Methode : setNbElement()
+	 * Permet de mettre a z�ro le nombre d lement
+	 */
+	public void setNbElementZero(){
+		this.nbElement=0;
+	}
+	
+	
 	
 
 	/**
@@ -108,7 +114,7 @@ public class CommBase extends Observable{
 	    			//TENTATIVE D'OUVERTURE DE LA CONNECTION...
 
 	    			//Creation de la socket selon les parametres recus
-	    			socketDeConnection = new Socket(ipRecu, portRecu);
+                    Socket socketDeConnection = new Socket(ipRecu, portRecu);
 	    			//creation du flux sortant
 	    			fluxEnvoyeVersServeur= new PrintStream(socketDeConnection.getOutputStream());
 	    			//creation du flux entrant
@@ -131,7 +137,7 @@ public class CommBase extends Observable{
 		    				PortUnreachableException |IllegalArgumentException  e)
 		    			{
 		    			// Envoie les parametre de texte a la methode warningMessage qui affiche le message d'erreur
-		    			warningMessage("Il y a une erreur :" + "\n"+ e.toString() + "\n"+e.getLocalizedMessage(), " Information d'erreur");
+		    			warningMessage("Il y a une erreur :" + "\n"+ e.toString() + "\n"+e.getLocalizedMessage());
 		    			connexion= false;
 		    			}
 
@@ -150,11 +156,11 @@ public class CommBase extends Observable{
 
 	
 	/**
-	 * Proc�dure qui permet de stopper la connexion avec le serveur
+	 * Procedure qui permet de stopper la connexion avec le serveur
 	 * 
-	 * Cons�quent :
+	 * Consequent :
 	 * 				La connexion se voit stopper
-	 * 				le (int) nbElement se voit revenir a z�ro
+	 * 				le (int) nbElement se voit revenir a zero
 	 * 				Affiche un message de signalement de fin de connexion
 	 */
 	public void stop(){
@@ -180,45 +186,46 @@ public class CommBase extends Observable{
 	}
 	
 	/**
-	 * Proc�dure qui permet de communiquer avec le serveur de formes
+	 * Procedure qui permet de communiquer avec le serveur de formes
 	 * 
-	 * Cons�quent :
+	 * Consequent :
 	 * 				Creation du fil d'execution parallele
 	 * 				Communication avec le serveur : commande Get
 	 * 				Reception des requetes entrantes
 	 * 				Transmission des requetes recus a la fenetre principale
 	 */
 
+	
 	@SuppressWarnings("rawtypes")
 	protected void creerCommunication(){		
-		// Crée un fil d'exécusion parallèle au fil courant,
+		// Cree un fil d'execusion parallele au fil courant,
 		threadComm = new SwingWorker(){
 			
 			protected Object doInBackground() throws Exception {
 				
 				while(true){
 					Thread.sleep(DELAI);
+					
 					// C'EST DANS CETTE BOUCLE QU'ON COMMUNIQUE AVEC LE SERVEUR
 					fluxEnvoyeVersServeur.println("GET");
 					
  					//La méthode suivante alerte l'observateur 
 					if(listener!=null)
-						if(fluxRecuSurClient.readLine().length() !=9){
+						
+					
+						if(fluxRecuSurClient.readLine().length() !=9 && nbElement <10){
 							
-							nbElement++; //Incr�mentation du nombre de formes � chaque nouvelle forme recu
+							//Envoie a ligne de commande recu (Formes.Formes) a la fenetre principale (fenetrePrincipale)
+							firePropertyChange("ENVOIE-FORME-RECU", null, fluxRecuSurClient.readLine());
+							
+							nbElement++; //Incrementation du nombre de formes a chaque nouvelle forme recu
 							//Permet de notifier le nombre de formes totale au JPanel PanneauNbItems
 							setChanged();
 							notifyObservers(nbElement);
 							
-							//Envoie a ligne de commande recu (Formes.Formes) � la fenetre principale (fenetrePrincipale)
-							firePropertyChange("ENVOIE-FORME-RECU", null, fluxRecuSurClient.readLine());
-							
-							//Condition d'arret
-							if(nbElement==10){
-								stop();
-							
-								
-							}
+						}
+						if(nbElement==10){
+							threadComm.cancel(true);
 						}
 				}
 			}
@@ -226,11 +233,11 @@ public class CommBase extends Observable{
 		
 		
 		if(listener!=null)
-			   threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelée lorsque le SwinkWorker invoquera la méthode "firePropertyChanger" 
-				nbElement=0;  //Remise a zero du nombre d'�l�ments
+			   threadComm.addPropertyChangeListener(listener); // La methode "propertyChange" de ApplicationFormes sera donc appelee lorsque le SwinkWorker invoquera la methode "firePropertyChanger" 
+				nbElement=0;  //Remise a zero du nombre d'elements
 				setChanged();	//on applique les changements
 				notifyObservers(nbElement);//On avise l'observeur
-			threadComm.execute(); // Lance le fil d'exécution parallèle.
+			threadComm.execute(); // Lance le fil d'exécution parallele.
 			isActif = true;
 	}
 	
@@ -253,11 +260,11 @@ public class CommBase extends Observable{
 	
 	/**
 	 * Permet d'afficher le message d'erreur concernant la connexion
-	 * @param information	String
-	 * @param entete		String
-	 */
-	public void warningMessage(String information, String entete){
-		JOptionPane.showMessageDialog(fenetrePrincipale,information,entete,JOptionPane.WARNING_MESSAGE);
+     * @param information    String
+     *
+     */
+	public void warningMessage(String information){
+		JOptionPane.showMessageDialog(fenetrePrincipale,information, " Information d'erreur",JOptionPane.WARNING_MESSAGE);
 
 	}
 	/**

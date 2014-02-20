@@ -37,11 +37,9 @@ import java.awt.*;
 public class FenetreFormes extends JComponent {
 	
 	private static final long serialVersionUID = -2262235643903749505L;
-	public static final int WIDTH = 400;
-	public static final int HEIGHT = 400;
-	public static final Dimension dimension = new Dimension(800,650);
-	
-	private Formes[] tabDeFormes= new Formes[10];
+	public static final int WIDTH = 250;
+	public static final int HEIGHT = 250;
+	public static final Dimension dimension = new Dimension(500,500);
 	
     private ListePerso liste= new ListePerso();// Liste qui va recopier la liste de base
     

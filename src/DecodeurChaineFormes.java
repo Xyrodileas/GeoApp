@@ -18,9 +18,9 @@ import ca.etsmtl.log.util.IDLogger;
 import java.util.regex.Pattern;
 
 public class DecodeurChaineFormes<Regex> {
-		private static Pattern format;
-		private static Formes formeAenvoyer ;
+    private static Formes formeAenvoyer ;
 		private static IDLogger logger = IDLogger.getInstance();	//Methode Statique
+		private static int i=0;
     /**
      * Cr�e une nouvelle forme. Cette m�thode re�oit la cha�ne de
      * caract�res provenant du serveur de formes, elle d�termine de quelle
@@ -38,8 +38,8 @@ public class DecodeurChaineFormes<Regex> {
      * 			creation de la forme approprier
      */
     public static Formes creerForme(String chaineFormeDuServeur) {
-    		
-    		format = Pattern.compile(" ");
+
+        Pattern format = Pattern.compile(" ");
     		
     		// s�paration en sous-cha�nes par " " dans un tableau
     		String[] tab_items = format.split(chaineFormeDuServeur);
@@ -54,38 +54,39 @@ public class DecodeurChaineFormes<Regex> {
     		case 7 :
     			 
     			//CAS LIGNE creer une forme LIGNE si la requete recus contient la chaine <LIGNE>
-    			if(tab_items[1].equals("<LIGNE>")){
-    				formeAenvoyer= new Ligne(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
-    			}
-    			
-    			
-    			else if(tab_items[1].equals("<CARRE>")){
-        			formeAenvoyer= new Carre(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+                switch (tab_items[1]) {
+                    case "<LIGNE>":
+                        formeAenvoyer = new Ligne(i, Integer.parseInt(tab_items[0]), Integer.parseInt(tab_items[2]), Integer.parseInt(tab_items[3]), Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+                        break;
+                    case "<CARRE>":
+                        formeAenvoyer = new Carre(i, Integer.parseInt(tab_items[0]), Integer.parseInt(tab_items[2]), Integer.parseInt(tab_items[3]), Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
 
-    				
-    			}
-    			
-    			//CAS OVALE creer une forme OVALE si la requete recus contient la chaine <OVALE>
-    			else if(tab_items[1].equals("<OVALE>")){
-    				//System.out.println("C'est un <OVALE>" + "\n");
-    				formeAenvoyer= new Ovale(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
-    			}
+
+                        break;
+
+                    //CAS OVALE creer une forme OVALE si la requete recus contient la chaine <OVALE>
+                    case "<OVALE>":
+                        //System.out.println("C'est un <OVALE>" + "\n");
+                        formeAenvoyer = new Ovale(i, Integer.parseInt(tab_items[0]), Integer.parseInt(tab_items[2]), Integer.parseInt(tab_items[3]), Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+                        break;
+                }
     			
     			break;
     		
     		//CAS CERCLE creer une forme CERCLE si la requete recus contient la chaine <CERCLE>
     		case 8:
     			// <CERCLE>
-    			formeAenvoyer= new Cercle(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]));
+    			formeAenvoyer= new Cercle(i,Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]));
     			break;
     			
     		//CAS RECTANGLE creer une forme rectangle si la requete recus contient la chaine <RECTANGLE>
     		case 11:
-    			formeAenvoyer= new Rectangle(Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
+    			formeAenvoyer= new Rectangle(i,Integer.parseInt(tab_items[0]),Integer.parseInt(tab_items[2]) ,Integer.parseInt(tab_items[3]) , Integer.parseInt(tab_items[4]), Integer.parseInt(tab_items[5]));
     			break;
 
     		}
     	logger.logID(Integer.parseInt(tab_items[0])); //le id �tant un int repr�sentant le num�ro de s�quence re�u
+    	i++;
 		return formeAenvoyer; //retourne la forme sp�cifique
         
 

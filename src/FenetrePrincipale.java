@@ -40,11 +40,17 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	private static final long serialVersionUID = -1210804336046370508L;
 	
 	//ATTRIBUTS DE FENETREPRINCIPALE
-	static FenetreFormes fenetreFormes;
+	FenetreFormes fenetreFormes;
 	private ListePerso listeChaineFormes=new ListePerso();
 	
 	
-	
+	/**
+	 * Constructeur par copie d'attributs 
+	 * de la classe FenetrePrincipale
+	 * il recoit en param�tre le Commbase (comnunication avec le serveur)
+	 * pour pouvoir l'envoy� en param�tre au panneau de menu
+	 * @param comm (CommBase)
+	 */
 	public FenetrePrincipale(CommBase comm){
 		
 		MenuFenetre menu = new MenuFenetre(comm); //creation d'une instanciation de la classe menu
@@ -62,6 +68,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 		this.pack(); 									// Ajuste la dimension de la fenêtre principale selon celle de ses composants
 		this.setVisible(true);							 // Rend la fenêtre principale visible.
 		this.setLocationRelativeTo(null);
+        this.setTitle("Client forme");
 		
 		//ajout de l'Ecouteur d'evenenement sur la fenetre Qui gere ouverture et fermeture de la fenetre
 	    addWindowListener(new OuvertureFermetureFenetreEcouteur(comm,this));
@@ -70,7 +77,9 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 	// Appelé lorsque le sujet lance "firePropertyChanger" 
 	/*
-	 * Permet de creer d'ajouter les formes dans un tableau des la reception d'une nouvelle ligne de commande
+	 * Permet d'ajouter � la liste de Formes chain�e les formes
+	 * qui seront cr�es au fur et � mesure de la r�ception des
+	 * lignes de commandes de la part du serveur
 	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
 	 */
 	public void propertyChange(PropertyChangeEvent arg0) {
@@ -79,13 +88,10 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 
 			//CHAQUE NOUVELLE FORMES EST STOCKER DANS LA LISTE APRES CREATION DE LA FORMES
 			try {
-				listeChaineFormes.ajoute(DecodeurChaineFormes.creerForme((String) arg0.getNewValue()), 1);
+				listeChaineFormes.ajoute(DecodeurChaineFormes.creerForme((String) arg0.getNewValue()),1);
 				
 				//listeChaineFormes.afficheElementDeListe();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} catch (Exception e) {listeChaineFormes=new ListePerso();	}
 			
 			
 			// ON ENVOIE LA LISTE AU PANNEAU DESSINATEUR
@@ -106,8 +112,24 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 		
 	}
+	
+	/**
+	 * Methode videListeEtRedemarre()
+	 * permet de Vider la liste 
+	 * pour ajouter dix nouvele formes
+	 * @throws ListeVideException 
+	 */
+	public void videListeEtRedemarre() throws ListeVideException{
+
+		listeChaineFormes.videLaListeAuComplet();
+	}
+	public void nouvelleListe(){
+		this.listeChaineFormes= new ListePerso();
+	}
+	
 	/**
 	 * Permet d'indiquer au trieur le type de triage
+	 * selon le boutons du menu activ�
 	 * @param int modeDeTriage
 	 */
 	
@@ -115,9 +137,12 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 		switch(modeDeTriage){
 		 /*
-		  * (sequenceCroissant = 0)(sequenceDecroissant = 1)
-		  * (aireFormeCroissante=2)(aireFormeDecroissante=3)
-		  * (parTypeDeFormes=4)(parTypeDeFormesInverse=5)
+		  * (sequenceCroissant = 0)			(sequenceDecroissant = 1)
+		  * (aireFormeCroissante = 2)		(aireFormeDecroissante = 3)
+		  * (parTypeDeFormes = 4)			(parTypeDeFormesInverse = 5)
+		  * (triParDistanceMax2points = 6)	(triLargeurCroissante = 7)
+		  * (triLargeuDeroissante = 8)		(triParhauteurCroissante = 9)
+		  * (triParhauteurCroissante = 10)	(triParOrdreOriginal = 11)
 		  */
 		case 0 :
 			System.out.println("Cas 0 Sequence Croissant");
@@ -144,8 +169,8 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
             Triage.triBulleAireCroissant(listeChaineFormes);
             
             System.out.println("VoiCI LA LISTE  APRES TRAITEMENT AIRE CROISSANT  d'origine");
-            listeChaineFormes.afficheAireDeLaLIste();;
-			break;
+            listeChaineFormes.afficheAireDeLaLIste();
+            break;
 		case 3 :
 			System.out.println("Cas 3 AIRE Decroissant");
 			System.out.println("VoiCI LA LISTE  AVANT TRAITEMENT  AIRE DECROISSANT d'origine");
@@ -156,7 +181,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
             listeChaineFormes.afficheAireDeLaLIste();
 			break;
 		case 4 :
-			System.out.println("Cas 4 carr�, rectangle, cercle, ovale, ligne");
+			System.out.println("Cas 4 carr�, rectangle, cercle, ovale, ligne");
 			Triage.triParFormes(listeChaineFormes);
 			 System.out.println("VoiCI LA LISTE APRES TRAITEMENT FORME UN");
 			listeChaineFormes.afficheElementDeListe();
@@ -179,30 +204,36 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 		case 7 :
 			//A fINIr **************
 			Triage.triLargeurCroissante(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE APRES TRAITEMENT LARGEUR CROISSANT");
+            listeChaineFormes.affichegetLargeur();
 			
 			break;
 		case 8 :
 			//A fINIr **************
-			Triage.triLargeurDcroissante(listeChaineFormes);
+			Triage.triLargeurDecroissante(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE APRES TRAITEMENT LARGEUR DECROISSANT");
+            listeChaineFormes.affichegetLargeur();
 			
 			break;
 		case 9 :
-			//A fINIr **************
 			Triage.triParhauteurCroissante(listeChaineFormes);
+            System.out.println("VoiCI LA LISTE APRES TRAITEMENT HAUTEUR CROISSANT");
+            listeChaineFormes.affichegetHauteur();
 			
 			break;
 		case 10 :
-			//A fINIr **************
 			Triage.triParHauteurDecroissante(listeChaineFormes);
-			
+            System.out.println("VoiCI LA LISTE APRES TRAITEMENT HAUTEUR DECROISSANT");
+            listeChaineFormes.affichegetHauteur();
 			break;
 		case 11 :
-			//A fINIr **************
-		Triage.triParOrdreOriginal(listeChaineFormes);
 			
+			System.out.println("VoiCI LA liste AVANT la remise a l'ordre initiale");
+			listeChaineFormes.afficheOrdreDarriveDeLaListe();
+			Triage.triParOrdreOriginal(listeChaineFormes);
+			System.out.println("VoiCI LA liste APRES TRAITEMENT de  la remise a l'ordre initiale");
+			listeChaineFormes.afficheOrdreDarriveDeLaListe();
 			break;
-
-
 
 
 
@@ -217,6 +248,9 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 		
 	}
 
+	
+	
+	
 	 private class OuvertureFermetureFenetreEcouteur implements WindowListener{
   	   private FenetrePrincipale frame;
   	   private CommBase comm;

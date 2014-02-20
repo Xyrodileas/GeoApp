@@ -1,24 +1,30 @@
 import Formes.Formes;
 
 /**
- * Classe pour les diff�rents tris
- * @author i7
- *
+ * Classe : Triage
+ *	Permet d'effectuer les differents
+ *	triage 
  */
 public abstract class Triage {
 
    
     // Trie à bulle en fonction de l'IDLogger, dans l'ordre croissant
-    public static void triBulleIDLoggerCroissant(ListePerso lt) throws ListeVideException, Exception{
+	/**
+	 * 
+	 * @param lt
+	 * @throws ListeVideException
+	 * @throws Exception
+	 */
+    public static void triBulleIDLoggerCroissant(ListePerso lt) throws Exception{
         boolean trie = true;
         do{
-            lt.premier(); // On part du début de la liste
+            lt.premier(); // On part du debut de la liste
             trie=true;
-            for(int i=0;i<9;i++){ // On parcours chaque élément de la liste
+            for(int i=0;i<9;i++){ // On parcours chaque element de la liste
 
-                Formes tmp = lt.getElement(); //On enregistre la forme précédente
+                Formes tmp = lt.getElement(); //On enregistre la forme precedente
                 lt.suivant();
-                if(tmp.getIDLogger() > lt.getElement().getIDLogger()){ // Si l'ID de la forme précédente est supérieur à l'actuel
+                if(tmp.getIDLogger() > lt.getElement().getIDLogger()){ // Si l'ID de la forme precedente est superieur à l'actuel
                     lt.precedent();                                    // On les permutes
                     lt.supprime();
                     lt.ajoute(tmp, 1);
@@ -27,10 +33,16 @@ public abstract class Triage {
                 }
             }
 
-        }while(!trie); // Tant que la liste n'est pas triée, on continue
+        }while(!trie); // Tant que la liste n'est pas triee, on continue
     }
     // Trie à bulle en fonction de l'IDLogger, dans l'ordre decroissant
-    public static void triBulleIDLoggerDecroissant(ListePerso lt) throws ListeVideException, Exception{
+    /**
+     * 
+     * @param lt
+     * @throws ListeVideException
+     * @throws Exception
+     */
+    public static void triBulleIDLoggerDecroissant(ListePerso lt) throws Exception{
             for(int i=0;i<10;i++){
             	lt.premier();
             	for(int j=10;j>i;j--){
@@ -49,7 +61,13 @@ public abstract class Triage {
     }
     
     // Trie à bulle en fonction de l'air, dans l'ordre croissant
-    public static void triBulleAireCroissant(ListePerso lt) throws ListeVideException, Exception{
+    /**
+     * 
+     * @param lt
+     * @throws ListeVideException
+     * @throws Exception
+     */
+    public static void triBulleAireCroissant(ListePerso lt) throws Exception{
         boolean trie = true;
         do{
             lt.premier();
@@ -72,7 +90,13 @@ public abstract class Triage {
     
     
     // Trie à bulle en fonction de l'air, dans l'ordre decroissant
-    public static void triBulleAireDecroissant(ListePerso lt) throws ListeVideException, Exception{
+    /**
+     * 
+     * @param lt
+     * @throws ListeVideException
+     * @throws Exception
+     */
+    public static void triBulleAireDecroissant(ListePerso lt) throws Exception{
     	 for(int i=0;i<10;i++){
          	lt.premier();
          	for(int j=10;j>i;j--){
@@ -88,7 +112,13 @@ public abstract class Triage {
          }    	
     }
     
+    
     //carr�, rectangle, cercle, ovale, ligne
+    /**
+     * 
+     * @param lt
+     * @throws Exception
+     */
     public static void triParFormes(ListePerso lt) throws Exception{
     	 boolean trie = true;
          do{
@@ -110,6 +140,11 @@ public abstract class Triage {
          }while(!trie);
      }
     
+    /**
+     * 
+     * @param lt
+     * @throws Exception
+     */
     public static void triParFormesInverse(ListePerso lt) throws Exception{
     	for(int i=0;i<10;i++){
          	lt.premier();
@@ -127,6 +162,11 @@ public abstract class Triage {
     	
     }
     
+    /**
+     * 
+     * @param lt
+     * @throws Exception
+     */
     public static void triParDistanceMax2points(ListePerso lt) throws Exception{
     	 boolean trie = true;
          do{
@@ -148,8 +188,16 @@ public abstract class Triage {
          }while(!trie);
     	
     }
+    
+   //*****************************************************************************
     //LES POINTS BONIS
-    public static void triLargeurCroissante(ListePerso lt) throws ListeVideException{
+    
+    /**
+     * 
+     * @param lt
+     * @throws Exception
+     */
+    public static void triLargeurCroissante(ListePerso lt) throws Exception {
     	 boolean trie = true;
          do{
              lt.premier();
@@ -158,36 +206,47 @@ public abstract class Triage {
 
                  Formes tmp = lt.getElement();
                  lt.suivant();
-                 /**if(tmp.getLargeur() > lt.getElement().getLargeur()()){
+                 if(tmp.getLargeur() > lt.getElement().getLargeur()){
                      lt.precedent();
                      lt.supprime();
                      lt.ajoute(tmp, 1);
                      lt.suivant();
-                     trie=false; f
-                 }**/
+                     trie=false;
+                 }
              }
 
          }while(!trie);
     	
     }
-    public static void triLargeurDcroissante(ListePerso lt) throws Exception{
+    
+    /**
+     * 
+     * @param lt
+     * @throws Exception
+     */
+    public static void triLargeurDecroissante(ListePerso lt) throws Exception{
     	for(int i=0;i<10;i++){
          	lt.premier();
          	for(int j=10;j>i;j--){
          		 Formes tmp = lt.getElement();
                   lt.suivant();
-                 /** if(tmp.getLargeur() < lt.getElement().getLargeur()){
+                 if(tmp.getLargeur() < lt.getElement().getLargeur()){
                   	lt.precedent();
                   	lt.supprime();
                   	lt.ajoute(tmp, 1);
-                  }**/
+                  }
             
              }
     	}
     	
     }
-                                   
-    public static void triParhauteurCroissante(ListePerso lt) throws ListeVideException{ 
+    
+    /**
+     * 
+     * @param lt
+     * @throws Exception
+     */
+    public static void triParhauteurCroissante(ListePerso lt) throws Exception {
     	boolean trie = true;
     do{
         lt.premier();
@@ -196,46 +255,85 @@ public abstract class Triage {
 
             Formes tmp = lt.getElement();
             lt.suivant();
-            /**if(tmp.getHauteur() > lt.getElement().getHauteur()){
+            if(tmp.getHauteur() > lt.getElement().getHauteur()){
                 lt.precedent();
                 lt.supprime();
                 lt.ajoute(tmp, 1);
                 lt.suivant();
                 trie=false;
-            }**/
+            }
         }
 
     }while(!trie);
     	
     }
+    
+    /**
+     * 
+     * @param lt
+     * @throws Exception
+     */
     public static void triParHauteurDecroissante(ListePerso lt) throws Exception{
     	for(int i=0;i<10;i++){
          	lt.premier();
          	for(int j=10;j>i;j--){
          		 Formes tmp = lt.getElement();
                   lt.suivant();
-                 /** if(tmp.getHauteur()< lt.getElement().getHauteur()){
+                  if(tmp.getHauteur()< lt.getElement().getHauteur()){
                   	lt.precedent();
                   	lt.supprime();
                   	lt.ajoute(tmp, 1);
-                  }**/
+                  }
             
              }
     	}
     	
     }
-    public static void triParOrdreOriginal(ListePerso lt){
-    	
-    }
-
     
-    public static void reorganize(ListePerso lt) throws Exception{
-        lt.premier();
-        ((Formes)lt.getElement()).newPosition(1,1);
+    
+    /**
+     * 
+     * @param lt
+     * @throws Exception
+     */
+    public static void triParOrdreOriginal(ListePerso lt) throws Exception{
+      	boolean trie = true;
+        do{
+            lt.premier();
+            trie=true;
+            for(int i=0;i<10;i++){
+
+                Formes tmp = lt.getElement();
+                lt.suivant();
+                if(tmp.getOrdreArriveForme() > (lt.getElement()).getOrdreArriveForme()){
+                    lt.precedent();
+                    lt.supprime();
+                    lt.ajoute(tmp, 1);
+                    lt.suivant();
+                    trie=false;
+                }
+            }
+
+        }while(!trie);
+        	
+        }
+    	
+ 
+    /**
+     * Methode reorganize(ListePerso liste)
+     * Cette methode permet de modifier laffichage en ajout 40 pixel
+     * @param liste ListePerso chainee
+     * @throws Exception
+     */
+    public static void reorganize(ListePerso liste) throws Exception{
+        liste.premier();
+        Formes tmp;
+        liste.getElement().newPosition(0, 0);
+       // liste.suivant();
         for(int i=0;i<10;i++){
-            Formes tmp = (Formes) lt.getElement();
-            lt.suivant();
-            ((Formes)lt.getElement()).newPosition(tmp.firstx()+40, tmp.firsty()+40);
+        	tmp = liste.getElement();
+            liste.suivant();
+            liste.getElement().newPosition(tmp.firstx() + 40, tmp.firsty() + 40);
         }
     }
     

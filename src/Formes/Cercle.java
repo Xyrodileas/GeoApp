@@ -9,8 +9,8 @@ package Formes;
 import java.awt.*;
 
 /**
- * Sous classe de Formes.Formes : classe Cercle
- * @author Aissou Idriss
+ * Classe : Carre
+ * Heritage : Formes
  *
  */
 public class Cercle extends Formes {
@@ -18,7 +18,7 @@ public class Cercle extends Formes {
     //ATTRIBUTS DE CERCLE
     private int centreX;
     private int centreY;
-    private int rayon;
+    private final int rayon;
 
     /**
      * Constructeur de la classe Cercle
@@ -30,8 +30,8 @@ public class Cercle extends Formes {
      * Consequent :
      * 				affecte les elements recu aux attributs
      */
-    public Cercle(int id,int centreXRecu,int centreYRecu,int rayonREcu){
-        super(id, Math.abs(Math.PI*(rayonREcu)*(rayonREcu)), Color.blue,"Cercle",2);
+    public Cercle(int ordre,int id,int centreXRecu,int centreYRecu,int rayonREcu){
+        super(ordre,id, Math.abs(Math.PI*(rayonREcu)*(rayonREcu)), Color.blue,"Cercle",2);
         centreX=centreXRecu;
         centreY=centreYRecu;
         rayon=rayonREcu;
@@ -62,23 +62,13 @@ public class Cercle extends Formes {
         return rayon;
     }
 
-    /**
-     * Retourne int idlogger
-     * @return : int id
-     */
-    public int getIDLogger(){
-        return super.getIDLogger();
-    }
-
     public void draw(Graphics g){
         g.setColor(this.couleur);
-        g.fillOval(centreX, centreY, rayon, rayon);
-        g.setColor(Color.BLACK);
-        g.drawOval(centreX, centreY, rayon, rayon);
+        g.fillOval(centreX-rayon, centreY-rayon, rayon*2, rayon*2);
         g.setColor(Color.GREEN);
-        g.drawLine(centreX, centreY, centreX+rayon, centreY+rayon);
+        g.drawLine(centreX-rayon, centreY-rayon, centreX+rayon, centreY+rayon);
         g.setColor(Color.CYAN);
-        g.drawRect(centreX, centreY, rayon, rayon);
+        g.drawRect(centreX-rayon, centreY-rayon, rayon*2, rayon*2);
 
     }
     public double getAir(){
@@ -97,6 +87,15 @@ public class Cercle extends Formes {
     public int lasty(){
         return centreY+rayon;
     }
+
+    public int getHauteur() {
+        return rayon*2;
+    }
+
+    public int getLargeur(){
+        return rayon*2;
+    }
+
     public void newPosition(int x2, int y2){
         // On attribut les coordonnées du centre
         this.centreX = x2 + this.rayon;

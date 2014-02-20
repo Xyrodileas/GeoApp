@@ -32,8 +32,8 @@ public class Rectangle extends Formes{
      * 				affecte les elements recu aux attributs de Rectangle
      */
 
-    public Rectangle (int id,int x1Recu,int y1Recu,int x2Recu, int y2Recu){
-        super(id, Math.abs(((x2Recu)-(x1Recu))*((y2Recu)-(y1Recu))), Color.ORANGE,"Rectangle",1);
+    public Rectangle (int ordre,int id,int x1Recu,int y1Recu,int x2Recu, int y2Recu){
+        super(ordre,id, Math.abs(((x2Recu)-(x1Recu))*((y2Recu)-(y1Recu))), Color.ORANGE,"Rectangle",1);
         x1 = x1Recu;
         y1 = y1Recu;
         x2 = x2Recu;
@@ -74,14 +74,6 @@ public class Rectangle extends Formes{
         return y2;
     }
 
-    /**
-     * Retourne int idlogger
-     * @return : int id
-     */
-    public int getIDLogger(){
-        return super.getIDLogger();
-    }
-
     public void draw(Graphics g){
         g.setColor(this.couleur);
         g.fillRect(x1, y1, x2-x1, y2-y1);
@@ -105,7 +97,16 @@ public class Rectangle extends Formes{
     }
     public int lasty(){
         return y2;
-}
+    }
+
+    public int getHauteur() {
+        return x2-x1;
+    }
+
+    public int getLargeur(){
+        return y2-y1;
+    }
+
     public void newPosition(int x2, int y2){
         // On calcul les longueurs du rectangle
         int tmp1 = this.x2-this.x1;

@@ -38,8 +38,8 @@ public class ListePerso{
 	  */
 	 
 	 //d�but et fin de liste constamment actualis�s
-	  Noeud debut;
-	  Noeud fin;
+     private Noeud debut;
+	 private Noeud fin;
 	 
 	 private int nbElement;
 	 
@@ -58,6 +58,14 @@ public class ListePerso{
 	 }
 	
 		
+	 
+	 /**
+	  * Constructeur : ListePerso(ListePerso listeRecu)
+	  * Permet de construire une liste chaine depuis une autre
+	  * en la copiant
+	  * @param listeRecu ListePerso
+	  * @throws Exception
+	  */
 	public ListePerso(ListePerso listeRecu) throws Exception{
 		
 		 debut = fin = position = null;
@@ -78,48 +86,43 @@ public class ListePerso{
 	}
 	 
 	 
-	 
-	 
 	 /**
-	  * Ins�re l'�l�ment re�u en d�but de liste
-	  * ant�d�cent : aucun
-	  * cons�quence : nbElement = nbElement + 1 
+	  * Insere la Forme recu en debut de liste
+	  * antecedent : aucun
+	  * consequence : nbElement = nbElement + 1 
 	  *                  position == debut 
 	  *                  this.getElement() == element
-      * @param element � ins�rer dans la liste                  
+      * @param Forme a inserer dans la liste                  
 	  */
 	 public void insererDebut(Formes element){
 		 
-		 //on cr�e un noeud en faisant le lien sur l'ancien d�but
+		 //on cree un noeud en faisant le lien sur l'ancien debut
   	     debut = new Noeud(element,debut);
   	     
-  	     //la premi�re fois il faut placer le pointeur de fin
+  	     //la premiere fois il faut placer le pointeur de fin
   	     if (nbElement == 0)
 		     fin = debut;
   	     
-  	     //place la position courante au d�but 
+  	     //place la position courante au debut 
 		 position = debut;
-		 
-		 //incr�mentation du nombre d�l�ment
-		 
 	 }
 	 
 	 
 	 /**
-	  * Ins�re l'�l�ment re�u apr�s la position courante
-      * ant�d�cent : aucun
-	  * cons�quence : nbElement = nbElement + 1 &       
+	  * Insere la Forme recu apres la position courante
+      * antecedent : aucun
+	  * consequence : nbElement = nbElement + 1 &       
 	  *              liste.getElement() == element
-	  * @param element � ins�rer dans la liste
+	  * @param Forme a inserer dans la liste
 	  *  
 	  */
 	 public void insererApres(Formes element){
 		 
-		 //si la liste est vide, on ins�re au d�but
+		 //si la liste est vide, on insere au debut
 		 if(debut == null)
 			 insererDebut(element);
 		 
-		 //Sinon on ins�re apr�s la position courante et la position se d�place
+		 //Sinon on insere apres la position courante et la position se deplace
 		 else {
 
 			 //coupe le lien du suivant et le pointe sur le nouveau noeud
@@ -141,32 +144,32 @@ public class ListePerso{
 	 }
 	 
 	 /**
-	  * Ins�re l'�l�ment re�u avant la position courante
-      * ant�d�cent : aucun
-	  * cons�quence : nbElement = nbElement + 1 &       
+	  * Insere la forme recu avant la position courante
+      * antecedent : aucun
+	  * consequence : nbElement = nbElement + 1 &       
 	  *                  liste.getElement() == element
-	  * @param element � ins�rer dans la liste
+	  * @param Forme a inserer dans la liste
 	  */
 	 public void insererAvant(Formes element){
 	 
-		 //si la liste est vide, on ins�re au d�but
+		 //si la liste est vide, on insere au debut
 		 if(debut == null)
 			 insererDebut(element);
 		 
-		 //on ins�re apr�s et on inverse les donn�es
+		 //on insere apres et on inverse les donn�ees
 		 else{
 			 
 			 //noeud temporaire pour conserver la position actuelle			
-			 //pour �viter de parcourir la liste et trouver le pr�c�dent
+			 //pour eviter de parcourir la liste et trouver le prec�edent
 			 Noeud tmp = position;
 			 			 		  
-			 //on insere apr�s en copiant la valeur de la position actuelle
+			 //on insere apres en copiant la valeur de la position actuelle
 			 insererApres(position.element);
 			 
-			 //on met le nouvel element � l'ancienne position
+			 //on met le nouvel element a l'ancienne position
 			 tmp.element = element;		
 
-              //replace la position courante sur le pr�c�dent      
+              //replace la position courante sur le precedent      
              position = tmp;
              
 		 }
@@ -175,30 +178,30 @@ public class ListePerso{
 	 
 	  
 	 /**
-	  * Retourne l'�l�ment � la position courante et l'enl�ve
-	  * de la structure
+	  * Retourne la forme de la position courante
 	  * 
-	  * ant�c�dent : la liste ne doit pas �tre vide
+	  * antecedent : la liste ne doit pas etre vide
 	  * @throws ListeVideException 
-	  * @return L'�l�ment � la position courante
-	  * @Override
+	  * @return Forme position courante
 	  */
 	 public Formes getElement() throws ListeVideException {
 
 		 //si la liste est vide, on avise
 		 if(debut == null)
-			 throw new ListeVideException("Vous ne pouvez r�cup�rer un �l�ment " +
-                                          "dans une liste vide");
+			 throw new ListeVideException("Vous ne pouvez rien recuperer dans une liste vide ");
 		 
 		 //sinon on retourne l'�l�ment
 		 
 		 return position.element;
 	 }
+	 
+	 
+	 
 	  
 	 /**
 	  * Passe la position courante au suivant dans la liste
-	  * ant�c�dent : aucun
-	  * cons�quence : position est d�plac�e sur l'�l�ment suivant s'il existe
+	  * antecedent : aucun
+	  * consequence : position est deplace sur l'element suivant s'il existe
 	  *                  sinon position courante == fin 
  	  * @throws ListeVideException 
 	  */
@@ -209,16 +212,25 @@ public class ListePerso{
 		     throw new ListeVideException("Vous ne pouvez aller au suivant " +
 		     		                      "dans une liste vide");
 		 
-		 //si c'est la fin, on ne d�place pas, sinon ...
+		 //si c'est la fin, on ne delace pas, sinon ...
 		 if(position.suivant != null){
 			 
 			 //on passe au suivant
     	     position = position.suivant;
 		 
     	  }
-			//Applique les changements On avise l'observeur
 	
 	 }
+	 
+	 
+	 
+	 /**
+	  * Methode : retourneSuivant() 
+	  * Permet de retourner l'element suivant de la 
+	  * position courante
+	  * @return Noeud (suivant)
+	  * @throws ListeVideException
+	  */
 	 public Noeud retourneSuivant()  throws ListeVideException{
 			
 		 //si la liste est vide, on avise
@@ -226,7 +238,7 @@ public class ListePerso{
 		     throw new ListeVideException("Vous ne pouvez aller au suivant " +
 		     		                      "dans une liste vide");
 		 
-		 //si c'est la fin, on ne d�place pas, sinon ...
+		 //si c'est la fin, on ne deplace pas, sinon ...
 		 if(position.suivant != null){
 			 
 			 //on passe au suivant
@@ -238,30 +250,31 @@ public class ListePerso{
 	 }
 	 
 	 /**
-	  * Met la position courante au d�but de la  liste
-	  * ant�c�dent : la liste ne doit pas �tre vide
-	  * cons�quence : position == debut  
+	  * Met la position courante au debut de la  liste
+	  * antecedent : la liste ne doit pas etre vide
+	  * consequence : position == debut  
  	  * @throws ListeVideException 
 	  */
 	 
 	 public void premier() throws ListeVideException{
 
-		 //si la liste est vide, on avise
+		 //si la liste est vide, on avise par exception
          if(debut == null)
-			 throw new ListeVideException("Vous ne pouvez aller au d�but " +
+			 throw new ListeVideException("Vous ne pouvez aller au debut " +
 			 		                      "dans une liste vide");
 		 
-         //on d�place la position courante au d�but
+         //on deplace la position courante au debut
 		 position = debut;
-			//Applique les changements On avise l'observeur
 		
 		 
 	 }
 
+	 
+	 
 	 /**
-	  * Met la position courante � la fin de la liste
-	  * ant�c�dent : la liste ne doit pas �tre vide
-	  * cons�quence : position == fin
+	  * Met la position courante a la fin de la liste
+	  * antecedent : la liste ne doit pas etre vide
+	  * consequence : position == fin
  	  * @throws ListeVideException 
 	  */  
 	 public void dernier() throws ListeVideException{
@@ -276,21 +289,23 @@ public class ListePerso{
 
 	 }
 	 
+	 
+	 
 	 /**
-	  * Passe la position courante au pr�c�dent dans la liste
-	  * ant�c�dent : la liste ne doit pas �tre vide
-	  * cons�quence : la position courante est sur l'�l�ment pr�c�dent s'il existe
+	  * Passe la position courante au preceent dans la liste
+	  * antecedent : la liste ne doit pas etre vide
+	  * consequence : la position courante est sur l'element precedent s'il existe
 	  *                  sinon position courante == debut
  	  * @throws ListeVideException 
 	  */
 	 public void precedent() throws ListeVideException{
 	
-		 //si la liste est vide, on avise
+		 //si la liste est vide, on avise par exception
 		 if(debut == null )
 			 throw new ListeVideException("Vous ne pouvez aller au pr�c�dent " +
 		                      	 		  "dans une liste vide");
 		 if(position != debut){
-			 //on se place au d�but
+			 //on se place au debut
 			 Noeud posTmp = debut;
 			 //tant qu'on n'est pas sur l'�l�ment voulu 
 			 while(posTmp.suivant != position)
@@ -298,17 +313,21 @@ public class ListePerso{
 				 //on passe au suivant
 				 posTmp = posTmp.suivant;
 			 
-			 //on place la position courante sur le pr�c�dent
+			 //on place la position courante sur le precedent
 			 position = posTmp;
 		 }
 	 }	
 	 
+	 
+	 
 	 /**
-	  * Supprime l'�l�ment � la position courante
-	  * ant�c�dent : la liste ne doit pas �tre vide
-	  * cons�quence : nbElement = nbElement - 1 &
+	  * Supprime les Formes de la liste chainee
+	  * selon les position courante
+	  * Il y different cas possible a gerer selon la position
+	  * antecedent : la liste ne doit pas etre vide
+	  * consequence : 	nbElement = nbElement - 1 &
 	  *                  position == position.suivant |
-	  *                  position == fin == debut si dernier �l�ment
+	  *                  position == fin == debut si dernier el�ment
  	  * @throws ListeVideException 
 	  */
 	 public void supprime() throws ListeVideException{
@@ -318,12 +337,12 @@ public class ListePerso{
 			 throw new ListeVideException("Vous ne pouvez supprimer " +
 			 		                      "dans une liste vide");
 		 
-		 //cas sp�cial; un seul �l�ment
+		 //cas special; un seul element
 		 if(debut == fin){
 		    debut = fin = position = null;
 		 }
 		 
-		 //cas sp�cial; le premier �l�ment
+		 //cas special; le premier element
 		 else if(position == debut){
 			  debut = debut.suivant;
 		       position = debut;
@@ -332,19 +351,14 @@ public class ListePerso{
 			    //on retient si c'est le dernier de la liste
 			    boolean dernier = position.suivant == null;			     
 			 
-    		     //cas sp�cial; le dernier �l�ment
 	   	         if(dernier){
-	   	        	 
-	 				//on ne peut pas utiliser la proc�dure pr�c�dent()
-	   	           //parqu'elle avertit les observateurs 
-	   	           //On utilise une autre boucle locale qui it�re simplement.
-	   	        	 //et d�place le  pointeur de fin sur la position pr�c�dent
+	   	        	
 	   	          fin = debut;
 	   	         
 	   	          while(fin.suivant !=position)
 	   	        	  fin = fin.suivant;
 	 		     
- 		            //on lib�re le noeud suivant
+ 		            //on libere le noeud suivant
 		            fin.suivant = null;
 		            
 		            //On replace la position sur la fin
@@ -352,52 +366,50 @@ public class ListePerso{
 		        }		            
 	   	         
 				 //on copie le suivant dans l'actuel cela supprime le suivant
-	   	         //pour d�truire en O(1).  � noter que la position ne change pas
 				 else{
 					 position.element  = position.suivant.element;		 
 					 position.suivant  = position.suivant.suivant;
 					 
-					 //encore un dernier cas sp�cial;  Si on a d�truit l'avant dernier
 					 //il faut ajuster le pointeur de fin
 					 if(position.suivant == null)
 						 fin = position;
 				 }
 	   	 }
 		 
-		 //On d�cr�mente le nombre d'�l�ments
+		 //On decremente le nombre d'elements
 		 nbElement--;
 	
 	 }
+	 
+	 
 
 		/**
-		 * Retourne un tableau dont les objets sont 
-		 * dispos�s dans le m�me sens que la ListePerso.
-		 *
-		 * Cela signifie que l'�l�ment du debut de la ListePerso
-		 * est dans la premi�re case du tableau.
+		 * Retourne un tableau dont les formes sont 
+		 * disposees dans le meme sens que celui de leur arrive
+		 * mais aussi selon le tri voulu
 		 * 
-		 * @return [] d'objets de la ListePerso
+		 * @return [] Formes ( de ListePerso)
 		 */
 	public Formes[] retournerUnTableauDobjet() {
-		//Le tableau � retourner
+		//Le tableau retourner
 		Formes[] tab = new Formes[nbElement];
 
-		//R�f�rence temporaire pour parourir la liste du debut a la fin
+		//Reference temporaire pour parcourir la liste
+		//du debut a la fin
 		Noeud tmp = debut;
 
 			//Indice du tableau
 			int i = 0;
 
-			//Tant qu'on a pas atteint la fin de la liste on boucle
+			//Tant qu'on a pas atteint la fin de la liste on parcours
 			while(tmp != null){
 				
 				
 				//On retient l element dans le tableau
 				tab[i] = tmp.element;				
-				//On passe � l'�l�ment suivant dans la pile
+				//On passe a l'element suivant de la liste
 				tmp = tmp.suivant;	
-
-				//On place l'it�rateur pour le prochain ajout
+				//on incremente l'indice du tableau
 				i++;
 			}
 			return tab.clone();
@@ -405,12 +417,13 @@ public class ListePerso{
 	} 
 
 	
+	
 	/**
 	 * Ajoute element dans la liste
 	 * antecedent : le mode d'insertion AVANT OU APRES
 	 * @param element element a ajoute par rapport a la positon courante
 	 */
-	public void ajoute(Formes element,int modeInsertion) throws Exception {
+	public void ajoute(Formes element,int modeInsertion) {
 		//cas ou le choix d'insertion est AVANT
 		if(modeInsertion==0){
 			insererAvant(element);
@@ -422,6 +435,8 @@ public class ListePerso{
 		}
 		nbElement++;
 	}
+	
+	
 
 	/**
 	 * Fonction qui permet de retourner
@@ -446,124 +461,36 @@ public class ListePerso{
 		return i;
 	}
 	
-	public boolean estVide(){
-		System.out.println(" Voici le nombre d'elements : "+nbElement);
-		if(nbElement==0)
-			return true;
-		return false;
-	}
-
+	
+	/**
+	 * Methode : getNbElementListe()
+	 * permet de retourner le nombre d'element dans la liste
+	 * @return (int) nbElement
+	 */
 	public int getNbElementListe(){
 		return nbElement;
 	}
 	
+	 
+	 
+	 /**
+	  * Methode videLaListeAuComplet()
+	  * Permet de supprimer tous les elments de la liste
+	  * @throws ListeVideException
+	  */
+	 public void videLaListeAuComplet() throws ListeVideException{
+		 for(int i =0;i<10;i++){
+			 this.supprime();
+		 }
+			 
+	 }
+	 
+		
+	 
+	 
 	
-	/**
-	 * Parcours la liste pour faire des ajout par ordre croissant selon NumSequence ou Aire
-	 * @param chiffreAcomparer (La forme a comparer)
-	 * @param type (0=Sequence , 1=Aire)
-	 * @return boolean
-	 */
-	 public boolean ParcourirTriCroissant(int chiffreAcomparer,int type){
-			
-			boolean insereAvant =false;
-			
-			//R�f�rence temporaire pour parourir la liste du debut a la fin
-			Noeud tmp = debut;
-			position=debut;
-			int nbsuperieur=0;
-			
-				while(tmp != null ){
-					
-					if (type==0){
-						if((tmp.element).getIDLogger()< chiffreAcomparer){
-							insereAvant=true;
-							position=tmp;
-						}
-						else if((tmp.element).getIDLogger()> chiffreAcomparer && nbsuperieur<1) {
-							nbsuperieur++;
-							insereAvant=false;
-							position=tmp;
-						}
-					}
-					if(type==1){
-						
-						if((tmp.element).getAir()< (double)chiffreAcomparer){
-							insereAvant=true;
-							position=tmp;
-						}
-						else if((tmp.element).getAir()> (double)chiffreAcomparer && nbsuperieur<1) {
-							nbsuperieur++;
-							insereAvant=false;
-							position=tmp;
-						}
-						
-					}
-					tmp = tmp.suivant;
-					
-				}
-			return	insereAvant;
-		 
-	 }
-	 
-	 
-	 public boolean ParcourirTriDecroissant(int chiffreAcomparer, int type){
-			
-			boolean insereAvant =true;
-			
-			//R�f�rence temporaire pour parourir la liste du debut a la fin
-			Noeud tmp = debut;
-			position=debut;
-			int nbsuperieur=0;
-			
-				while(tmp != null ){
-					//System.out.println("Les �lements a comparer sont  Noeud existant" +(tmp.element).getIDLogger()+  "Forme a ajouter "+chiffreAcomparer);
-					
-					if (type==0){
-						if((tmp.element).getIDLogger()> chiffreAcomparer) {
-							insereAvant=true;
-							position=tmp;
-						}
-						if((tmp.element).getIDLogger()< chiffreAcomparer && nbsuperieur<1){
-							nbsuperieur++;
-							insereAvant=false;
-							position=tmp;
-					}
-					if(type==1){
-							if((tmp.element).getAir()>(double) chiffreAcomparer) {
-								insereAvant=true;
-								position=tmp;
-							}
-							if((tmp.element).getAir()<(double) chiffreAcomparer && nbsuperieur<1){
-								nbsuperieur++;
-								insereAvant=false;
-								position=tmp;
-							}
-						}
-						
-					}
-				
-					
-					tmp = tmp.suivant;
-				}	
-			return	insereAvant;
-		 
-	 }
-
-    public void supprimeListe() throws ListeVideException {
-
-        for(int i =0;i<10;i++)
-        supprime();
-
-
-
-    }
-
-
-
-
-
-    //Unit� de test
+	
+	//Unit� de test
 	public void afficheElementDeListe() throws ListeVideException{
 			premier();
 
@@ -598,23 +525,74 @@ public class ListePerso{
 
 				}
 		}
-		
+    //Unit� de test2
+    public void affichegetHauteur() throws ListeVideException{
+        premier();
+        int i=0;
+        //R�f�rence temporaire pour parourir la liste du debut a la fin
+        Noeud tmp = debut;
+
+        while(tmp != null){
+
+            //aFFICHE
+            System.out.println((tmp.element).getHauteur() + "indice : "+i + (tmp.element).getNom());
+
+            //On passe � l'�l�ment suivant dans la pile
+            tmp = tmp.suivant;
+            i++;
+
+        }
+    }
+    public void affichegetLargeur() throws ListeVideException{
+        premier();
+        int i=0;
+        //R�f�rence temporaire pour parourir la liste du debut a la fin
+        Noeud tmp = debut;
+
+        while(tmp != null){
+
+            //aFFICHE
+            System.out.println((tmp.element).getLargeur() + "indice : "+i + (tmp.element).getNom());
+
+            //On passe a l'element suivant dans la pile
+            tmp = tmp.suivant;
+            i++;
+
+        }
+    }
 		
 		//Unit� de test3
 		public void afficheAireDeLaLIste() throws ListeVideException{
 				premier();
 				int i=0;
+				//Reference temporaire pour parourir la liste du debut a la fin
+				Noeud tmp = debut;
+				
+					while(tmp != null){
+					
+						//aFFICHE
+					System.out.println((tmp.element).getAire() + "indice : "+i);
+								
+					//On passe a l'element suivant dans la pile
+					tmp = tmp.suivant;	
+					i++;
+
+				}
+		}
+		
+		//Unit� de test4
+		public void afficheOrdreDarriveDeLaListe() throws ListeVideException{
+				premier();
 				//R�f�rence temporaire pour parourir la liste du debut a la fin
 				Noeud tmp = debut;
 				
 					while(tmp != null){
 					
 						//aFFICHE
-					System.out.println((tmp.element).getAir() + "indice : "+i);
+					System.out.println((tmp.element).getOrdreArriveForme());
 								
 					//On passe � l'�l�ment suivant dans la pile
 					tmp = tmp.suivant;	
-					i++;
 
 				}
 		}
