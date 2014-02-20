@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/ca.etsmtl.log.util"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ca.etsmtl.log.util"/>
+	<classpathentry kind="lib" path="C:/Users/i7/workspaceKepler/GeoApp/src/ca.etsmtl.log.util.jar"/>
 	<classpathentry kind="output" path="out/production/GeoApp"/>
 </classpath>

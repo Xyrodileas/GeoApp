@@ -1,18 +1,21 @@
+
+@SuppressWarnings("serial")
 /**
- *Exception levée si on essaie de retirer dans une liste vide
- *@author <a href="mailto:Pierre.Belisle@etsmtl.ca">Pierre Belisle</a>
- *@version novembre 2005
+ * Classe ListeVideException qui permet
+ * de Lever des exceptions aves des messages
+ * différent selon le comportement de la liste personnel
+ *
  */
 public class ListeVideException extends Exception{
   
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	public  ListeVideException(){}
 	
-	//le message est récupérable par getMessage()
+	/**
+	 * Permet de lever une exception
+	 * Constructeur de par copie d'attribut
+	 * Fait appel à la méthode de la classe mère
+	 * @param message (String)
+	 */
 	public  ListeVideException(String message){
 		super(message);
 	}

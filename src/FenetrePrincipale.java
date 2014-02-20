@@ -22,14 +22,12 @@ Historique des modifications
 2013-05-03 Version initiale
 *******************************************************/  
 
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
  
 /**
@@ -42,16 +40,18 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	private static final long serialVersionUID = -1210804336046370508L;
 	
 	//ATTRIBUTS DE FENETREPRINCIPALE
-	static FenetreFormes fenetreFormes;
-	private Formes[] tabFormes= new Formes[10];
+	FenetreFormes fenetreFormes;
+	private ListePerso listeChaineFormes=new ListePerso();
+	
+	
 	/**
-	 * Constructeur
+	 * Constructeur : FenetrePrincipale
+	 * Constructeur par copie d'attributs 
+	 * de la classe FenetrePrincipale
+	 * il recoit en paramètre le Commbase (comnunication avec le serveur)
+	 * pour pouvoir l'envoyé en paramètre au panneau de menu
+	 * @param comm (CommBase)
 	 */
-	
-	 private ListePerso listeChaineFormes=new ListePerso();
-	
-	
-	
 	public FenetrePrincipale(CommBase comm){
 		
 		MenuFenetre menu = new MenuFenetre(comm); //creation d'une instanciation de la classe menu
@@ -69,6 +69,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 		this.pack(); 									// Ajuste la dimension de la fenÃªtre principale selon celle de ses composants
 		this.setVisible(true);							 // Rend la fenÃªtre principale visible.
 		this.setLocationRelativeTo(null);
+        this.setTitle("Client forme");
 		
 		//ajout de l'Ecouteur d'evenenement sur la fenetre Qui gere ouverture et fermeture de la fenetre
 	    addWindowListener(new OuvertureFermetureFenetreEcouteur(comm,this));
@@ -77,45 +78,66 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 	// AppelÃ© lorsque le sujet lance "firePropertyChanger" 
 	/*
-	 * Permet de creer d'ajouter les formes dans un tableau des la reception d'une nouvelle ligne de commande
+	 * Permet d'ajouter à la liste de Formes chainée les formes
+	 * qui seront crées au fur et à mesure de la réception des
+	 * lignes de commandes de la part du serveur
 	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
 	 */
 	public void propertyChange(PropertyChangeEvent arg0) {
 		
 		if(arg0.getPropertyName().equals("ENVOIE-FORME-RECU")){
-			
-			//Parcours le tableau de la fin vers le debut
-			for (int i =9 ; i>=1 ; i--){
-				//permet de permuter les elements dans le tableau afin d'ï¿½liminer automatiquement la premiere forme
-				tabFormes[i] = tabFormes[i-1];
-				
-			}
-			
-			//Ajout de la nouvelle forme au tableau de forme
-			tabFormes[0] = DecodeurChaineFormes.creerForme((String) arg0.getNewValue());
-			
-			//1 signifie insï¿½rer aprï¿½s ï¿½lement, 0 signifie avant ï¿½lï¿½ment
+
+			//CHAQUE NOUVELLE FORMES EST STOCKER DANS LA LISTE APRES CREATION DE LA FORMES
 			try {
-				listeChaineFormes.ajoute(DecodeurChaineFormes.creerForme((String) arg0.getNewValue()), 1);
-				listeChaineFormes.afficheElementDeListe();
+				listeChaineFormes.ajoute(DecodeurChaineFormes.creerForme((String) arg0.getNewValue()),1);
+				
+				//listeChaineFormes.afficheElementDeListe();
+			} catch (Exception e) {listeChaineFormes=new ListePerso();	}
+			
+			
+			// ON ENVOIE LA LISTE AU PANNEAU DESSINATEUR
+			try {
+				fenetreFormes.setListe(listeChaineFormes);
+				
+			} catch (ListeVideException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
-			//envoie du tableau de forme au panneau dessinateur (FenetreFormes)
-			fenetreFormes.setTab(tabFormes);
-			
-			//Rafraichit le panneau dessin
+			//ON RAFRAICHIT LE PANNEAU
 			fenetreFormes.repaint();
 			
 		}
 	
 		
 	}
+	
+	/**
+	 * Methode : videListeEtRedemarre()
+	 * permet de Vider la liste 
+	 * pour ajouter dix nouvele formes
+	 * @throws ListeVideException 
+	 */
+	public void videListeEtRedemarre() throws ListeVideException{
+
+		listeChaineFormes.videLaListeAuComplet();
+	}
+	
+	/**
+	 * Methode : nouvelleListe()
+	 * Permet de creer une nouvelle liste 
+	 * en cas de bug
+	 */
+	public void nouvelleListe(){
+		this.listeChaineFormes= new ListePerso();
+	}
+	
+	
 	/**
 	 * Permet d'indiquer au trieur le type de triage
+	 * selon le boutons du menu activé
 	 * @param int modeDeTriage
 	 */
 	
@@ -123,44 +145,74 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 		switch(modeDeTriage){
 		 /*
-		  * (sequenceCroissant = 0)(sequenceDecroissant = 1)
-		  * (aireFormeCroissante=2)(aireFormeDecroissante=3)
-		  * (parTypeDeFormes=4)(parTypeDeFormesInverse=5)
+		  * (sequenceCroissant = 0)			(sequenceDecroissant = 1)
+		  * (aireFormeCroissante = 2)		(aireFormeDecroissante = 3)
+		  * (parTypeDeFormes = 4)			(parTypeDeFormesInverse = 5)
+		  * (triParDistanceMax2points = 6)	(triLargeurCroissante = 7)
+		  * (triLargeuDeroissante = 8)		(triParhauteurCroissante = 9)
+		  * (triParhauteurCroissante = 10)	(triParOrdreOriginal = 11)
 		  */
 		case 0 :
-			System.out.println("Cas 0");
-            Triage.SelfSort(listeChaineFormes);
+            Triage.triBulleIDLoggerCroissant(listeChaineFormes);
 			break;
 		case 1 :
-			System.out.println("Cas 1");
-            Triage.bubbleSortByIDLoggerInverted(listeChaineFormes);
+            Triage.triBulleIDLoggerDecroissant(listeChaineFormes);
 			break;
 		case 2 :
-			System.out.println("Cas 2");
-            Triage.bubbleSortByAir(listeChaineFormes);
+            Triage.triBulleAireCroissant(listeChaineFormes);
 			break;
 		case 3 :
-			System.out.println("Cas 3");
-            Triage.bubbleSortByAirInverted(listeChaineFormes);
+            Triage.triBulleAireDecroissant(listeChaineFormes);
 			break;
-		case 4 :
-			System.out.println("Cas 4");
+		case 4 :	
+			Triage.triParFormes(listeChaineFormes);
 			break;
 		case 5 :
-			System.out.println("Cas 5");
+			Triage.triParFormesInverse(listeChaineFormes);
+			break;
+		case 6 :
+			Triage.triParDistanceMax2points(listeChaineFormes);	
+			break;
+		case 7 :
+			Triage.triLargeurCroissante(listeChaineFormes);
+			break;
+		case 8 :
+			Triage.triLargeurDecroissante(listeChaineFormes);
+			break;
+		case 9 :
+			Triage.triParhauteurCroissante(listeChaineFormes);
+			break;
+		case 10 :
+			Triage.triParHauteurDecroissante(listeChaineFormes);
+			break;
+		case 11 :
+			Triage.triParOrdreOriginal(listeChaineFormes);
 			break;
 
 		}
+		
+		//ON ORGANISE LA LISTE
         Triage.reorganize(listeChaineFormes);
-        repaint();
+        //ON REENVOIE LA NOUVeLLE LISTE TRIER
+        fenetreFormes.setListe(listeChaineFormes);
+        //ON RAFFRAICHT LE PANNEAU
+        fenetreFormes.repaint();
 		
 	}
 
+	
+	
+	/**
+	 * Classe : OuvertureFermetureFenetreEcouteur()
+	 * Permet d'ajouter des actions a l'ouverture 
+	 * et a la fermeture du programme
+	 *
+	 */
 	 private class OuvertureFermetureFenetreEcouteur implements WindowListener{
-  	   private JFrame frame;
+  	   private FenetrePrincipale frame;
   	   private CommBase comm;
   	   
-  	   private OuvertureFermetureFenetreEcouteur(CommBase commR, JFrame frameR){
+  	   private OuvertureFermetureFenetreEcouteur(CommBase commR, FenetrePrincipale frameR){
   		   comm=commR;
   		   frame=frameR;
   		   

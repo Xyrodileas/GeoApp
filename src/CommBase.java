@@ -20,7 +20,6 @@ Historique des modifications
 *******************************************************
 *@author Patrice Boucher
 2013-05-03 Version initiale
-*testtest
 *******************************************************/  
 
 import javax.swing.*;
@@ -34,34 +33,33 @@ import java.util.Observable;
 
 /**
  * STRATEGIE :
- * 				Permet d'�tablir la connexion avec le serveur gr�ce  
- * 				� la r�ception des identifiants de la part de l'onglet Demarrer du menu
+ * 				Permet d'etablir la connexion avec le serveur grace  
+ * 				a la reception des identifiants de la part de l'onglet Demarrer du menu
  * 
- * Base d'une communication via un fil d'exécution parallèle.
+ * Base d'une communication via un fil d'execution parallele.
  */
 
 /**
  * Classe CommBase qui permet
- * d'�tablir la connection avec le serveur
+ * d'etablir la connection avec le serveur
  * mais aussi d'envoyer les lignes de commande recu
  * au DecodeurDeChaine
- * @author Aissou Idriss
  * 
  *
  */
 public class CommBase extends Observable{
 	
 	//CONSTANTES
-	private final int DELAI = 1500;
-	static final String ip ="127.0.0.1";
-	static final int port  = 10000;
+	private final int DELAI = 200;
+
 	
 	//ATTRIBUTS DE LA  CLASSE COMMBASE
 	@SuppressWarnings("rawtypes")
 	private SwingWorker threadComm =null;
 	private PropertyChangeListener listener = null;
 	private boolean isActif = false;
-	private int nbElement=0;
+	
+	private int nbElement;
 	
 	//SOCKET ELEMENTS
 	private Socket          socketDeConnection;	
@@ -84,8 +82,20 @@ public class CommBase extends Observable{
 		this.listener = listener;
 	}
 	
+	
+	/**
+	 * Methode : setNbElement()
+	 * Permet de mettre a z�ro le nombre d lement
+	 */
+	public void setNbElementZero(){
+		this.nbElement=0;
+	}
+	
+	
+	
 
 	/**
+	 * Methode : start()
 	 * Démarre la communication avec le serveur
 	 * 
 	 * @param ipRecu   (Adresse ip recu du menu Demarrer)
@@ -135,9 +145,10 @@ public class CommBase extends Observable{
 		    			}
 
 
+	    		//On va vers Connection 
 	    		if (connexion) {
 			
-		 			JOptionPane.showMessageDialog(fenetrePrincipale, "Vous �tes connect�"); 
+		 			JOptionPane.showMessageDialog(fenetrePrincipale, "Vous etes connecte"); 
 		 			creerCommunication();
 		 			}
 	    			
@@ -145,15 +156,15 @@ public class CommBase extends Observable{
 	}
 	    		
 	   
-	    
 
 	
 	/**
-	 * Proc�dure qui permet de stopper la connexion avec le serveur
+	 * Methode : stop()
+	 * Procedure qui permet de stopper la connexion avec le serveur
 	 * 
-	 * Cons�quent :
+	 * Consequent :
 	 * 				La connexion se voit stopper
-	 * 				le (int) nbElement se voit revenir a z�ro
+	 * 				le (int) nbElement se voit revenir a zero
 	 * 				Affiche un message de signalement de fin de connexion
 	 */
 	public void stop(){
@@ -167,6 +178,7 @@ public class CommBase extends Observable{
 					"Fin de la connexion", 
 					"Fin",
 					JOptionPane.INFORMATION_MESSAGE); 
+		
 		}
 		//si le thread est different de null (est actif)
 		if(threadComm!=null)
@@ -178,70 +190,80 @@ public class CommBase extends Observable{
 	}
 	
 	/**
-	 * Proc�dure qui permet de communiquer avec le serveur de formes
+	 * Methode : creerCommunication()
+	 * Procedure qui permet de communiquer avec le serveur de formes
 	 * 
-	 * Cons�quent :
+	 * Consequent :
 	 * 				Creation du fil d'execution parallele
 	 * 				Communication avec le serveur : commande Get
 	 * 				Reception des requetes entrantes
 	 * 				Transmission des requetes recus a la fenetre principale
 	 */
 
+	
 	@SuppressWarnings("rawtypes")
 	protected void creerCommunication(){		
-		// Crée un fil d'exécusion parallèle au fil courant,
+		// Cree un fil d'execusion parallele au fil courant,
 		threadComm = new SwingWorker(){
 			
 			protected Object doInBackground() throws Exception {
 				
 				while(true){
 					Thread.sleep(DELAI);
+					
 					// C'EST DANS CETTE BOUCLE QU'ON COMMUNIQUE AVEC LE SERVEUR
 					fluxEnvoyeVersServeur.println("GET");
 					
  					//La méthode suivante alerte l'observateur 
 					if(listener!=null)
-						if(fluxRecuSurClient.readLine().length() !=9){
+						
+					
+						if(fluxRecuSurClient.readLine().length() !=9 && nbElement <10){
 							
-							nbElement++; //Incr�mentation du nombre de formes � chaque nouvelle forme recu
+							//Envoie a ligne de commande recu (Formes.Formes) a la fenetre principale (fenetrePrincipale)
+							firePropertyChange("ENVOIE-FORME-RECU", null, fluxRecuSurClient.readLine());
+							
+							nbElement++; //Incrementation du nombre de formes a chaque nouvelle forme recu
 							//Permet de notifier le nombre de formes totale au JPanel PanneauNbItems
 							setChanged();
 							notifyObservers(nbElement);
 							
-							//Envoie a ligne de commande recu (Formes) � la fenetre principale (fenetrePrincipale)
-							firePropertyChange("ENVOIE-FORME-RECU", null, fluxRecuSurClient.readLine());
-							
-							//Condition d'arret
-							if(nbElement>=10){
-								stop();
-								
-							}
+						}
+						//Nous avons attend 10 formes on arrete le threadComm
+						if(nbElement==10){
+							threadComm.cancel(true);
 						}
 				}
 			}
 		};
 		
 		
+		/**
+		 * si l'ecouteur n'est pas null
+		 */
 		if(listener!=null)
-			   threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelée lorsque le SwinkWorker invoquera la méthode "firePropertyChanger" 
-				nbElement=0;  //Remise a zero du nombre d'�l�ments
+			   threadComm.addPropertyChangeListener(listener); // La methode "propertyChange" de ApplicationFormes sera donc appelee lorsque le SwinkWorker invoquera la methode "firePropertyChanger" 
+				nbElement=0;  //Remise a zero du nombre d'elements
 				setChanged();	//on applique les changements
 				notifyObservers(nbElement);//On avise l'observeur
-			threadComm.execute(); // Lance le fil d'exécution parallèle.
+			threadComm.execute(); // Lance le fil d'exécution parallele.
 			isActif = true;
 	}
 	
 	/**
+	 * MEthode : recupereJFrame()
 	 * Procedure qui recupere la JFrame principale
 	 * @param frame JFrame
 	 */
-	public void recupereJFrame(JFrame frame){
+	public void recupereJFrame(FenetrePrincipale frame){
 		fenetrePrincipale=frame;
 		
 	}
 	
 	/**
-	 * Permet de savoir si le fil d'exécution parallèle est actif
+	 * Methode : isActif()
+	 * Permet de savoir si 
+	 * le fil d'exécution parallèle est actif
 	 * @return isActif boolean
 	 */
 	public boolean isActif(){
@@ -249,7 +271,9 @@ public class CommBase extends Observable{
 	}
 	
 	/**
-	 * Permet d'afficher le message d'erreur concernant la connexion
+	 * Methode : warningMessage()
+	 * Permet d'afficher le message
+	 *  d'erreur concernant la connexion
 	 * @param information	String
 	 * @param entete		String
 	 */
@@ -257,11 +281,5 @@ public class CommBase extends Observable{
 		JOptionPane.showMessageDialog(fenetrePrincipale,information,entete,JOptionPane.WARNING_MESSAGE);
 
 	}
-	/**
-	 * Permet de retourner le nombre total de formes
-	 * @return nbElement
-	 */
-	public int getNbElements(){
-		return nbElement;
-	}
+	
 }

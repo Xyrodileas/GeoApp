@@ -23,6 +23,7 @@ Historique des modifications
 *******************************************************/  
 
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -58,18 +59,21 @@ public class MenuFenetre extends JMenuBar{
 	CommBase comm; // Pour activer/dÃ©sactiver la communication avec le serveur
 	
 	/**
-	 * Constructeur
+	 * Constructeur : MenuFenetre
+	 * permet d'initaliser le menu
+	 * @param (CommBase)comm
 	 */
-	public MenuFenetre(CommBase comm) {
-		this.comm = comm;
+	public MenuFenetre(CommBase commRecu) {
+		comm = commRecu;
 		addMenuDessiner();
+		addMenuRechercheFormes();
 		addMenuClasser();
 		addMenuFichier();
 		addMenuAide();
 	}
 
 	/**
-	 *  CrÃ©er le menu "Draw". 
+	 *  Cree le menu "Draw". 
 	 */
 	protected void addMenuDessiner() {
 		JMenu menu = creerMenu(MENU_DESSIN_TITRE,new String[] { MENU_DESSIN_DEMARRER, MENU_DESSIN_ARRETER });
@@ -82,10 +86,9 @@ public class MenuFenetre extends JMenuBar{
 				JTextField adresse_ip = new JTextField();
 				JTextField num_port = new JTextField();
 				
-				//JOptionPane jConnexion = new JOptionPane();
 				
 				int validation = JOptionPane.showConfirmDialog(fenetrePrincipale, 
-					      new Object[] {"L'hote de connexion :", adresse_ip, "Numï¿½ro de port :", num_port},
+					      new Object[] {"L'hote de connexion :", adresse_ip, "Numero de port :", num_port},
 					      "Hote de connexion distant",
 					      JOptionPane.OK_CANCEL_OPTION); 
 				
@@ -99,16 +102,21 @@ public class MenuFenetre extends JMenuBar{
 			    	
 			    }
 			    catch(NumberFormatException e){
+			    	int i=0;
+			    	if(i==0){
+			    		comm.start("127.0.0.1",10000);
+			    	}
+			    	else{
 			    	JOptionPane.showMessageDialog(fenetrePrincipale, 
 							"Format incorrect", 
 							"Fin",
-							JOptionPane.INFORMATION_MESSAGE); 
+							JOptionPane.INFORMATION_MESSAGE);
+			    	}
 				}
 			    	
 			    }
 			    	 
 			catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			rafraichirMenus();
@@ -121,16 +129,24 @@ public class MenuFenetre extends JMenuBar{
 		arreterMenuItem = menu.getItem(1);
 		arreterMenuItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
+			try {
+				fenetrePrincipale.videListeEtRedemarre();
+			} catch (ListeVideException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			comm.stop();
 			rafraichirMenus();
 		    }
 	    });
-		
 		arreterMenuItem.setAccelerator(KeyStroke.getKeyStroke(
 				MENU_DESSIN_ARRETER_TOUCHE_RACC,
 				MENU_DESSIN_ARRETER_TOUCHE_MASK));
 		add(menu);
 	}
+	
+	
+//************************************************************************************
 
 	/** 
 	 * CrÃ©er le menu "File". 
@@ -154,6 +170,8 @@ public class MenuFenetre extends JMenuBar{
 		add(menu);
 	}
 
+	
+	//*********************************************************************************************
 	/**
 	 *  CrÃ©er le menu "Help". 
 	 */
@@ -169,24 +187,85 @@ public class MenuFenetre extends JMenuBar{
 	}
 	
 	
+	//  *******************************************************************************************
+		
+		/**
+		 * Methode : addMenuRechercheFormes()
+		 * Permet de creer le menu Recuperer 10 formes
+		 */
+		private void addMenuRechercheFormes(){
+			
+			JMenu demandeFormeMenuItems = new JMenu("Relancer 10 Formes ");
+			JMenuItem item = new JMenuItem("10 nouvelles formes");
+			
+			//Ecouteur du menu 10 nouvelles formes
+			item .addActionListener(new ActionListener(){
+				/**
+				 * ActionListener :
+				 * 					-Va vider la liste
+				 * 					-Relancer la communication avec le serveur
+				 */
+				public void actionPerformed(ActionEvent arg0) {
+					
+					comm.setNbElementZero();
+					try {
+						fenetrePrincipale.videListeEtRedemarre();
+						
+					} catch (ListeVideException e) {
+					
+						fenetrePrincipale.nouvelleListe();
+					}
+					repaint();
+					comm.creerCommunication();
+				
+
+			    }
+		    });
+			
+			demandeFormeMenuItems.add(item);
+			add(demandeFormeMenuItems);
+		}
+		
+		
+
+	
+	
+	
+//  ***************************************************************************************************************
+	/**
+	* Methode : addMenuClasser()
+	* Permet d'initaliser le menu classer ( triage )
+	 */
 	private void addMenuClasser() {
-		   		//Menu Classer_Formes
+		   		
+		//Menu Classer_Formes
+				//Onglet principale
 		   		JMenu menuClasser = new JMenu("Classer_Formes");
-		   		//Crï¿½ation du groupe de boutons
+		   		
+		   		//Crï¿½ation du groupe de boutons qui va englober tous les tis
 		   		ButtonGroup groupeboutton = new ButtonGroup();
+		   		
 		   		//Crï¿½ation de l'ecouteur des boutons
 		   		EcouteurClasser ecouteur= new EcouteurClasser();
 		   		
 		   	   // Creation des sous menus
-			   JRadioButtonMenuItem sequenceCroissant = new JRadioButtonMenuItem("Sequence_Croissant");//numï¿½ro de sï¿½quence croissant
-			   sequenceCroissant.setSelected(true);
 			   
+			   /**
+			    * Les boutons du menu de tri
+			    */
+		   	   JRadioButtonMenuItem sequenceCroissant = new JRadioButtonMenuItem("Sequence_Croissant");//numï¿½ro de sï¿½quence croissant
 			   JRadioButtonMenuItem sequenceDecroissant = new JRadioButtonMenuItem("Sequence_Decroissant");//numï¿½ro de sï¿½quence dï¿½croissant
 			   JRadioButtonMenuItem aireFormeCroissante = new JRadioButtonMenuItem("Aire_Forme_Croissante");//Aire croissante
 			   JRadioButtonMenuItem aireFormeDecroissante = new JRadioButtonMenuItem("Aire_Forme_Decroissante");//Aire dï¿½croissante
 			   JRadioButtonMenuItem parTypeDeFormes = new JRadioButtonMenuItem("Par_type_De_formes");//carrï¿½, rectangle, cercle, ovale, ligne
 			   JRadioButtonMenuItem parTypeDeFormesInverse = new JRadioButtonMenuItem("Par_type_De_formes_inverse");//ligne, ovale, cercle, rectangle, carrï¿½**/
-			  
+			   JRadioButtonMenuItem parDistanceMax2points = new JRadioButtonMenuItem("parDistanceMax2points");//ligne, ovale, cercle, rectangle, carrï¿½**/
+			   JRadioButtonMenuItem triLargeurCroissante = new JRadioButtonMenuItem("triLargeurCroissante");//triLargeurCroissante
+			   JRadioButtonMenuItem triLargeurDecroissante = new JRadioButtonMenuItem("triLargeurDecroissante");//triLargeurDecroissante
+			   JRadioButtonMenuItem triParhauteurCroissante = new JRadioButtonMenuItem("triParhauteurCroissante");//triParhauteurCroissante
+			   JRadioButtonMenuItem triParHauteurDecroissante = new JRadioButtonMenuItem("triParHauteurDecroissante");//triParHauteurDecroissante
+			   JRadioButtonMenuItem triParOrdreOriginal = new JRadioButtonMenuItem("triParOrdreOriginal");//triParOrdreOriginal
+			   
 			   //Ajout de l ï¿½couteur aux boutons
 			   sequenceCroissant.addActionListener(ecouteur);
 			   sequenceDecroissant.addActionListener(ecouteur);
@@ -194,6 +273,12 @@ public class MenuFenetre extends JMenuBar{
 			   aireFormeDecroissante.addActionListener(ecouteur);
 			   parTypeDeFormes.addActionListener(ecouteur);
 			   parTypeDeFormesInverse.addActionListener(ecouteur);
+			   parDistanceMax2points.addActionListener(ecouteur);
+			   triLargeurCroissante.addActionListener(ecouteur);
+			   triLargeurDecroissante.addActionListener(ecouteur);
+			   triParhauteurCroissante.addActionListener(ecouteur);
+			   triParHauteurDecroissante.addActionListener(ecouteur);
+			   triParOrdreOriginal.addActionListener(ecouteur);
 			   
 			   //Ajout des boutons au groupe
 			   groupeboutton.add(sequenceCroissant);
@@ -202,7 +287,13 @@ public class MenuFenetre extends JMenuBar{
 			   groupeboutton.add(aireFormeDecroissante);
 			   groupeboutton.add(parTypeDeFormes);
 			   groupeboutton.add(parTypeDeFormesInverse);
-		   
+			   groupeboutton.add(parDistanceMax2points);
+			   groupeboutton.add(triLargeurCroissante);
+			   groupeboutton.add(triLargeurDecroissante);
+			   groupeboutton.add(triParhauteurCroissante);
+			   groupeboutton.add(triParHauteurDecroissante);
+			   groupeboutton.add(triParOrdreOriginal);
+		
 			   //Ajout des boutons au super menu
 			   menuClasser.add(sequenceCroissant);
 			   menuClasser.add(sequenceDecroissant);
@@ -210,33 +301,55 @@ public class MenuFenetre extends JMenuBar{
 			   menuClasser.add(aireFormeDecroissante);
 			   menuClasser.add(parTypeDeFormes);
 			   menuClasser.add(parTypeDeFormesInverse);
-
+			   menuClasser.add(parDistanceMax2points);
+			   menuClasser.add(triLargeurCroissante);
+			   menuClasser.add(triLargeurDecroissante);
+			   menuClasser.add(triParhauteurCroissante);
+			   menuClasser.add(triParHauteurDecroissante);
+			   menuClasser.add(triParOrdreOriginal);
+			   
 			   menuClasser.addSeparator();
 			   
 			   //Ajout du menuClasser Globale
 			   add(menuClasser);
 		   
 	}
+	
+	
+/**
+ * Classe : Ecouteur de tri	
+ *Permet d'implémenter l'interface
+ * ActionListener selon les boutons activés
+ * du menu de tri
+ */
 public class EcouteurClasser  implements ActionListener{
 		
+	
 		public EcouteurClasser(){ }
 
+		
+	/**
+	 * ActionListener :
+	 * Evenement qui se produira selon le bouton préssé
+	 * 			-Permet de Trier selon le bouton
+	 */
 	 public void actionPerformed(ActionEvent e) {
 		 
 		 /*
-		  * (sequenceCroissant = 0)(sequenceDecroissant = 1)
-		  * (aireFormeCroissante=2)(aireFormeDecroissante=3)
-		  * (parTypeDeFormes=4)(parTypeDeFormesInverse=5)
+		  * (sequenceCroissant = 0)			(sequenceDecroissant = 1)
+		  * (aireFormeCroissante = 2)		(aireFormeDecroissante = 3)
+		  * (parTypeDeFormes = 4)			(parTypeDeFormesInverse = 5)
+		  * (triParDistanceMax2points = 6)	(triLargeurCroissante = 7)
+		  * (triLargeuDeroissante = 8)		(triParhauteurCroissante = 9)
+		  * (triParhauteurCroissante = 10)	(triParOrdreOriginal = 11)
 		  */
 		try{
 		   if(e.getActionCommand().equals("Sequence_Croissant")){
-			   System.out.println("tri sequenceCroissant  appel de fenetrePrincipale.aiguilleurDeTraitement(0)");
 			   MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(0);
 			  
 		   }
 		   		else
 		   				if(e.getActionCommand().equals( "Sequence_Decroissant")){
-		   					System.out.println("tri sequenceDecroissant appel de  fenetrePrincipale.aiguilleurDeTraitement(1)" );
 		   				    MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(1);
 
 		   				
@@ -244,41 +357,84 @@ public class EcouteurClasser  implements ActionListener{
 		   
 		   				else 
 		   					if(e.getActionCommand().equals( "Aire_Forme_Croissante")){
-		   						System.out.println("tri aireFormeCroissante appel de fenetrePrincipale.aiguilleurDeTraitement(2)");
 		   						MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(2);
 		   					
 		   					}
 		   					else 
 			   					if(e.getActionCommand().equals("Aire_Forme_Decroissante")){
-			   					System.out.println("tri aireFormeDecroissante appel de fenetrePrincipale.aiguilleurDeTraitement(3)");
 			   					MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(3);
 			   					
 			   					}
 		   					else 
 		   						if(e.getActionCommand().equals("Par_type_De_formes")){
-		   						System.out.println("tri TypeDeFormes appel de fenetrePrincipale.aiguilleurDeTraitement(4)");
 		   						MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(4);
 		   						
 				   		
 		   						}
 		   						else 
 		   							if(e.getActionCommand().equals( "Par_type_De_formes_inverse")){
-		   							System.out.println("tri TypeDeFormesInverse appel de fenetrePrincipale.aiguilleurDeTraitement(5)");
 		   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(5);
 		   							
 					   		
 		   							}
+		   							else 
+			   							if(e.getActionCommand().equals( "parDistanceMax2points")){
+			   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(6);
+			   							
+						   		
+			   							}
+			   							else 
+				   							if(e.getActionCommand().equals( "triLargeurCroissante")){
+				   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(7);
+				   							
+							   		
+				   							}
+				   							else 
+					   							if(e.getActionCommand().equals( "triLargeurDecroissante")){
+					   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(8);
+					   							
+								   		
+					   							}
+					   							else 
+						   							if(e.getActionCommand().equals( "triParhauteurCroissante")){
+						   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(9);
+						   							
+									   		
+						   							}
+						   							else 
+							   							if(e.getActionCommand().equals( "triParHauteurDecroissante")){
+							   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(10);
+							   							
+										   		
+							   							}
+							   							else 
+								   							if(e.getActionCommand().equals( "triParOrdreOriginal")){
+								   							MenuFenetre.fenetrePrincipale.aiguilleurDeTraitement(11);
+								   							
+											   		
+								   							}
+				   
+			   
+		   rafraichirMenus();
+		   
+		   
+		   
+		   
         }catch(Exception e1){}
 		   }
 	}
 
+//  ********************************************************************************************************************
+
 	/**
 	 *  Activer ou dÃ©sactiver les items du menu selon la sÃ©lection. 
 	 */
-	private void rafraichirMenus() {
+	private  void rafraichirMenus() {
 		demarrerMenuItem.setEnabled(!comm.isActif());
 		arreterMenuItem.setEnabled(comm.isActif());
 	}
+	
+//  ********************************************************************************************************************
 	
 	/**
 	 * CrÃ©er un Ã©lÃ©ment de menu Ã  partir d'un champs principal et ses Ã©lÃ©ments
@@ -294,8 +450,15 @@ public class EcouteurClasser  implements ActionListener{
         return menu;
    }
 	
+	/**
+	 * Methode : setJFrame
+	 * Permet de récupérer la référence de la fenetre principale
+	 * @param fenetre
+	 */
 	public void setJFrame(FenetrePrincipale fenetre){
 		fenetrePrincipale=fenetre;
 		
 	}
+	
+	
 }
